@@ -3,4 +3,31 @@
   <groupId>gr.florents.or</groupId>
   <artifactId>ttrp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava</artifactId>
+  		<version>13.0.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava-collections</artifactId>
+  		<version>r03</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava-annotations</artifactId>
+  		<version>r03</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava-base</artifactId>
+  		<version>r03</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava-primitives</artifactId>
+  		<version>r03</version>
+  	</dependency>
+  </dependencies>
 </project>

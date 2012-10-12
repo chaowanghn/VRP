@@ -6,4 +6,8 @@ public class Depot {
 	public Depot(Location loc) {
 		this.location = loc;
 	}
+
+	public Location getLocation() {
+		return location;
+	}
 }

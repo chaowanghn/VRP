@@ -1,0 +1,412 @@
+ -----------------------
+ BEST SOLUTION TTRP14
+ -----------------------
+************ TTRP Solution *************************
+Total cost: 1333.656582368676
+Number of VEHICLE routes: 9
+Number of TRUCK routes: 7
+Number of SUBTOURS: 13
+Use of Resources : TRUCK 16 TRAILERS 9
+
+Route 0:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 150 Load: 135.0 Stops: 7
+Stops: 7
+Distance: 38.47988580413171
+Trip: 
+Stop at: Customer_28 Served demand: 16.0 
+Stop at: Customer_76 Served demand: 13.0 
+Stop at: Customer_196 Served demand: 27.0 
+Stop at: Customer_116 Served demand: 15.0 
+Stop at: Customer_184 Served demand: 19.0 
+Stop at: Customer_154 Served demand: 30.0 
+Stop at: Customer_138 Served demand: 15.0 
+
+Route 1:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 150 Load: 145.0 Stops: 8
+Stops: 8
+Distance: 40.11941332648108
+Trip: 
+Stop at: Customer_132 Served demand: 12.0 
+Stop at: Customer_69 Served demand: 6.0 
+Stop at: Customer_162 Served demand: 16.0 
+Stop at: Customer_31 Served demand: 27.0 
+Stop at: Customer_190 Served demand: 33.0 
+Stop at: Customer_127 Served demand: 15.0 
+Stop at: Customer_167 Served demand: 20.0 
+Stop at: Customer_27 Served demand: 16.0 
+
+Route 2:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 150 Load: 149.0 Stops: 8
+Stops: 8
+Distance: 39.79508382759436
+Trip: 
+Stop at: Customer_152 Served demand: 26.0 
+Stop at: Customer_58 Served demand: 18.0 
+Stop at: Customer_117 Served demand: 3.0 
+Stop at: Customer_95 Served demand: 20.0 
+Stop at: Customer_94 Served demand: 27.0 
+Stop at: Customer_183 Served demand: 27.0 
+Stop at: Customer_6 Served demand: 3.0 
+Stop at: Customer_147 Served demand: 25.0 
+
+Route 3:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 150 Load: 150.0 Stops: 9
+Stops: 9
+Distance: 60.188269919140694
+Trip: 
+Stop at: Customer_88 Served demand: 9.0 
+Stop at: Customer_148 Served demand: 17.0 
+Stop at: Customer_159 Served demand: 29.0 
+Stop at: Customer_62 Served demand: 19.0 
+Stop at: Customer_182 Served demand: 28.0 
+Stop at: Customer_7 Served demand: 5.0 
+Stop at: Customer_194 Served demand: 17.0 
+Stop at: Customer_106 Served demand: 15.0 
+Stop at: Customer_153 Served demand: 11.0 
+
+Route 4:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 150 Load: 148.0 Stops: 10
+Stops: 10
+Distance: 65.09626433867167
+Trip: 
+Stop at: Customer_73 Served demand: 9.0 
+Stop at: Customer_171 Served demand: 28.0 
+Stop at: Customer_133 Served demand: 23.0 
+Stop at: Customer_22 Served demand: 18.0 
+Stop at: Customer_41 Served demand: 5.0 
+Stop at: Customer_145 Served demand: 10.0 
+Stop at: Customer_115 Served demand: 10.0 
+Stop at: Customer_178 Served demand: 29.0 
+Stop at: Customer_2 Served demand: 7.0 
+Stop at: Customer_137 Served demand: 9.0 
+
+Route 5:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 150 Load: 146.0 Stops: 11
+Stops: 11
+Distance: 90.09602943630213
+Trip: 
+Stop at: Customer_10 Served demand: 16.0 
+Stop at: Customer_189 Served demand: 16.0 
+Stop at: Customer_108 Served demand: 23.0 
+Stop at: Customer_90 Served demand: 3.0 
+Stop at: Customer_126 Served demand: 7.0 
+Stop at: Customer_63 Served demand: 10.0 
+Stop at: Customer_181 Served demand: 25.0 
+Stop at: Customer_32 Served demand: 23.0 
+Stop at: Customer_131 Served demand: 11.0 
+Stop at: Customer_70 Served demand: 5.0 
+Stop at: Customer_101 Served demand: 7.0 
+
+Route 6:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 150 Load: 150.0 Stops: 12
+Stops: 12
+Distance: 55.10199451121065
+Trip: 
+Stop at: Customer_151 Served demand: 18.0 
+Stop at: Customer_92 Served demand: 2.0 
+Stop at: Customer_37 Served demand: 8.0 
+Stop at: Customer_100 Served demand: 17.0 
+Stop at: Customer_193 Served demand: 18.0 
+Stop at: Customer_91 Served demand: 1.0 
+Stop at: Customer_98 Served demand: 10.0 
+Stop at: Customer_59 Served demand: 28.0 
+Stop at: Customer_99 Served demand: 9.0 
+Stop at: Customer_104 Served demand: 9.0 
+Stop at: Customer_96 Served demand: 11.0 
+Stop at: Customer_156 Served demand: 19.0 
+
+Route 7:
+Depot:Customer_166 (SUBTOUR) 
+Capacity: 150 Load: 129.0 Stops: 8
+Stops: 8
+Distance: 38.01154015731082
+Trip: 
+Stop at: Customer_18 Served demand: 12.0 
+Stop at: Customer_114 Served demand: 21.0 
+Stop at: Customer_8 Served demand: 9.0 
+Stop at: Customer_174 Served demand: 27.0 
+Stop at: Customer_45 Served demand: 16.0 
+Stop at: Customer_125 Served demand: 28.0 
+Stop at: Customer_199 Served demand: 5.0 
+Stop at: Customer_83 Served demand: 11.0 
+
+Route 8:
+Depot:Customer_166 (SUBTOUR) 
+Capacity: 150 Load: 44.0 Stops: 2
+Stops: 2
+Distance: 10.47213595499958
+Trip: 
+Stop at: Customer_60 Served demand: 3.0 
+Stop at: Customer_118 Served demand: 41.0 
+
+Route 9:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 207.0 Stops: 2
+Stops: 2
+Distance: 28.134688361210983
+Trip: 
+Stop at: Customer_166 Served demand: 192.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_89 Served demand: 15.0 
+
+Route 10:
+Depot:Customer_16 (SUBTOUR) 
+Capacity: 150 Load: 42.0 Stops: 2
+Stops: 2
+Distance: 8.60555127546399
+Trip: 
+Stop at: Customer_141 Served demand: 27.0 
+Stop at: Customer_191 Served demand: 15.0 
+
+Route 11:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 236.0 Stops: 10
+Stops: 10
+Distance: 84.4799679723069
+Trip: 
+Stop at: Customer_93 Served demand: 22.0 
+Stop at: Customer_85 Served demand: 41.0 
+Stop at: Customer_61 Served demand: 13.0 
+Stop at: Customer_16 Served demand: 61.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_86 Served demand: 35.0 
+Stop at: Customer_113 Served demand: 23.0 
+Stop at: Customer_17 Served demand: 2.0 
+Stop at: Customer_173 Served demand: 6.0 
+Stop at: Customer_84 Served demand: 7.0 
+Stop at: Customer_5 Served demand: 26.0 
+
+Route 12:
+Depot:Customer_50 (SUBTOUR) 
+Capacity: 150 Load: 45.0 Stops: 2
+Stops: 2
+Distance: 8.485281374238571
+Trip: 
+Stop at: Customer_157 Served demand: 15.0 
+Stop at: Customer_102 Served demand: 30.0 
+
+Route 13:
+Depot:Customer_188 (SUBTOUR) 
+Capacity: 150 Load: 9.0 Stops: 1
+Stops: 1
+Distance: 4.47213595499958
+Trip: 
+Stop at: Customer_20 Served demand: 9.0 
+
+Route 14:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 250.0 Stops: 12
+Stops: 12
+Distance: 95.95021817328703
+Trip: 
+Stop at: Customer_50 Served demand: 58.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_33 Served demand: 11.0 
+Stop at: Customer_51 Served demand: 10.0 
+Stop at: Customer_103 Served demand: 16.0 
+Stop at: Customer_66 Served demand: 25.0 
+Stop at: Customer_188 Served demand: 33.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_128 Served demand: 14.0 
+Stop at: Customer_160 Served demand: 26.0 
+Stop at: Customer_30 Served demand: 21.0 
+Stop at: Customer_122 Served demand: 8.0 
+Stop at: Customer_1 Served demand: 10.0 
+Stop at: Customer_176 Served demand: 18.0 
+
+Route 15:
+Depot:Customer_120 (SUBTOUR) 
+Capacity: 150 Load: 119.0 Stops: 7
+Stops: 7
+Distance: 43.09900207886099
+Trip: 
+Stop at: Customer_135 Served demand: 17.0 
+Stop at: Customer_35 Served demand: 8.0 
+Stop at: Customer_136 Served demand: 6.0 
+Stop at: Customer_65 Served demand: 20.0 
+Stop at: Customer_71 Served demand: 15.0 
+Stop at: Customer_161 Served demand: 37.0 
+Stop at: Customer_9 Served demand: 16.0 
+
+Route 16:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 250.0 Stops: 7
+Stops: 7
+Distance: 77.10558283253623
+Trip: 
+Stop at: Customer_111 Served demand: 19.0 
+Stop at: Customer_81 Served demand: 26.0 
+Stop at: Customer_120 Served demand: 147.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_164 Served demand: 31.0 
+Stop at: Customer_34 Served demand: 14.0 
+Stop at: Customer_78 Served demand: 3.0 
+Stop at: Customer_185 Served demand: 10.0 
+
+Route 17:
+Depot:Customer_72 (SUBTOUR) 
+Capacity: 150 Load: 148.0 Stops: 8
+Stops: 8
+Distance: 53.11814689160681
+Trip: 
+Stop at: Customer_74 Served demand: 8.0 
+Stop at: Customer_75 Served demand: 18.0 
+Stop at: Customer_23 Served demand: 29.0 
+Stop at: Customer_67 Served demand: 25.0 
+Stop at: Customer_39 Served demand: 31.0 
+Stop at: Customer_186 Served demand: 12.0 
+Stop at: Customer_56 Served demand: 6.0 
+Stop at: Customer_197 Served demand: 19.0 
+
+Route 18:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 249.0 Stops: 6
+Stops: 6
+Distance: 46.93522555861456
+Trip: 
+Stop at: Customer_53 Served demand: 14.0 
+Stop at: Customer_40 Served demand: 9.0 
+Stop at: Customer_21 Served demand: 11.0 
+Stop at: Customer_72 Served demand: 173.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_198 Served demand: 20.0 
+Stop at: Customer_180 Served demand: 22.0 
+
+Route 19:
+Depot:Customer_177 (SUBTOUR) 
+Capacity: 150 Load: 145.0 Stops: 11
+Stops: 11
+Distance: 47.04342117716655
+Trip: 
+Stop at: Customer_134 Served demand: 26.0 
+Stop at: Customer_163 Served demand: 12.0 
+Stop at: Customer_24 Served demand: 3.0 
+Stop at: Customer_29 Served demand: 9.0 
+Stop at: Customer_121 Served demand: 8.0 
+Stop at: Customer_169 Served demand: 15.0 
+Stop at: Customer_129 Served demand: 6.0 
+Stop at: Customer_79 Served demand: 23.0 
+Stop at: Customer_158 Served demand: 16.0 
+Stop at: Customer_3 Served demand: 13.0 
+Stop at: Customer_77 Served demand: 14.0 
+
+Route 20:
+Depot:Customer_177 (SUBTOUR) 
+Capacity: 150 Load: 52.0 Stops: 3
+Stops: 3
+Distance: 10.261297173761164
+Trip: 
+Stop at: Customer_68 Served demand: 36.0 
+Stop at: Customer_80 Served demand: 6.0 
+Stop at: Customer_150 Served demand: 10.0 
+
+Route 21:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 244.0 Stops: 3
+Stops: 3
+Distance: 40.37853994238486
+Trip: 
+Stop at: Customer_109 Served demand: 11.0 
+Stop at: Customer_177 Served demand: 214.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_12 Served demand: 19.0 
+
+Route 22:
+Depot:Customer_87 (SUBTOUR) 
+Capacity: 150 Load: 149.0 Stops: 13
+Stops: 13
+Distance: 76.58101262086171
+Trip: 
+Stop at: Customer_172 Served demand: 12.0 
+Stop at: Customer_42 Served demand: 5.0 
+Stop at: Customer_142 Served demand: 13.0 
+Stop at: Customer_14 Served demand: 20.0 
+Stop at: Customer_192 Served demand: 11.0 
+Stop at: Customer_119 Served demand: 9.0 
+Stop at: Customer_44 Served demand: 18.0 
+Stop at: Customer_140 Served demand: 7.0 
+Stop at: Customer_38 Served demand: 16.0 
+Stop at: Customer_43 Served demand: 7.0 
+Stop at: Customer_15 Served demand: 8.0 
+Stop at: Customer_57 Served demand: 7.0 
+Stop at: Customer_144 Served demand: 16.0 
+
+Route 23:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 239.0 Stops: 4
+Stops: 4
+Distance: 40.23305455004042
+Trip: 
+Stop at: Customer_112 Served demand: 29.0 
+Stop at: Customer_97 Served demand: 12.0 
+Stop at: Customer_87 Served demand: 175.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_13 Served demand: 23.0 
+
+Route 24:
+Depot:Customer_124 (SUBTOUR) 
+Capacity: 150 Load: 40.0 Stops: 2
+Stops: 2
+Distance: 9.123105625617661
+Trip: 
+Stop at: Customer_168 Served demand: 13.0 
+Stop at: Customer_47 Served demand: 27.0 
+
+Route 25:
+Depot:Customer_11 (SUBTOUR) 
+Capacity: 150 Load: 33.0 Stops: 2
+Stops: 2
+Distance: 7.7678289356323695
+Trip: 
+Stop at: Customer_107 Served demand: 19.0 
+Stop at: Customer_175 Served demand: 14.0 
+
+Route 26:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 250.0 Stops: 13
+Stops: 13
+Distance: 127.21206614865076
+Trip: 
+Stop at: Customer_82 Served demand: 16.0 
+Stop at: Customer_48 Served demand: 36.0 
+Stop at: Customer_124 Served demand: 50.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_46 Served demand: 1.0 
+Stop at: Customer_36 Served demand: 5.0 
+Stop at: Customer_143 Served demand: 11.0 
+Stop at: Customer_49 Served demand: 30.0 
+Stop at: Customer_64 Served demand: 9.0 
+Stop at: Customer_11 Served demand: 45.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_19 Served demand: 17.0 
+Stop at: Customer_123 Served demand: 16.0 
+Stop at: Customer_52 Served demand: 9.0 
+Stop at: Customer_146 Served demand: 5.0 
+
+Route 27:
+Depot:Customer_179 (SUBTOUR) 
+Capacity: 150 Load: 148.0 Stops: 11
+Stops: 11
+Distance: 46.8775591474219
+Trip: 
+Stop at: Customer_54 Served demand: 18.0 
+Stop at: Customer_130 Served demand: 19.0 
+Stop at: Customer_165 Served demand: 8.0 
+Stop at: Customer_55 Served demand: 2.0 
+Stop at: Customer_25 Served demand: 6.0 
+Stop at: Customer_170 Served demand: 22.0 
+Stop at: Customer_187 Served demand: 14.0 
+Stop at: Customer_139 Served demand: 14.0 
+Stop at: Customer_155 Served demand: 21.0 
+Stop at: Customer_4 Served demand: 19.0 
+Stop at: Customer_110 Served demand: 5.0 
+
+Route 28:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 250 Load: 238.0 Stops: 5
+Stops: 5
+Distance: 40.43227929817051
+Trip: 
+Stop at: Customer_105 Served demand: 21.0 
+Stop at: Customer_26 Served demand: 17.0 
+Stop at: Customer_149 Served demand: 18.0 
+Stop at: Customer_179 Served demand: 161.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_195 Served demand: 21.0 
+*************************************************

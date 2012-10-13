@@ -1,0 +1,138 @@
+ -----------------------
+ BEST SOLUTION TTRP03
+ -----------------------
+************ TTRP Solution *************************
+Total cost: 618.0372068925424
+Number of VEHICLE routes: 3
+Number of TRUCK routes: 2
+Number of SUBTOURS: 6
+Use of Resources : TRUCK 5 TRAILERS 3
+
+Route 0:
+Depot:Customer_18 (SUBTOUR) 
+Capacity: 100 Load: 97.0 Stops: 6
+Stops: 6
+Distance: 84.79937776417464
+Trip: 
+Stop at: Customer_47 Served demand: 25.0 
+Stop at: Customer_44 Served demand: 16.0 
+Stop at: Customer_42 Served demand: 13.0 
+Stop at: Customer_19 Served demand: 9.0 
+Stop at: Customer_40 Served demand: 7.0 
+Stop at: Customer_41 Served demand: 27.0 
+
+Route 1:
+Depot:Customer_18 (SUBTOUR) 
+Capacity: 100 Load: 60.0 Stops: 3
+Stops: 3
+Distance: 46.982355809701666
+Trip: 
+Stop at: Customer_4 Served demand: 9.0 
+Stop at: Customer_13 Served demand: 23.0 
+Stop at: Customer_25 Served demand: 28.0 
+
+Route 2:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 200 Load: 198.0 Stops: 1
+Stops: 1
+Distance: 29.5296461204668
+Trip: 
+Stop at: Customer_18 Served demand: 198.0 (Vehicle Customer root of subtours) 
+
+Route 3:
+Depot:Customer_6 (SUBTOUR) 
+Capacity: 100 Load: 77.0 Stops: 5
+Stops: 5
+Distance: 62.73997362869845
+Trip: 
+Stop at: Customer_14 Served demand: 21.0 
+Stop at: Customer_24 Served demand: 10.0 
+Stop at: Customer_43 Served demand: 11.0 
+Stop at: Customer_7 Served demand: 19.0 
+Stop at: Customer_23 Served demand: 16.0 
+
+Route 4:
+Depot:Customer_27 (SUBTOUR) 
+Capacity: 100 Load: 87.0 Stops: 7
+Stops: 7
+Distance: 66.59060439800605
+Trip: 
+Stop at: Customer_48 Served demand: 17.0 
+Stop at: Customer_8 Served demand: 23.0 
+Stop at: Customer_26 Served demand: 7.0 
+Stop at: Customer_31 Served demand: 11.0 
+Stop at: Customer_28 Served demand: 14.0 
+Stop at: Customer_22 Served demand: 8.0 
+Stop at: Customer_1 Served demand: 7.0 
+
+Route 5:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 200 Load: 194.0 Stops: 2
+Stops: 2
+Distance: 28.4571393891288
+Trip: 
+Stop at: Customer_6 Served demand: 92.0 (Vehicle Customer root of subtours) 
+Stop at: Customer_27 Served demand: 102.0 (Vehicle Customer root of subtours) 
+
+Route 6:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 100 Load: 97.0 Stops: 9
+Stops: 9
+Distance: 96.47771969814762
+Trip: 
+Stop at: Customer_17 Served demand: 3.0 
+Stop at: Customer_37 Served demand: 9.0 
+Stop at: Customer_15 Served demand: 10.0 
+Stop at: Customer_45 Served demand: 10.0 
+Stop at: Customer_33 Served demand: 23.0 
+Stop at: Customer_39 Served demand: 14.0 
+Stop at: Customer_10 Served demand: 5.0 
+Stop at: Customer_49 Served demand: 18.0 
+Stop at: Customer_46 Served demand: 5.0 
+
+Route 7:
+Depot:Depot_0 (TRUCK ROUTE) 
+Capacity: 100 Load: 96.0 Stops: 5
+Stops: 5
+Distance: 47.46419818738913
+Trip: 
+Stop at: Customer_32 Served demand: 12.0 
+Stop at: Customer_11 Served demand: 19.0 
+Stop at: Customer_38 Served demand: 15.0 
+Stop at: Customer_5 Served demand: 21.0 
+Stop at: Customer_12 Served demand: 29.0 
+
+Route 8:
+Depot:Customer_2 (SUBTOUR) 
+Capacity: 100 Load: 67.0 Stops: 4
+Stops: 4
+Distance: 52.57552943532892
+Trip: 
+Stop at: Customer_20 Served demand: 28.0 
+Stop at: Customer_35 Served demand: 17.0 
+Stop at: Customer_36 Served demand: 6.0 
+Stop at: Customer_3 Served demand: 16.0 
+
+Route 9:
+Depot:Customer_2 (SUBTOUR) 
+Capacity: 100 Load: 95.0 Stops: 7
+Stops: 7
+Distance: 60.37307037824305
+Trip: 
+Stop at: Customer_16 Served demand: 15.0 
+Stop at: Customer_50 Served demand: 10.0 
+Stop at: Customer_9 Served demand: 11.0 
+Stop at: Customer_30 Served demand: 19.0 
+Stop at: Customer_34 Served demand: 26.0 
+Stop at: Customer_21 Served demand: 8.0 
+Stop at: Customer_29 Served demand: 6.0 
+
+Route 10:
+Depot:  Depot_0 (VEHICLE ROUTE WITH SUBTOUR)
+Capacity: 200 Load: 192.0 Stops: 1
+Stops: 1
+Distance: 42.04759208325728
+Trip: 
+Stop at: Customer_2 Served demand: 192.0 (Vehicle Customer root of subtours) 
+*************************************************
+TTRP>----------------------PERMUTATION ----------------------

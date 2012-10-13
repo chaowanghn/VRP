@@ -38,9 +38,6 @@ public class TTRP {
 		this.truckCapacity = truckCapacity;
 		this.trailerCapacity = trailerCapacity;
 		this.depot = depot;
-		this.customers = customers;
-		
-		
 	} 
 
 	public int getNumberOfCustomers() {

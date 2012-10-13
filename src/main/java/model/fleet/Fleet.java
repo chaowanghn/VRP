@@ -4,31 +4,36 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Fleet {
+	private double truckCapacity;
+	private double trailerCapacity;
 	
-	Set<Truck> trucks;
-	Set<Trailer> trailers;
+	Set<Truck> trucks = new HashSet<Truck>();
+	Set<Trailer> trailers = new HashSet<Trailer>();
 	Set<Vehicle> completeVehicles;
 	
-	public Fleet(int numberOfTrucks, int numberOfTrailers) {
-		this.trucks = new HashSet<Truck>(numberOfTrucks);
-		this.trailers = new HashSet<Trailer>(numberOfTrailers);
-		this.completeVehicles = new HashSet<Vehicle>();
+	public Fleet(double truckCapacity, Set<Truck> trucks, double trailerCapacity, Set<Trailer> trailers) {
+		this.truckCapacity = truckCapacity;
+		this.trailerCapacity = trailerCapacity;
+		this.trucks = trucks;
+		this.trailers = trailers;
 	}
 
+	public Set<Truck> getTrucks() {
+		return trucks;
+	}
 
-	public void addTruck(Truck truck) {
-		trucks.add(truck);
+	public Set<Trailer> getTrailers() {
+		return trailers;
+	}
+
+	public double getTruckCapacity() {
+		return truckCapacity;
+	}
+
+	public double getTrailerCapacity() {
+		return trailerCapacity;
 	}
 	
-	public void addTrailer(Trailer trailer) {
-		trailers.add(trailer);
-	}
 	
-	public int getNumOfTrucks() {
-		return trucks.size();
-	}
 	
-	public int getNumOfTrailers() {
-		return trailers.size();
-	}
 }

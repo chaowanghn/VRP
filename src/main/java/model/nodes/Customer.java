@@ -1,6 +1,6 @@
 package model.nodes;
 
-public abstract class Customer {
+public class Customer implements Node {
 	protected int id;
 	protected double demand;
 	protected Location location;

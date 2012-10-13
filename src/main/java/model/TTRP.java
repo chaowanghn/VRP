@@ -3,6 +3,8 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.collect.Sets;
+
 import model.fleet.*;
 import model.nodes.*;
 
@@ -20,36 +22,41 @@ import model.nodes.*;
  */
 public class TTRP {
 	
-	private double truckCapacity;
-	
-	private double trailerCapacity;
-	
 	private Depot depot;
 	
-	private Set<Customer> customers;
 	private Set<TruckCustomer> truckCustomers;
 	private Set<VehicleCustomer> vehicleCustomers;
-	
 
 	private Fleet fleet;
 	
-	private TTRP(double truckCapacity,double trailerCapacity,Depot depot, Set<Customer> customers) {
+	public TTRP(Depot depot, Set<TruckCustomer> truckCustomers, Set<VehicleCustomer> vehicleCustomers, Fleet fleet) {
 		super();
-		this.truckCapacity = truckCapacity;
-		this.trailerCapacity = trailerCapacity;
+		this.truckCustomers = truckCustomers;
+		this.vehicleCustomers = vehicleCustomers;
 		this.depot = depot;
-	} 
+		this.fleet = fleet;
+	}
 
-	public int getNumberOfCustomers() {
-		return this.customers.size();
+	
+	public Depot getDepot() {
+		return depot;
+	}
+
+	public Set<TruckCustomer> getTruckCustomers() {
+		return truckCustomers;
+	}
+
+	public Set<VehicleCustomer> getVehicleCustomers() {
+		return vehicleCustomers;
+	}
+
+	public Fleet getFleet() {
+		return fleet;
+	} 
+	
+	public Set<Customer> getCustomers() {
+		return Sets.union(truckCustomers, vehicleCustomers);
 	}
 	
-	public int getNumberOfTruckCustomers() {
-		return this.truckCustomers.size();
-	}
-	
-	public int getNumberOfVehicelCustomers() {
-		return this.vehicleCustomers.size();
-	}
 	
 }

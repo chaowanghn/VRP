@@ -58,5 +58,12 @@ public class TTRP {
 		return Sets.union(truckCustomers, vehicleCustomers);
 	}
 	
+	public Set<Node> getAllNodes() {
+		Set<Node> allNodes = new HashSet<Node>();
+		allNodes.addAll(getCustomers());
+		allNodes.add(depot);
+		return allNodes;
+		
+	}
 	
 }

@@ -1,6 +1,8 @@
 package model.nodes;
 
-public class Depot implements Node {
+public class Depot extends Node {
+
+	private static final long serialVersionUID = 1L;
 	int id;
 	Location location;
 	
@@ -15,5 +17,15 @@ public class Depot implements Node {
 
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public double getX() {
+		return this.location.getX();
+	}
+
+	@Override
+	public double getY() {
+		return this.location.getY();
 	}
 }

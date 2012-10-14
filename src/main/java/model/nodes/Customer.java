@@ -1,6 +1,8 @@
 package model.nodes;
 
-public class Customer implements Node {
+public class Customer extends Node {
+	
+	private static final long serialVersionUID = 1L;
 	protected int id;
 	protected double demand;
 	protected Location location;
@@ -49,6 +51,16 @@ public class Customer implements Node {
 	public String toString() {
 		return "Customer [id=" + id + ", demand=" + demand + ", location="
 				+ location + ", isSatisfied=" + isSatisfied + "]";
+	}
+
+	@Override
+	public double getX() {
+		return this.location.getX();
+	}
+
+	@Override
+	public double getY() {
+		return this.location.getY();
 	}
 	
 	

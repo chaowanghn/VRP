@@ -7,9 +7,12 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 
+import model.TTRP;
+
 import org.apache.commons.collections15.Transformer;
 
-import edu.uci.ics.jung.algorithms.layout.*;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.graph.util.*;
 import edu.uci.ics.jung.graph.*;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
@@ -17,11 +20,7 @@ import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 public class Visualizer {
 	public static void main(String[] args) {
 		Graph<Integer,String> graph = new DirectedSparseMultigraph<Integer, String>();
-		graph.addVertex(1);
-		graph.addVertex(2);
-		graph.addVertex(3);
-		graph.addEdge("1-2", 1, 2, EdgeType.DIRECTED);
-		graph.addEdge("2-3", 2, 3, EdgeType.DIRECTED);
+		Layout<Integer, String> layout = new StaticLayout<Integer, String>(graph);
 		
 		Transformer<Integer, Paint> vertexPaint = new Transformer<Integer, Paint>() {
 			public Paint transform(Integer input) {
@@ -29,12 +28,11 @@ public class Visualizer {
 			}
 		};
 		
-		Layout<Integer, String> layout = new CircleLayout<Integer, String>(graph);
-		Integer vertex = new Integer(0);
 		
-		layout.setLocation(vertex, new Point2D.Double(10.0,10.0));
-		layout.reset();
+		Integer vertex = new Integer(0);
 		layout.getGraph().addVertex(vertex);
+		layout.setLocation(vertex, new Point2D.Double(0.0,0.0));
+		
 		
 		layout.setSize(new Dimension(500, 500));
 		BasicVisualizationServer<Integer, String> vv = new BasicVisualizationServer<Integer, String>(layout);
@@ -46,6 +44,12 @@ public class Visualizer {
 		frame.getContentPane().add(vv);
 		frame.pack();
 		frame.setVisible(true);
+		
+		
+		
+	}
+	
+	public static void visualize(TTRP ttrp) {
 		
 	}
 }

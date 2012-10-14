@@ -106,11 +106,15 @@ public class InstanceImporter {
 		return vehicleCustomers;
 	}
 	
-	public static TTRP createTTRP(File inputFilePath) throws IOException {
-		InstanceImporter instanceImporter = new InstanceImporter(inputFilePath);
+	public static TTRP createTTRP(File inputFile) throws IOException {
+		InstanceImporter instanceImporter = new InstanceImporter(inputFile);
 		instanceImporter.read();
 		TTRP ttrp = new TTRP(instanceImporter.getDepot(), instanceImporter.getTruckCustomers(), instanceImporter.getVehicleCustomers(), instanceImporter.getFleet());
 		return ttrp;
+	}
+	
+	public static TTRP createTTRP(String filePath) throws IOException {
+		return createTTRP(new File(filePath));
 	}
 
 	private Fleet getFleet() {

@@ -66,4 +66,7 @@ public class TTRP {
 		
 	}
 	
+	public String toString() {
+		return "TTRP instance: Truck Customers: "+ this.truckCustomers.size()+" Vehicle Customers: " + this.vehicleCustomers.size() ;
+	}
 }

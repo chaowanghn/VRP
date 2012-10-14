@@ -3,13 +3,13 @@ package io;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
+import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 
 import org.apache.commons.collections15.Transformer;
 
-import edu.uci.ics.jung.algorithms.layout.CircleLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.*;
 import edu.uci.ics.jung.graph.util.*;
 import edu.uci.ics.jung.graph.*;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
@@ -30,6 +30,12 @@ public class Visualizer {
 		};
 		
 		Layout<Integer, String> layout = new CircleLayout<Integer, String>(graph);
+		Integer vertex = new Integer(0);
+		
+		layout.setLocation(vertex, new Point2D.Double(10.0,10.0));
+		layout.reset();
+		layout.getGraph().addVertex(vertex);
+		
 		layout.setSize(new Dimension(500, 500));
 		BasicVisualizationServer<Integer, String> vv = new BasicVisualizationServer<Integer, String>(layout);
 		vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);

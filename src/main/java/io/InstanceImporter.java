@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.print.attribute.IntegerSyntax;
-
 import model.TTRP;
 import model.fleet.Fleet;
 import model.fleet.Trailer;
@@ -96,11 +94,9 @@ public class InstanceImporter {
 		return depot;
 	}
 
-	
 	private Set<TruckCustomer> getTruckCustomers() {
 		return truckCustomers;
 	}
-
 	
 	private Set<VehicleCustomer> getVehicleCustomers() {
 		return vehicleCustomers;

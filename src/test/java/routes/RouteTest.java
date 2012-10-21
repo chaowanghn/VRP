@@ -42,7 +42,7 @@ public class RouteTest {
 				+ c3.distance(depot);
 		
 		assertTrue("Real Cost: "+realCost+ " Route Cost: " + routeCost, routeCost == realCost);
-		
+		assertEquals(route.toString(), "0-1-2-3-0");
 	}
 
 }

@@ -34,4 +34,13 @@ public class Route {
 		return totalCost;
 	}
 	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(depot.getId());
+		for (Customer c : customers)
+			sb.append("-"+c.getId());
+		sb.append("-"+depot.getId());
+		return sb.toString();
+	}
+	
 }

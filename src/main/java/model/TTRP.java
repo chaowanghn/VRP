@@ -1,5 +1,8 @@
 package model;
 
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -62,11 +65,18 @@ public class TTRP {
 		Set<Node> allNodes = new HashSet<Node>();
 		allNodes.addAll(getCustomers());
 		allNodes.add(depot);
-		return allNodes;
-		
+		return allNodes;	
 	}
 	
 	public String toString() {
 		return "TTRP instance: Truck Customers: "+ this.truckCustomers.size()+" Vehicle Customers: " + this.vehicleCustomers.size() ;
+	}
+	
+	public TIntObjectMap<Node> nodesMap() {
+		TIntObjectHashMap<Node> map = new TIntObjectHashMap<Node>();
+		for (Node n : getAllNodes()) {
+			map.put(n.getId(), n);
+		}
+		return map;
 	}
 }

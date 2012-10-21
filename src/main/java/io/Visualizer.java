@@ -61,19 +61,21 @@ public class Visualizer {
 			layout.setLocation(node, node);
 			layout.lock(node, true);
 		}
+				    
+		 visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColorTransformer());
 		
-		//Set nodes colors
-		Transformer<Node,Paint> vertexColor = new Transformer<Node,Paint>() {
+	}
+	
+	private Transformer<Node,Paint> vertexColorTransformer() {
+		return new Transformer<Node,Paint>() {
 			public Paint transform(Node node) {
 						if (node instanceof Depot) {return Color.BLACK;}
 						if (node instanceof VehicleCustomer ) {return Color.RED;}
 						else return Color.BLUE;
 					}
-		    };     
-		    visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColor);
-		
+		    };
 	}
-	
+
 	private VisualizationViewer<Node, String> getVisualizationViewer() {
 		return this.visualViewer;
 	}

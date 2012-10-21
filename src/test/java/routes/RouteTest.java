@@ -43,6 +43,8 @@ public class RouteTest {
 		
 		assertTrue("Real Cost: "+realCost+ " Route Cost: " + routeCost, routeCost == realCost);
 		assertEquals(route.toString(), "0-1-2-3-0");
+		
+		assertTrue(route.getNodes().contains(c1) && route.getNodes().contains(c2) && route.getNodes().contains(c3) && route.getNodes().contains(depot));
 	}
 
 }

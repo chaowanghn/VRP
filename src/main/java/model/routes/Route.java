@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+
 import model.nodes.Customer;
 import model.nodes.Depot;
+import model.nodes.Node;
 
 public class Route {
 
@@ -43,4 +47,8 @@ public class Route {
 		return sb.toString();
 	}
 	
+	public ImmutableList<Node> getNodes() {	
+		return new ImmutableList.Builder<Node>().add(depot).addAll(customers).add(depot).build();
+	}
+
 }

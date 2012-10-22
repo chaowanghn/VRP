@@ -6,7 +6,9 @@ import java.awt.Paint;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,11 +25,13 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.*;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbsoluteCrossoverScalingControl;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 public class Visualizer {
 	
 	public static void main(String[] args) throws IOException {
-		Visualizer.visualize(InstanceImporter.createTTRP(new File("src/test/resources/instances/benchmark/ttrp05.dat")));
+		TTRP ttrp = InstanceImporter.createTTRP(new File("src/test/resources/instances/benchmark/ttrp02.dat"));
+		Visualizer.visualizeNodesSequence(new ArrayList<Node>(ttrp.getTruckCustomers()).subList(5, 15));
 	}
 	
 	public static float DEFAULT_SCALING_CONTROL = 10;
@@ -55,7 +59,7 @@ public class Visualizer {
 		this.scalingcontrol.scale(visualViewer, scalingControl, point);
 	}
 	
-	private void setNodes(Collection<Node> nodes) {
+	private void setNodes(Collection<? extends Node> nodes) {
 		for (Node node : nodes) {
 			this.graph.addVertex(node);
 			layout.setLocation(node, node);
@@ -63,7 +67,34 @@ public class Visualizer {
 		}
 				    
 		 visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColorTransformer());
+		 visualViewer.getRenderContext().setVertexLabelTransformer(new Transformer<Node, String>() {
+				
+				public String transform(Node input) {
+					return Integer.toString(input.getId());
+				}
+			});
 		
+	}
+	
+	private void setNodes(List<? extends Node> nodes) {
+		for (Node node : nodes) {
+			this.graph.addVertex(node);
+			layout.setLocation(node, node);
+			layout.lock(node, true);
+		}
+		
+		for (int i=1; i<=nodes.size()-1; i++) {
+			this.graph.addEdge(Integer.toString(i), nodes.get(i-1), nodes.get(i));
+		}
+		
+		visualViewer.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<String>());
+		visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColorTransformer());
+		visualViewer.getRenderContext().setVertexLabelTransformer(new Transformer<Node, String>() {
+			
+			public String transform(Node input) {
+				return Integer.toString(input.getId());
+			}
+		});
 	}
 	
 	private Transformer<Node,Paint> vertexColorTransformer() {
@@ -80,7 +111,7 @@ public class Visualizer {
 		return this.visualViewer;
 	}
 	
-	public static void visualize(TTRP ttrp) {
+	public static void visualizeTTRP(TTRP ttrp) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(ttrp.getAllNodes());
 		JFrame frame = new JFrame(ttrp.toString());
@@ -89,5 +120,13 @@ public class Visualizer {
 		frame.setVisible(true);
 	}
 	
+	public static void visualizeNodesSequence(List<? extends Node> nodes) {
+		Visualizer visualizer = new Visualizer();
+		JFrame frame = new JFrame();
+		visualizer.setNodes(nodes);
+		frame.getContentPane().add(visualizer.getVisualizationViewer());
+		frame.pack();
+		frame.setVisible(true);
+	}
 
 }

@@ -8,6 +8,8 @@ import io.Visualizer;
 import java.util.HashSet;
 import java.util.Set;
 
+import algorithms.GiantTour;
+
 import com.google.common.collect.Sets;
 
 import model.fleet.*;
@@ -86,4 +88,7 @@ public class TTRP {
 		Visualizer.visualizeTTRP(this);
 	}
 
+	public GiantTour createGiantTour() {
+		return new GiantTour(depot, getCustomers());
+	}
 }

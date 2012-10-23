@@ -1,6 +1,7 @@
 package model.routes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -50,5 +51,10 @@ public class Route {
 	public ImmutableList<Node> getNodes() {	
 		return new ImmutableList.Builder<Node>().add(depot).addAll(customers).add(depot).build();
 	}
+
+	public void shuffleCustomers() {
+		Collections.shuffle(customers);
+	}
+
 
 }

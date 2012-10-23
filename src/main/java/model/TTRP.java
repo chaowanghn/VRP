@@ -3,6 +3,8 @@ package model;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
+import io.Visualizer;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,4 +81,9 @@ public class TTRP {
 		}
 		return map;
 	}
+
+	public void visualize() {
+		Visualizer.visualizeTTRP(this);
+	}
+
 }

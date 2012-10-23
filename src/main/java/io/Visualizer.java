@@ -17,6 +17,7 @@ import model.TTRP;
 import model.nodes.Depot;
 import model.nodes.Node;
 import model.nodes.VehicleCustomer;
+import model.routes.Route;
 
 import org.apache.commons.collections15.Transformer;
 
@@ -130,4 +131,7 @@ public class Visualizer {
 		frame.setVisible(true);
 	}
 
+	public static void visualizeRoute(Route r) {
+		visualizeNodesSequence(r.getNodes());
+	}
 }

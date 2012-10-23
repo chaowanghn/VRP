@@ -28,7 +28,7 @@ import edu.uci.ics.jung.visualization.control.AbsoluteCrossoverScalingControl;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 public class Visualizer {
-	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp02.dat";
+	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp06.dat";
 	
 	public static void main(String[] args) throws IOException {
 		TTRP ttrp = InstanceImporter.createTTRP(INPUT_FILE_PATH);

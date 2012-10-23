@@ -31,7 +31,8 @@ public class Visualizer {
 	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp02.dat";
 	
 	public static void main(String[] args) throws IOException {
-		InstanceImporter.createTTRP(INPUT_FILE_PATH).visualize();
+		TTRP ttrp = InstanceImporter.createTTRP(INPUT_FILE_PATH);
+		ttrp.visualize();
 	}
 	
 	public static float DEFAULT_SCALING_CONTROL = 10;
@@ -101,8 +102,8 @@ public class Visualizer {
 		return new Transformer<Node,Paint>() {
 			public Paint transform(Node node) {
 						if (node instanceof Depot) {return Color.BLACK;}
-						if (node instanceof VehicleCustomer ) {return Color.RED;}
-						else return Color.BLUE;
+						if (node instanceof VehicleCustomer ) {return Color.BLUE;}
+						else return Color.RED;
 					}
 		    };
 	}

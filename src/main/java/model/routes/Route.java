@@ -22,6 +22,7 @@ public class Route {
 	}
 	
 	public void addCustomer(Customer c) {
+		c.setSatisfied(true);
 		customers.add(c);
 	}
 	

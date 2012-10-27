@@ -84,6 +84,10 @@ public class TTRP {
 		return map;
 	}
 
+	public Node getNode(int id) {
+		return nodesMap().get(id);
+	}
+	
 	public void visualize() {
 		Visualizer.visualizeTTRP(this);
 	}

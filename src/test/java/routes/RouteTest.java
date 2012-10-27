@@ -27,11 +27,11 @@ public class RouteTest {
 
 	@Test
 	public void test() {
-		Customer c1 = (Customer) ttrp.nodesMap().get(1);
+		Customer c1 = (Customer) ttrp.getNode(1);
 		route.addCustomer(c1);
-		Customer c2 = (Customer) ttrp.nodesMap().get(2);
+		Customer c2 = (Customer) ttrp.getNode(2);
 		route.addCustomer(c2);
-		Customer c3 = (Customer) ttrp.nodesMap().get(3);
+		Customer c3 = (Customer) ttrp.getNode(3);
 		route.addCustomer(c3);
 		
 		double routeCost = route.cost();
@@ -41,9 +41,7 @@ public class RouteTest {
 				+ c2.distance(c3)
 				+ c3.distance(depot);
 		
-		assertTrue("Real Cost: "+realCost+ " Route Cost: " + routeCost, routeCost == realCost);
-		assertEquals(route.toString(), "0-1-2-3-0");
-		
+		assertTrue("Real Cost: "+realCost+ " Route Cost: " + routeCost, routeCost == realCost);		
 		assertTrue(route.getNodes().contains(c1) && route.getNodes().contains(c2) && route.getNodes().contains(c3) && route.getNodes().contains(depot));
 	}
 

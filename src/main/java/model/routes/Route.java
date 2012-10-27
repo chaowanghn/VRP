@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
+import algorithms.moves.Movable;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -12,7 +14,7 @@ import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
 
-public class Route {
+public class Route implements Movable {
 
 	private Depot depot;
 	protected List<Customer> customers = new ArrayList<Customer>();
@@ -46,6 +48,7 @@ public class Route {
 		for (Customer c : customers)
 			sb.append("-"+c.getId());
 		sb.append("-"+depot.getId());
+		sb.append("  Cost: " + cost());
 		return sb.toString();
 	}
 	
@@ -57,5 +60,27 @@ public class Route {
 		Collections.shuffle(customers);
 	}
 
+	public int compareTo(Movable o) {
+		
+		if (this.cost() < o.cost()) {
+			return -1;
+		}
+		
+		else if (this.cost() > o.cost()) {
+			return 1;
+		}
+		
+		else {
+			return 0;
+		}
+	}
+
+	public Depot getDepot() {
+		return this.depot;
+	}
+	
+	public List<Customer> getCustomers() {
+		return this.customers;
+	}
 
 }

@@ -2,7 +2,7 @@ package model.fleet;
 
 import model.nodes.Location;
 
-public class Vehicle extends Movable{	
+public class Vehicle extends MovingObject{	
 	Truck truck;
 	Trailer trailer;
 	

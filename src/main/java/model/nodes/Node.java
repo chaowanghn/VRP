@@ -16,21 +16,16 @@ public abstract class Node extends Point2D.Double {
 	
 	public abstract double getY();
 	
-	public static List<? extends Node> nodesInAscendingDistance(Collection<? extends Node> of,final Node to) {
-		List<? extends Node> nodes = new ArrayList<Node>(of);
-		Collections.sort(nodes, new Comparator<Node>() {
-			public int compare(Node n1, Node n2) {
-				if (n1.distance(to) < n2.distance(to)) {
+	public static <N extends Node> List<N> nodesInAscendingDistance(Collection<? extends N> of,final N to) {
+		List<N> nodes = new ArrayList<N>(of);
+		Collections.sort(nodes, new Comparator<N>() {
+			public int compare(N n1, N n2) {
+				if (n1.distance(to) < n2.distance(to))
 					return -1;
-				}
-				
-				else if (n1.distance(to) > n2.distance(to)) {
+				else if (n1.distance(to) > n2.distance(to))
 					return 1;
-				}
-				
-				else {
+				else
 					return 0;
-				}
 			}
 			
 		});
@@ -38,11 +33,11 @@ public abstract class Node extends Point2D.Double {
 		return nodes;
 	}
 
-	public static Node nearestNode(Collection<? extends Node> of,final Node to) {
+	public static <N extends Node> N nearestNode(Collection<? extends N> of,final N to) {
 		return nodesInAscendingDistance(of, to).get(0);
 	}
 	
-	public static Node farthestNode(Collection<? extends Node> of,final Node to) {
+	public static <N extends Node> N farthestNode(Collection<? extends N> of,final N to) {
 		return nodesInAscendingDistance(of, to).get(nodesInAscendingDistance(of, to).size()-1);
 	}
 }

@@ -20,7 +20,7 @@ public class RouteTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ttrp = InstanceImporter.createTTRP(InstanceImporterTest.inputInstanceFilepath);
+		ttrp = TTRP.createInstanceFromFile(InstanceImporterTest.inputInstanceFilepath);
 		depot = ttrp.getDepot();
 		route = new Route(ttrp.getDepot());
 	}

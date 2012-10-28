@@ -3,8 +3,11 @@ package model;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
+import io.InstanceImporter;
 import io.Visualizer;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -94,5 +97,16 @@ public class TTRP {
 
 	public GiantTour createGiantTour() {
 		return new GiantTour(depot, getCustomers());
+	}
+
+	public static TTRP createInstanceFromFile(File inputFile) throws IOException {
+		InstanceImporter instanceImporter = new InstanceImporter(inputFile);
+		instanceImporter.read();
+		return new TTRP(instanceImporter.getDepot(), instanceImporter.getTruckCustomers(), instanceImporter.getVehicleCustomers(), instanceImporter.getFleet());
+		
+	}
+	
+	public static TTRP createInstanceFromFile(String inputFilePath) throws IOException {
+		return createInstanceFromFile(new File(inputFilePath));
 	}
 }

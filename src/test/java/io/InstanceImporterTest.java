@@ -24,7 +24,7 @@ public class InstanceImporterTest {
 	@Before
 	public void setUp() throws Exception {
 		inputInstanceFile = new File(inputInstanceFilepath);
-		ttrp = InstanceImporter.createTTRP(inputInstanceFile);	
+		ttrp = TTRP.createInstanceFromFile(inputInstanceFile);
 	}
 
 	@Test

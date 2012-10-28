@@ -26,13 +26,14 @@ public class RandomExchageTest {
 
 	@Before
 	public void setUp() throws Exception {
-		ttrp = InstanceImporter.createTTRP(INPUT_FILE_PATH);
+		ttrp = TTRP.createInstanceFromFile(INPUT_FILE_PATH);
 		route1 = new Route(ttrp.getDepot());
 		route2 = new Route(ttrp.getDepot());
 		
 		for (int i=1; i<=10; i++) {
 			if (i<=5) {
 				route1.addCustomer((Customer) ttrp.nodesMap().get(i));
+				
 			}
 			
 			else {
@@ -44,8 +45,7 @@ public class RandomExchageTest {
 
 	@Test
 	public void test() {
-		System.out.println(new RandomExchange(new MoveConfiguration(1000)).apply(route1).getBestNeigbor());
-		
+		System.out.println(new RandomExchange(new MoveConfiguration(100000)).apply(route1).getBestNeigbor());
 	}
 
 }

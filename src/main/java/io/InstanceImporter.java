@@ -33,11 +33,11 @@ public class InstanceImporter {
 	
 	private File inputInstanceFile;
 	
-	private InstanceImporter (File f) {
+	public InstanceImporter (File f) {
 		this.inputInstanceFile = f;
 	}
 	
-	private void read() throws IOException {
+	public void read() throws IOException {
 		List<String> fileLines = Files.readLines(inputInstanceFile, Charsets.UTF_8);
 		readFirstLine(fileLines.get(0).split("	"));
 		readDepotLine(fileLines.get(1).split("	"));
@@ -90,30 +90,19 @@ public class InstanceImporter {
 		this.fleet = new Fleet(this.truckCapacity,trucks,this.trailerCapacity,trailers);
 	}
 	
-	private Depot getDepot() {
+	public Depot getDepot() {
 		return depot;
 	}
 
-	private Set<TruckCustomer> getTruckCustomers() {
+	public Set<TruckCustomer> getTruckCustomers() {
 		return truckCustomers;
 	}
 	
-	private Set<VehicleCustomer> getVehicleCustomers() {
+	public Set<VehicleCustomer> getVehicleCustomers() {
 		return vehicleCustomers;
 	}
 	
-	public static TTRP createTTRP(File inputFile) throws IOException {
-		InstanceImporter instanceImporter = new InstanceImporter(inputFile);
-		instanceImporter.read();
-		TTRP ttrp = new TTRP(instanceImporter.getDepot(), instanceImporter.getTruckCustomers(), instanceImporter.getVehicleCustomers(), instanceImporter.getFleet());
-		return ttrp;
-	}
-	
-	public static TTRP createTTRP(String filePath) throws IOException {
-		return createTTRP(new File(filePath));
-	}
-
-	private Fleet getFleet() {
+	public Fleet getFleet() {
 		return fleet;
 	}
 	

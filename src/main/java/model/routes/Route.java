@@ -83,4 +83,7 @@ public class Route implements Movable {
 		return this.customers;
 	}
 
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
 }

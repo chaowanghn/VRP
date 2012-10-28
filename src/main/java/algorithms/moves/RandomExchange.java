@@ -1,5 +1,6 @@
 package algorithms.moves;
 
+import io.Visualizer;
 import model.nodes.Customer;
 import model.routes.Route;
 
@@ -19,9 +20,7 @@ public class RandomExchange implements Move {
 			for (int i=1; i<=this.configuration.getNumberOfIterations(); i++) {
 				Route neighbor = new Route(initialRoute.getDepot());
 				initialRoute.shuffleCustomers();
-				for (Customer c : initialRoute.getCustomers()) {
-					neighbor.addCustomer(c);
-				}
+				neighbor.setCustomers(initialRoute.getCustomers());
 				neighborhood.addNeighbor(neighbor);
 			}
 			

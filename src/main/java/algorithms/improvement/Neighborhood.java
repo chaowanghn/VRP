@@ -19,7 +19,7 @@ public class Neighborhood {
 		this.neighbors.add(neighbor);
 	}
 	
-	public int getNeighborhoodSize() {
-		return this.neighbors.size();
+	public Set<Movable> getNeighbors() {
+		return this.neighbors;
 	}
 }

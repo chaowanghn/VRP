@@ -7,6 +7,7 @@ import java.util.List;
 import algorithms.improvement.Movable;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import model.nodes.Customer;
 import model.nodes.Depot;
@@ -59,18 +60,12 @@ public class Route implements Movable {
 	}
 
 	public int compareTo(Movable o) {
-		
-		if (this.cost() < o.cost()) {
-			return -1;
-		}
-		
-		else if (this.cost() > o.cost()) {
-			return 1;
-		}
-		
-		else {
+		if (this.cost() < o.cost())
+			return -1;		
+		else if (this.cost() > o.cost())
+			return 1;		
+		else 
 			return 0;
-		}
 	}
 
 	public Depot getDepot() {
@@ -93,7 +88,7 @@ public class Route implements Movable {
 	}
 
 	public Customer getLastCustomer() {
-		return customers.get(customers.size()-1);
+		return Iterables.getLast(this.customers);
 	}
 
 }

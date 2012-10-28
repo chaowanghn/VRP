@@ -35,12 +35,13 @@ public class GiantTour extends Route {
 			}
 		};
 		
-		greedyGiantTour.addCustomer(Node.nearestNode(customers, ttrp.getDepot()));
+		Customer firstCustomer = Node.nearestNode(customers, ttrp.getDepot());
+		greedyGiantTour.addCustomer(firstCustomer);
+		firstCustomer.setSatisfied(true);
 		
 		while (Iterables.any(customers, notSatisfied)) {
 			/*
-			 * Get the unsatisfied customer who is nea
-			 * rest to the last serviced(visited) customer
+			 * Get the unsatisfied customer who is nearest to the last serviced(visited) customer
 			 */
 			Customer nearestCustomer = Node.nearestNode(Collections2.filter(customers, notSatisfied), greedyGiantTour.getLastCustomer());
 			greedyGiantTour.addCustomer(nearestCustomer);

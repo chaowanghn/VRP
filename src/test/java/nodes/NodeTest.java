@@ -18,7 +18,7 @@ public class NodeTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.ttrp = TTRP.createInstanceFromFile(InstanceImporterTest.inputInstanceFilepath);
+		this.ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
 	}
 
 	@Test

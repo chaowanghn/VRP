@@ -15,18 +15,18 @@ import model.routes.Route;
 
 public class GiantTour extends Route {
 
-	public GiantTour(Depot d) {
+	private GiantTour(Depot d) {
 		super(d);
 	}
 	
-	public GiantTour(Depot d, Collection<Customer> customers) {
+	private GiantTour(Depot d, Collection<Customer> customers) {
 		super(d);
 		super.customers.addAll(customers);
 	}
 	
 	public static GiantTour createGreedyGiantTour(TTRP ttrp) {
 		List<Customer> customers = new ArrayList<Customer>(ttrp.getCustomers());
-		GiantTour gt = new GiantTour(ttrp.getDepot());
+		GiantTour greedyGiantTour = new GiantTour(ttrp.getDepot());
 		
 		Predicate<Customer> notSatisfied = new Predicate<Customer>() {
 			public boolean apply(Customer c) {
@@ -34,13 +34,17 @@ public class GiantTour extends Route {
 			}
 		};
 		
-		gt.addCustomer(Node.<Customer>nearestNode(customers, ttrp.getDepot()));
+		greedyGiantTour.addCustomer(Node.<Customer>nearestNode(customers, ttrp.getDepot()));
 		
-		while (! Collections2.filter(customers, notSatisfied).isEmpty()) {
-			Customer nearestCustomer = Node.nearestNode(Collections2.filter(customers, notSatisfied), gt.getLastCustomer());
-			gt.addCustomer(nearestCustomer);
+		while (! Collections2.filter(customers, notSatisfied).isEmpty()) { // while there are non-satisfied customers
+			/*
+			 * Get the unsatisfied customer who is nea
+			 * rest to the last serviced(visited) customer
+			 */
+			Customer nearestCustomer = Node.nearestNode(Collections2.filter(customers, notSatisfied), greedyGiantTour.getLastCustomer());
+			greedyGiantTour.addCustomer(nearestCustomer);
 			nearestCustomer.setSatisfied(true);
 		}		
-		return gt;
+		return greedyGiantTour;
 	}
 }

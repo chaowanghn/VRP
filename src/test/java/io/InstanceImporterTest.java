@@ -11,14 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class InstanceImporterTest {
-	public static String inputInstanceFilepath = "src/test/resources/instances/benchmark/ttrp01.dat";
 	File inputInstanceFile;
 	InstanceImporter importer;
 	TTRP ttrp;
 
 	@Before
 	public void setUp() throws Exception {
-		inputInstanceFile = new File(inputInstanceFilepath);
+		inputInstanceFile = new File(TTRP.INPUT_FILE_PATH);
 		ttrp = TTRP.createInstanceFromFile(inputInstanceFile);
 	}
 

@@ -1,7 +1,6 @@
 package algorithms.construction;
 
-import io.InstanceImporterTest;
-import io.Visualizer;
+import static org.junit.Assert.*;
 
 import model.TTRP;
 
@@ -13,13 +12,14 @@ public class GiantTourTest {
 
 	@Before
 	public void setUp() throws Exception {
-		ttrp = TTRP.createInstanceFromFile(InstanceImporterTest.inputInstanceFilepath);
+		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
 	}
 
 	@Test
 	public void test() {
-		GiantTour gt = GiantTour.createGreedyGiantTour(ttrp);
-		Visualizer.visualizeRoute(gt);
+		GiantTour greedyGiantTour = GiantTour.createGreedyGiantTour(ttrp);
+		assertTrue(greedyGiantTour.getCustomers().size() == ttrp.getCustomers().size());
+		System.out.println(greedyGiantTour);
 	}
 
 }

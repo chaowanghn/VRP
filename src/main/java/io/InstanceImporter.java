@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import model.TTRP;
 import model.fleet.Fleet;
 import model.fleet.Trailer;
 import model.fleet.Truck;

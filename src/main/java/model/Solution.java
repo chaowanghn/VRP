@@ -14,17 +14,12 @@ public class Solution implements Movable {
 	}
 
 	public int compareTo(Movable o) {
-		if (this.cost() < o.cost()) {
-			return -1;
-		}
-		
-		else if (this.cost() > o.cost()) {
-			return 1;
-		}
-		
-		else {
+		if (this.cost() < o.cost())
+			return -1;	
+		else if (this.cost() > o.cost())
+			return 1;	
+		else 
 			return 0;
-		}
 	}
 
 	public double cost() {

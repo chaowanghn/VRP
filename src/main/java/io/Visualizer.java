@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.geom.Point2D;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,12 +25,6 @@ import edu.uci.ics.jung.visualization.control.AbsoluteCrossoverScalingControl;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 public class Visualizer {
-	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp06.dat";
-	
-	public static void main(String[] args) throws IOException {
-		TTRP ttrp = TTRP.createInstanceFromFile(INPUT_FILE_PATH);
-		ttrp.visualize();
-	}
 	
 	public static float DEFAULT_SCALING_CONTROL = 10;
 	public static Dimension DEFAULT_LAYOUT_SIZE = new Dimension(1000,1000);

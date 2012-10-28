@@ -87,9 +87,8 @@ public class Route implements Movable {
 
 	public static double costOfRoutes(Collection<? extends Route> routes) {
 		double totalCost = 0;
-		for (Route r : routes) {
+		for (Route r : routes)
 			totalCost += r.cost();
-		}
 		return totalCost;
 	}
 

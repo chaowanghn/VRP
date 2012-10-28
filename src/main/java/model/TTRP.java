@@ -32,6 +32,8 @@ import model.nodes.*;
  */
 public class TTRP {
 	
+	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp01.dat";
+		
 	private Depot depot;
 	
 	private Set<TruckCustomer> truckCustomers;
@@ -92,10 +94,6 @@ public class TTRP {
 	
 	public void visualize() {
 		Visualizer.visualizeTTRP(this);
-	}
-
-	public GiantTour createGiantTour() {
-		return new GiantTour(depot, getCustomers());
 	}
 
 	public static TTRP createInstanceFromFile(File inputFile) throws IOException {

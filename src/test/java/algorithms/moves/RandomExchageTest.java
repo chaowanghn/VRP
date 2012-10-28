@@ -13,26 +13,21 @@ import algorithms.improvement.RandomExchange;
 
 public class RandomExchageTest {
 	
-	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp06.dat";
 	TTRP ttrp ;
 	Route route1;
 	Route route2;
 
 	@Before
 	public void setUp() throws Exception {
-		ttrp = TTRP.createInstanceFromFile(INPUT_FILE_PATH);
+		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
 		route1 = new Route(ttrp.getDepot());
 		route2 = new Route(ttrp.getDepot());
 		
 		for (int i=1; i<=10; i++) {
-			if (i<=5) {
-				route1.addCustomer((Customer) ttrp.nodesMap().get(i));
-				
-			}
-			
-			else {
+			if (i<=5)
+				route1.addCustomer((Customer) ttrp.nodesMap().get(i));		
+			else 
 				route2.addCustomer((Customer) ttrp.nodesMap().get(i));
-			}
 		}
 		
 	}

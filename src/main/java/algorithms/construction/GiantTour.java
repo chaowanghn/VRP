@@ -35,9 +35,9 @@ public class GiantTour extends Route {
 			}
 		};
 		
-		greedyGiantTour.addCustomer(Node.<Customer>nearestNode(customers, ttrp.getDepot()));
+		greedyGiantTour.addCustomer(Node.nearestNode(customers, ttrp.getDepot()));
 		
-		while (Iterables.any(customers, notSatisfied)) { // while there are non-satisfied customers
+		while (Iterables.any(customers, notSatisfied)) {
 			/*
 			 * Get the unsatisfied customer who is nea
 			 * rest to the last serviced(visited) customer

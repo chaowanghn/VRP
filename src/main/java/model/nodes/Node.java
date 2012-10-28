@@ -13,28 +13,26 @@ public abstract class Node extends Point2D.Double {
 	
 	public abstract double getY();
 	
-	public static <N extends Node> List<N> nodesInAscendingDistance(Collection<? extends N> of,final  Node to) {
-		List<N> nodes = new ArrayList<N>(of);
-		Collections.sort(nodes, new Comparator<N>() {
-			public int compare(N n1, N n2) {
+	public static <O extends Node, T extends Node> List<O> nodesInAscendingDistance(Collection<? extends O> of,final  T to) {
+		List<O> nodes = new ArrayList<O>(of);
+		Collections.sort(nodes, new Comparator<O>() {
+			public int compare(O n1, O n2) {
 				if (n1.distance(to) < n2.distance(to))
 					return -1;
 				else if (n1.distance(to) > n2.distance(to))
 					return 1;
 				else
 					return 0;
-			}
-			
+			}		
 		});
-
 		return nodes;
 	}
 
-	public static <N extends Node> N nearestNode(Collection<? extends N> of,final Node to) {
+	public static <O extends Node, T extends Node> O nearestNode(Collection<? extends O> of,final T to) {
 		return nodesInAscendingDistance(of, to).get(0);
 	}
 	
-	public static <N extends Node> N farthestNode(Collection<? extends N> of,final Node to) {
+	public static <O extends Node, T extends Node> O farthestNode(Collection<? extends O> of,final T to) {
 		return nodesInAscendingDistance(of, to).get(nodesInAscendingDistance(of, to).size()-1);
 	}
 }

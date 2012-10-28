@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import algorithms.GiantTour;
+import algorithms.construction.GiantTour;
 
 import com.google.common.collect.Sets;
 

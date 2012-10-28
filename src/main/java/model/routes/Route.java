@@ -1,6 +1,7 @@
 package model.routes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
@@ -85,5 +86,13 @@ public class Route implements Movable {
 
 	public void setCustomers(List<Customer> customers) {
 		this.customers = customers;
+	}
+
+	public static double costOfRoutes(Collection<? extends Route> routes) {
+		double totalCost = 0;
+		for (Route r : routes) {
+			totalCost += r.cost();
+		}
+		return totalCost;
 	}
 }

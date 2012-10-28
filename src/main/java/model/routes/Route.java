@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-import algorithms.moves.Movable;
+import algorithms.improvement.Movable;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;

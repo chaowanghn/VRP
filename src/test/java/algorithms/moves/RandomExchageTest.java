@@ -17,6 +17,9 @@ import model.routes.Route;
 import org.junit.Before;
 import org.junit.Test;
 
+import algorithms.improvement.MoveConfiguration;
+import algorithms.improvement.RandomExchange;
+
 public class RandomExchageTest {
 	
 	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp06.dat";

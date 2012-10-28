@@ -2,7 +2,7 @@ package model;
 
 import java.util.*;
 
-import algorithms.moves.Movable;
+import algorithms.improvement.Movable;
 
 import model.routes.Route;
 

@@ -95,4 +95,9 @@ public class Route implements Movable {
 		}
 		return totalCost;
 	}
+
+	public Customer getLastCustomer() {
+		return customers.get(customers.size()-1);
+	}
+
 }

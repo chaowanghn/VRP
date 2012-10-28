@@ -1,7 +1,5 @@
 package algorithms.improvement;
 
-import io.Visualizer;
-import model.nodes.Customer;
 import model.routes.Route;
 
 public class RandomExchange implements Move {

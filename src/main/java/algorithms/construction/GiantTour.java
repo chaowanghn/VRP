@@ -1,9 +1,5 @@
 package algorithms.construction;
 
-import io.InstanceImporterTest;
-import io.Visualizer;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -46,9 +42,5 @@ public class GiantTour extends Route {
 			nearestCustomer.setSatisfied(true);
 		}		
 		return gt;
-	}
-
-	public static void main(String[] args) throws IOException {
-		Visualizer.visualizeRoute(GiantTour.createGreedyGiantTour(TTRP.createInstanceFromFile("src/test/resources/instances/benchmark/ttrp01.dat")));
 	}
 }

@@ -1,14 +1,5 @@
 package algorithms.moves;
 
-import static org.junit.Assert.*;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import io.InstanceImporter;
-import io.InstanceImporterTest;
-import io.Visualizer;
 
 import model.TTRP;
 import model.nodes.Customer;

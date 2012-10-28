@@ -3,9 +3,6 @@ package model.nodes;
 import java.awt.geom.Point2D;
 import java.util.*;
 
-import com.google.common.collect.Collections2;
-
-
 public abstract class Node extends Point2D.Double {
 	
 	private static final long serialVersionUID = 1L;

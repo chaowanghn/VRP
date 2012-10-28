@@ -1,6 +1,5 @@
 package algorithms.construction;
 
-import static org.junit.Assert.*;
 import io.InstanceImporterTest;
 import io.Visualizer;
 

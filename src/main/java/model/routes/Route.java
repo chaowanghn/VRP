@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
-
 import algorithms.improvement.Movable;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 
 import model.nodes.Customer;
 import model.nodes.Depot;

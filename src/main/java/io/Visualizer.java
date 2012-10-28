@@ -4,14 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.geom.Point2D;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import model.TTRP;
 import model.nodes.Depot;

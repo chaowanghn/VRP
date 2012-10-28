@@ -39,7 +39,7 @@ public class TTRP {
 
 	private Fleet fleet;
 	
-	public TTRP(Depot depot, Set<TruckCustomer> truckCustomers, Set<VehicleCustomer> vehicleCustomers, Fleet fleet) {
+	private TTRP(Depot depot, Set<TruckCustomer> truckCustomers, Set<VehicleCustomer> vehicleCustomers, Fleet fleet) {
 		super();
 		this.truckCustomers = truckCustomers;
 		this.vehicleCustomers = vehicleCustomers;
@@ -47,7 +47,6 @@ public class TTRP {
 		this.fleet = fleet;
 	}
 
-	
 	public Depot getDepot() {
 		return depot;
 	}

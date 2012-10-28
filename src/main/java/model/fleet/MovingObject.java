@@ -2,7 +2,7 @@ package model.fleet;
 
 import model.nodes.Location;
 
-public class MovingObject {
+public class MovingObject implements Comparable<MovingObject> {
 	
 	private double capacity; 
 	private boolean isAvailable = true;
@@ -36,6 +36,14 @@ public class MovingObject {
 	public void setCapacity(double capacity) {
 		this.capacity = capacity;
 	}
-	
-	
+
+	public int compareTo(MovingObject o) {
+		if (this.capacity < o.getCapacity())
+			return -1;
+		
+		else if (this.capacity > o.getCapacity())
+			return 1;
+		else
+			return 0;	
+	}
 }

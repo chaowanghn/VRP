@@ -8,13 +8,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
+import model.Solution;
 import model.TTRP;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
 import model.routes.Route;
 
-public class GiantTour extends Route {
+public class GiantTour extends Route implements ConstructionHeuristic {
 
 	private GiantTour(Depot d) {
 		super(d);
@@ -48,5 +49,10 @@ public class GiantTour extends Route {
 			nearestCustomer.setSatisfied(true);
 		}		
 		return greedyGiantTour;
+	}
+
+	public Solution apply(TTRP input) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

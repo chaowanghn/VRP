@@ -3,9 +3,9 @@ package model.routes;
 import model.nodes.Depot;
 import model.nodes.VehicleCustomer;
 
-public class VehicleRoute extends Route {
+public class PureVehicleRoute extends Route {
 
-	public VehicleRoute(Depot d) {
+	public PureVehicleRoute(Depot d) {
 		super(d);
 	}
 

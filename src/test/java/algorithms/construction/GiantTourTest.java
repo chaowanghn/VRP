@@ -1,6 +1,7 @@
 package algorithms.construction;
 
 import static org.junit.Assert.*;
+import io.Visualizer;
 
 import model.TTRP;
 

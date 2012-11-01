@@ -9,12 +9,14 @@ import algorithms.improvement.Movable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
+import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
 
 public class Route implements Movable {
-
+	
+	protected MovingObject vehicle;
 	private Depot depot;
 	protected List<Customer> customers = new ArrayList<Customer>();
 	
@@ -89,6 +91,10 @@ public class Route implements Movable {
 
 	public Customer getLastCustomer() {
 		return Iterables.getLast(this.customers);
+	}
+
+	public MovingObject getVehicle() {
+		return vehicle;
 	}
 
 }

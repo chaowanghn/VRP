@@ -9,7 +9,7 @@ public class Fleet {
 	
 	Set<Truck> trucks = new HashSet<Truck>();
 	Set<Trailer> trailers = new HashSet<Trailer>();
-	Set<Vehicle> completeVehicles;
+	Set<CompleteVehicle> completeVehicles;
 	
 	public Fleet(double truckCapacity, Set<Truck> trucks, double trailerCapacity, Set<Trailer> trailers) {
 		this.truckCapacity = truckCapacity;

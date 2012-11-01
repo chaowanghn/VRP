@@ -32,7 +32,7 @@ import model.nodes.*;
  */
 public class TTRP {
 	
-	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp01.dat";
+	public static String INPUT_FILE_PATH = "src/test/resources/instances/benchmark/ttrp03.dat";
 		
 	private Depot depot;
 	

@@ -15,7 +15,7 @@ public class TwoOpt implements Move {
 	}
 
 	public MoveConfiguration getConfiguration() {
-		return this.getConfiguration();
+		return this.configuration;
 	}
 
 }

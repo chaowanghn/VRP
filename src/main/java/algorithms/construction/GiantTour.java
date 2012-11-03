@@ -38,15 +38,13 @@ public class GiantTour extends Route implements ConstructionHeuristic {
 		
 		Customer firstCustomer = Node.nearestNode(customers, ttrp.getDepot());
 		greedyGiantTour.addCustomer(firstCustomer);
-		firstCustomer.setSatisfied(true);
 		
 		while (Iterables.any(customers, notSatisfied)) {
 			/*
 			 * Get the unsatisfied customer who is nearest to the last serviced(visited) customer
 			 */
-			Customer nearestCustomer = Node.nearestNode(Collections2.filter(customers, notSatisfied), greedyGiantTour.getLastCustomer());
-			greedyGiantTour.addCustomer(nearestCustomer);
-			nearestCustomer.setSatisfied(true);
+			Customer nearestToTheLastVisitedOne = Node.nearestNode(Collections2.filter(customers, notSatisfied), greedyGiantTour.getLastCustomer());
+			greedyGiantTour.addCustomer(nearestToTheLastVisitedOne);
 		}		
 		return greedyGiantTour;
 	}

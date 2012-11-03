@@ -4,6 +4,34 @@
   <artifactId>ttrp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+ 	<licenses>
+ 	    <license>
+ 	        <name>The Apache Software License, Version 2.0</name>
+		    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		    <distribution>repo</distribution>
+		    <comments>A business-friendly OSS license</comments>
+		 </license>
+	</licenses>
+	
+ 	<developers>
+	    <developer>
+	      <id>Florents</id>
+	      <name>Florents Tselai</name>
+	      <email>tselai@dmst.aueb.gr</email>
+	      <url>http://twitter.com/Flooorents</url>
+	      <organization> Department of Management Science and Technology - Athens University of Economics and Business </organization>
+	      <organizationUrl>http://dmst.aueb.gr</organizationUrl>
+	      <roles>
+	        <role>architect</role>
+	        <role>developer</role>
+	      </roles>
+	      <timezone>+2</timezone>
+	      <properties>
+	        <picUrl>http://tinyurl.com/cw59jq6</picUrl>
+	      </properties>
+	    </developer>
+  </developers>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

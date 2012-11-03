@@ -3,6 +3,8 @@ package model.nodes;
 import java.awt.geom.Point2D;
 import java.util.*;
 
+import com.google.common.collect.Iterables;
+
 public abstract class Node extends Point2D.Double {
 	
 	private static final long serialVersionUID = 1L;
@@ -29,10 +31,10 @@ public abstract class Node extends Point2D.Double {
 	}
 
 	public static <O extends Node, T extends Node> O nearestNode(Collection<? extends O> of,final T to) {
-		return nodesInAscendingDistance(of, to).get(0);
+		return Iterables.getFirst(nodesInAscendingDistance(of, to), null);
 	}
 	
 	public static <O extends Node, T extends Node> O farthestNode(Collection<? extends O> of,final T to) {
-		return nodesInAscendingDistance(of, to).get(nodesInAscendingDistance(of, to).size()-1);
+		return Iterables.getLast(nodesInAscendingDistance(of, to));
 	}
 }

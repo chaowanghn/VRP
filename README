@@ -1,0 +1,3 @@
+  A collection of (meta)heuristic algorithms, aiming to solve the Truck and Trailer Routing Problem (TTRP)
+  
+  For research papers on the TTRP see: src/main/ resources/papers

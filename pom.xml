@@ -4,6 +4,10 @@
   <artifactId>ttrp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  <description>
+      A collection of (meta)heuristic algorithms, aiming to solve the Truck and Trailer Routing Problem
+  </description>
+  
  	<licenses>
  	    <license>
  	        <name>The Apache Software License, Version 2.0</name>

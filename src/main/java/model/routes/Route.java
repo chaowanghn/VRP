@@ -32,13 +32,13 @@ public class Route implements Movable {
 	public double cost() {
 		double totalCost=0.0;
 		
-		totalCost += depot.distance(customers.get(0));
+		totalCost += depot.distance(Iterables.getFirst(customers, null));
 		
 		for (int i=1; i<=customers.size()-1; i++) {
 			totalCost += customers.get(i).distance(customers.get(i-1));
 		}
 		
-		totalCost += depot.distance(customers.get(customers.size()-1));
+		totalCost += depot.distance(Iterables.getLast(customers));
 		
 		return totalCost;
 	}

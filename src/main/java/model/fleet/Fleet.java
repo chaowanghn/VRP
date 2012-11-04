@@ -1,5 +1,6 @@
 package model.fleet;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,7 +35,11 @@ public class Fleet {
 		return trailerCapacity;
 	}
 	
+	public Truck getTruckWithMaxCapacity() {
+		return Collections.max(trucks);
+	}
 	
-	
-	
+	public Trailer getTrailerWithMaxCapacity() {
+		return Collections.max(trailers);
+	}
 }

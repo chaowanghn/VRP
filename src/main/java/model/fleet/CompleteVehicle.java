@@ -8,6 +8,8 @@ public class CompleteVehicle extends MovingObject{
 	
 	public CompleteVehicle(Truck truck, Trailer trailer, Location loc) {
 		super(truck.getCapacity() + trailer.getCapacity() , loc);
+		truck.setAvailable(false);
+		trailer.setAvailable(false);
 	}
 
 	

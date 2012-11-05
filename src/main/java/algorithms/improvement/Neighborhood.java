@@ -32,4 +32,8 @@ public class Neighborhood {
 	public Movable getInitialMovable() {
 		return initial;
 	}
+	
+	public int size() {
+		return neighbors.size();
+	}
 }

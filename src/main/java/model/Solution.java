@@ -29,4 +29,8 @@ public class Solution implements Movable {
 	public void addRoute(Route r) {
 		this.routes.add(r);
 	}
+	
+	public boolean containsRoute(Route r) {
+		return this.routes.contains(r);
+	}
 }

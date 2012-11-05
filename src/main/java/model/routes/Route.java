@@ -97,4 +97,7 @@ public class Route implements Movable {
 		return vehicle;
 	}
 
+	public boolean containsCustomer(Customer c) {
+		return this.customers.contains(c);
+	}
 }

@@ -33,4 +33,10 @@ public class Solution implements Movable {
 	public boolean containsRoute(Route r) {
 		return this.routes.contains(r);
 	}
+
+	public List<Route> getRoutes() {
+		return this.routes;
+	}
 }
+
+

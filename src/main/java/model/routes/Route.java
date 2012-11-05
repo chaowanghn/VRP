@@ -1,5 +1,8 @@
 package model.routes;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,8 +28,16 @@ public class Route implements Movable {
 	}
 	
 	public void addCustomer(Customer c) {
+		checkNotNull(c);
 		c.setSatisfied(true);
 		customers.add(c);
+	}
+	
+	public void addCustomers(List<Customer> customers) {
+		checkArgument(!customers.isEmpty());
+		for (Customer c : customers ) {
+			addCustomer(c);
+		}
 	}
 	
 	public double cost() {

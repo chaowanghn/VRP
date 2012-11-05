@@ -6,7 +6,7 @@ public class Customer extends Node {
 	protected int id;
 	protected double demand;
 	protected Location location;
-	protected boolean isSatisfied;
+	protected boolean isSatisfied = false;
 	
 	public Customer (int id, double demand, Location location, boolean isSatisfied) {
 		this.id = id;

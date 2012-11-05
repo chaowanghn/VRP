@@ -8,11 +8,13 @@ import io.Visualizer;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import algorithms.construction.GiantTour;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import model.fleet.*;
@@ -88,14 +90,31 @@ public class TTRP {
 		return map;
 	}
 
-	public Node getNode(int id) {
+	public Node getNodesMap(int id) {
 		return nodesMap().get(id);
+	}
+	
+	public Customer getCustomer(final int id) {
+		return Iterables.getFirst(Collections2.filter(getCustomers(), new Predicate<Customer>() {
+			public boolean apply(Customer c) {
+				return c.getId() == id;
+			}
+		}), null); 
+		
 	}
 	
 	public void visualize() {
 		Visualizer.visualizeTTRP(this);
 	}
 
+	public List<Customer> getCustomers(int...ids) {
+		List<Customer> customers = new ArrayList<Customer>();
+		for (int id : ids) {
+			customers.add(getCustomer(id));
+		}
+		return customers;
+	}
+	
 	public static TTRP createInstanceFromFile(File inputFile) throws IOException {
 		InstanceImporter instanceImporter = new InstanceImporter(inputFile);
 		instanceImporter.read();

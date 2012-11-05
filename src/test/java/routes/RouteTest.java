@@ -26,11 +26,11 @@ public class RouteTest {
 
 	@Test
 	public void test() {
-		Customer c1 = (Customer) ttrp.getNode(1);
+		Customer c1 = (Customer) ttrp.getNodesMap(1);
 		route.addCustomer(c1);
-		Customer c2 = (Customer) ttrp.getNode(2);
+		Customer c2 = (Customer) ttrp.getNodesMap(2);
 		route.addCustomer(c2);
-		Customer c3 = (Customer) ttrp.getNode(3);
+		Customer c3 = (Customer) ttrp.getNodesMap(3);
 		route.addCustomer(c3);
 		
 		double routeCost = route.cost();

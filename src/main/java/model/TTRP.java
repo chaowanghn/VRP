@@ -90,7 +90,7 @@ public class TTRP {
 		return map;
 	}
 
-	public Node getNodesMap(int id) {
+	public Node getNode(int id) {
 		return nodesMap().get(id);
 	}
 	

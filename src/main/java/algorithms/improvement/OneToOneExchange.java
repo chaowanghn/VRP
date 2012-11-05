@@ -14,8 +14,8 @@ public class OneToOneExchange implements Move {
 	
 
 	public Neighborhood apply(Movable initial) {
-		
-		return null;
+		Neighborhood neighborhood = new Neighborhood(initial);
+		return neighborhood;
 	}
 
 	public MoveConfiguration getConfiguration() {

@@ -11,7 +11,7 @@ public class RandomExchange implements Move {
 	}
 
 	public Neighborhood apply(Movable initial) {
-		Neighborhood neighborhood = new Neighborhood();
+		Neighborhood neighborhood = new Neighborhood(initial);
 		
 		if (initial instanceof Route) {
 			Route initialRoute = (Route) initial;

@@ -1,4 +1,4 @@
-package algorithms.moves;
+package algorithms.improvement;
 
 
 import model.TTRP;
@@ -11,7 +11,7 @@ import org.junit.Test;
 import algorithms.improvement.MoveConfiguration;
 import algorithms.improvement.RandomExchange;
 
-public class RandomExchageTest {
+public class RandomExchangeTest {
 	
 	TTRP ttrp ;
 	Route route1;

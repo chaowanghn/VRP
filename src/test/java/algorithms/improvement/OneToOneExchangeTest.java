@@ -22,13 +22,7 @@ public class OneToOneExchangeTest extends MoveTest {
 	}
 
 	@Test
-	public void test() {
-		List<Customer> customers = ttrp.getCustomers(3,6,2,5,1,4);
-		assertFalse(customers.isEmpty());
-		route.addCustomers(customers);
-		initialSolution.addRoute(route);
-		assertTrue(initialSolution.containsRoute(route));
-		
+	public void test() {		
 		Neighborhood neighborhood = oneToOneExchange.apply(initialSolution);
 		assertEquals(neighborhood.getInitialMovable(), initialSolution);
 		

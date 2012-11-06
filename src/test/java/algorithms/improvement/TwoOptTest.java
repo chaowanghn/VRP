@@ -32,8 +32,7 @@ public class TwoOptTest extends MoveTest {
 	@Override
 	@Test
 	public void testApplyToSolution() {
-		
-		
+		fail("Not implemented yet!");
 	}
 
 

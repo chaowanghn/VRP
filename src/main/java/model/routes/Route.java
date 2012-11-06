@@ -118,7 +118,7 @@ public class Route implements Movable {
 	}
 	
 	public void swap(int i, int j) {
-		Collections.swap(this.customers, i-1, j-1);
+		Collections.swap(this.customers, --i, --j);
 	}
 
 }

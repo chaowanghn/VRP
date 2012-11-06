@@ -1,7 +1,6 @@
 package algorithms.improvement;
 
 
-import model.TTRP;
 import model.nodes.Customer;
 import model.routes.Route;
 
@@ -17,7 +16,7 @@ public class RandomExchangeTest extends MoveTest {
 	Route route2;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		super.setUp();
 		route1 = new Route(ttrp.getDepot());
 		route2 = new Route(ttrp.getDepot());

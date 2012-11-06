@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import algorithms.construction.GiantTour;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
@@ -115,14 +114,19 @@ public class TTRP {
 		return customers;
 	}
 	
-	public static TTRP createInstanceFromFile(File inputFile) throws IOException {
+	public static TTRP createInstanceFromFile(File inputFile) {
 		InstanceImporter instanceImporter = new InstanceImporter(inputFile);
-		instanceImporter.read();
+		try {
+			instanceImporter.read();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return new TTRP(instanceImporter.getDepot(), instanceImporter.getTruckCustomers(), instanceImporter.getVehicleCustomers(), instanceImporter.getFleet());
 		
 	}
 	
-	public static TTRP createInstanceFromFile(String inputFilePath) throws IOException {
+	public static TTRP createInstanceFromFile(String inputFilePath) {
 		return createInstanceFromFile(new File(inputFilePath));
 	}
 }

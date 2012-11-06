@@ -1,6 +1,5 @@
 package algorithms.improvement;
 
-import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public abstract class MoveTest {
 	List<Customer> customers;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		this.ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
 		this.initialSolution = new Solution();
 		this.route = new Route(ttrp.getDepot());

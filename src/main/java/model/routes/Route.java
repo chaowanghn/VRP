@@ -117,8 +117,12 @@ public class Route implements Movable {
 		return this.customers.contains(c);
 	}
 	
-	public void swap(int i, int j) {
+	public void swapCustomers(int i, int j) {
 		Collections.swap(this.customers, --i, --j);
 	}
 
+	public void swapNodes(int i, int j) throws Exception {
+		throw new Exception("not implemented yet!");
+	}
+	
 }

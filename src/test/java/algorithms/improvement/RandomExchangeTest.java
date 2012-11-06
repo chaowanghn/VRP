@@ -36,4 +36,18 @@ public class RandomExchangeTest extends MoveTest {
 		System.out.println(new RandomExchange(new MoveConfiguration(100000)).apply(route1).getBestNeigbor());
 	}
 
+	@Override
+	@Test
+	public void testApplyToSingleRoute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	@Test
+	public void testApplyToSolution() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -1,5 +1,7 @@
 package algorithms.improvement;
 
+import model.routes.Route;
+
 
 public class OneToOneExchange implements Move {
 	private MoveConfiguration configuration;
@@ -14,6 +16,11 @@ public class OneToOneExchange implements Move {
 	
 
 	public Neighborhood apply(Movable initial) {
+		Neighborhood neighborhood = new Neighborhood(initial);
+		return neighborhood;
+	}
+	
+	public Neighborhood apply(Route initial) {
 		Neighborhood neighborhood = new Neighborhood(initial);
 		return neighborhood;
 	}

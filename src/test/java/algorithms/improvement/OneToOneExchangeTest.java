@@ -21,8 +21,20 @@ public class OneToOneExchangeTest extends MoveTest {
 		oneToOneExchange = new OneToOneExchange();
 	}
 
+
+	@Override
 	@Test
-	public void test() {		
+	public void testApplyToSingleRoute() {
+		Neighborhood neighborhood = oneToOneExchange.apply(route);
+		assertEquals(neighborhood.getInitialMovable(), route);
+		
+	}
+
+
+
+	@Override
+	@Test
+	public void testApplyToSolution() {
 		Neighborhood neighborhood = oneToOneExchange.apply(initialSolution);
 		assertEquals(neighborhood.getInitialMovable(), initialSolution);
 		

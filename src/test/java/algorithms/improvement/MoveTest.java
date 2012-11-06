@@ -12,7 +12,7 @@ import model.routes.Route;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MoveTest {
+public abstract class MoveTest {
 	public static int[] DEFAULT_COUSTOMER_IDS = {3,6,2,5,1,4};
 	TTRP ttrp;
 	Solution initialSolution;
@@ -29,4 +29,10 @@ public class MoveTest {
 		initialSolution.addRoute(route);
 	}
 
+	
+	@Test
+	public abstract void testApplyToSingleRoute();
+	
+	@Test
+	public abstract void testApplyToSolution();
 }

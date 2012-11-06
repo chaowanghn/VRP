@@ -3,6 +3,11 @@ Truck And Trailer Routing Problem
 
 A collection of (meta)heuristic algorithms, aiming to solve the Truck and Trailer Routing Problem (TTRP)
 
+The truck and trailer routing problem (TTRP) is a variant of the well known vehicle routing problem (VRP). 
+Different from the VRP, in the TTRP, customers are serviced by a fleet of trucks and trailers. 
+Due to some practical constraints, some customers can only be serviced by a single truck. 
+The other customers can be serviced by a single truck or a truck pulling a trailer. 
+
 License
 -------
 

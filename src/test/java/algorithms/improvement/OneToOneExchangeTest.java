@@ -12,18 +12,13 @@ import model.routes.Route;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OneToOneExchangeTest {
-	TTRP ttrp;
-	Solution initialSolution;
-	Route route;
-	Move oneToOne;
+public class OneToOneExchangeTest extends MoveTest {
+	OneToOneExchange oneToOneExchange;
 
 	@Before
 	public void setUp() throws Exception {
-		this.ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
-		this.initialSolution = new Solution();
-		this.route = new Route(ttrp.getDepot());
-		oneToOne = new OneToOneExchange();
+		super.setUp();
+		oneToOneExchange = new OneToOneExchange();
 	}
 
 	@Test
@@ -34,7 +29,7 @@ public class OneToOneExchangeTest {
 		initialSolution.addRoute(route);
 		assertTrue(initialSolution.containsRoute(route));
 		
-		Neighborhood neighborhood = oneToOne.apply(initialSolution);
+		Neighborhood neighborhood = oneToOneExchange.apply(initialSolution);
 		assertEquals(neighborhood.getInitialMovable(), initialSolution);
 		
 	}

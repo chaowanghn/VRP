@@ -11,15 +11,14 @@ import org.junit.Test;
 import algorithms.improvement.MoveConfiguration;
 import algorithms.improvement.RandomExchange;
 
-public class RandomExchangeTest {
+public class RandomExchangeTest extends MoveTest {
 	
-	TTRP ttrp ;
 	Route route1;
 	Route route2;
 
 	@Before
 	public void setUp() throws Exception {
-		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
+		super.setUp();
 		route1 = new Route(ttrp.getDepot());
 		route2 = new Route(ttrp.getDepot());
 		

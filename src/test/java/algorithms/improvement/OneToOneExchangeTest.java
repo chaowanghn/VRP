@@ -36,8 +36,6 @@ public class OneToOneExchangeTest extends MoveTest {
 		assertTrue("Neighborhood size: "+neighborhood.size(), neighborhood.size() == 15);
 	}
 
-
-
 	@Override
 	@Test
 	public void testApplyToSolution() {

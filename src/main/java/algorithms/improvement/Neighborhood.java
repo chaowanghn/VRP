@@ -40,4 +40,12 @@ public class Neighborhood {
 	public boolean hasNeighbors() {
 		return !this.neighbors.isEmpty();
 	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Movable m : neighbors) {
+			sb.append("\n"+m.toString());
+		}
+		return sb.toString();
+	}
 }

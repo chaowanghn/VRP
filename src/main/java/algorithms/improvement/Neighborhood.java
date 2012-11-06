@@ -36,4 +36,8 @@ public class Neighborhood {
 	public int size() {
 		return neighbors.size();
 	}
+
+	public boolean hasNeighbors() {
+		return !this.neighbors.isEmpty();
+	}
 }

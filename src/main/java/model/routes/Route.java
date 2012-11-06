@@ -27,6 +27,11 @@ public class Route implements Movable {
 		this.depot = d;
 	}
 	
+	public Route(Depot d, Collection<? extends Customer> customers) {
+		this(d);
+		this.customers.addAll(customers);
+	}
+	
 	public void addCustomer(Customer c) {
 		checkNotNull(c);
 		c.setSatisfied(true);
@@ -111,4 +116,9 @@ public class Route implements Movable {
 	public boolean containsCustomer(Customer c) {
 		return this.customers.contains(c);
 	}
+	
+	public void swap(int i, int j) {
+		Collections.swap(this.customers, i-1, j-1);
+	}
+
 }

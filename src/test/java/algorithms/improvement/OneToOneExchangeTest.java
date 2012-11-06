@@ -25,9 +25,15 @@ public class OneToOneExchangeTest extends MoveTest {
 	@Override
 	@Test
 	public void testApplyToSingleRoute() {
-		Neighborhood neighborhood = oneToOneExchange.apply(route);
-		assertEquals(neighborhood.getInitialMovable(), route);
+		int numberOfCustomer = route.getCustomers().size();
+		assertTrue
+		(numberOfCustomer == 6);
 		
+		Neighborhood neighborhood = oneToOneExchange.apply(route);
+		
+		assertEquals(neighborhood.getInitialMovable(), route);
+		assertTrue(neighborhood.hasNeighbors());
+		assertTrue("Neighborhood size: "+neighborhood.size(), neighborhood.size() == 15);
 	}
 
 

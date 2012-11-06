@@ -25,6 +25,7 @@ public class TwoOptTest extends MoveTest {
 		Neighborhood neighborhood = twoOpt.apply(route);
 		assertEquals(neighborhood.getInitialMovable(), route);
 		assertTrue(route.getCustomers().size() == 5);
+		assertTrue(neighborhood.size()==10);
 		
 	}
 

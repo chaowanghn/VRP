@@ -2,7 +2,11 @@ package algorithms.improvement;
 
 import java.util.*;
 
-import model.nodes.Node;
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+
+import model.nodes.*;
 import model.routes.Route;
 
 
@@ -20,22 +24,33 @@ public class TwoOpt implements Move {
 	}
 
 	public Neighborhood apply(Route initialRoute) {
+		
 		Neighborhood neighborhood = new Neighborhood(initialRoute);
+		
 		for(int i=0; i<=initialRoute.getCustomers().size()-2; i++) {
 			for(int j=i+2; j<=initialRoute.getCustomers().size(); j++) {
-				//System.out.println(i + " " + j);
-				List<Node> nodes = new ArrayList<Node>(initialRoute.getNodes());
-				Collections.swap(nodes, i+1, j);
-				Collections.reverse(nodes.subList(i+2, j-1+1));
-				for(Node n : nodes) {
-					System.out.print(" "+n.getId());
+				List<Node> preparedNodes = this.swapAndReverse(new ArrayList<Node>(initialRoute.getNodes()), i, j);
+				
+				Route neighborRoute = new Route(initialRoute.getDepot());
+
+				for (Node n : preparedNodes) {
+					if (n instanceof Customer) {
+						neighborRoute.addCustomer((Customer) n);
+					}
 				}
-				System.out.println();
+			
+				neighborhood.addNeighbor(neighborRoute);
 			}
 			
 		}
 		
 		return neighborhood;
+	}
+	
+	private List<Node> swapAndReverse(List<Node> nodes, int i, int j) {
+		Collections.swap(nodes, i+1, j);
+		Collections.reverse(nodes.subList(i+2, j-1+1));
+		return nodes;
 	}
 	
 	public void setConfiguration(MoveConfiguration config) {

@@ -38,7 +38,7 @@ public class Route implements Movable {
 		customers.add(c);
 	}
 	
-	public void addCustomers(List<Customer> customers) {
+	public void addCustomers(Collection<Customer> customers) {
 		checkArgument(!customers.isEmpty());
 		for (Customer c : customers ) {
 			addCustomer(c);

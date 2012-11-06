@@ -24,7 +24,7 @@ public class OneToOneExchangeTest extends MoveTest {
 
 	@Override
 	@Test
-	public void testApplyToSingleRoute() {
+	public void testIntraRoute() {
 		int numberOfCustomer = route.getCustomers().size();
 		assertTrue
 		(numberOfCustomer == 6);

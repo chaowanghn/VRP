@@ -38,7 +38,7 @@ public class RandomExchangeTest extends MoveTest {
 
 	@Override
 	@Test
-	public void testApplyToSingleRoute() {
+	public void testIntraRoute() {
 		// TODO Auto-generated method stub
 		
 	}

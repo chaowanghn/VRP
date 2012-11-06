@@ -31,7 +31,7 @@ public abstract class MoveTest {
 
 	
 	@Test
-	public abstract void testApplyToSingleRoute();
+	public abstract void testIntraRoute();
 	
 	@Test
 	public abstract void testApplyToSolution();

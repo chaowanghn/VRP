@@ -42,7 +42,7 @@ public class TwoOpt implements Move {
 			}
 			
 		}
-		logger.info("two opt application finished with neighborhood size "+neighborhood.size() + "\n Best neighbor: " + neighborhood.getBestNeigbor().toString() + " Improvement: "+Math.abs(((initialRoute.cost() - neighborhood.getBestNeigbor().cost()) / initialRoute.cost())) * 100 + " %");
+		logger.info("two opt application finished with neighborhood size "+neighborhood.size() + "\n Best neighbor: " + neighborhood.getBestNeigbor().toString() + " Improvement: "+(((initialRoute.cost() - neighborhood.getBestNeigbor().cost()) / initialRoute.cost())) * 100 + " %");
 		return neighborhood;
 	}
 	

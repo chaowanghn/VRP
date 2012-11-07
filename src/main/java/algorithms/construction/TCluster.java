@@ -1,7 +1,16 @@
 package algorithms.construction;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.google.common.collect.Iterables;
+
 import model.Solution;
 import model.TTRP;
+import model.fleet.*;
+import model.routes.*;
 /*
  * Implement the T-Cluster construction heuristics as described in [3]
  * 
@@ -42,6 +51,12 @@ import model.TTRP;
  * more vehicle are available.
  * 		 
  */
+import model.nodes.Customer;
+import model.nodes.Depot;
+import model.nodes.Node;
+import model.nodes.TruckCustomer;
+import model.nodes.VehicleCustomer;
+import model.routes.Route;
 
 public class TCluster implements ConstructionHeuristic {
 	
@@ -49,8 +64,37 @@ public class TCluster implements ConstructionHeuristic {
 		
 	}
 
-	public Solution apply(TTRP input) {
-		// TODO Auto-generated method stub
+	public Solution apply(TTRP ttrp) {
+		Set<Customer> customers = ttrp.getCustomers();
+		Fleet fleet = ttrp.getFleet();
+		Depot depot = ttrp.getDepot();
+		
+		Set<Route> routes = new HashSet<Route>();
+		
+		while(Iterables.any(customers, Customer.notSatisfied())) {
+			
+			if(fleet.hasAvailabeTrailers() && fleet.hasAvailabeTrucks()) {
+				
+			}
+			
+			
+			
+			Customer seedCustomer = Node.farthest(customers, depot); // the seed customer
+			Truck truck = fleet.getAvailableTruckWithMaxCapacity();
+			Trailer trailer = fleet.getAvailableTrailerWithMaxCapacity();
+			
+			if (seedCustomer instanceof VehicleCustomer) {
+				
+			}
+			
+			else {
+				checkArgument(seedCustomer instanceof TruckCustomer);
+				
+				
+			}
+			
+		}
+		
 		return null;
 	}
 	

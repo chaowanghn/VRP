@@ -26,8 +26,9 @@ public class TwoOpt implements Move {
 		logger.info("TwoOpt application started for " + initialRoute.toString());
 		Neighborhood neighborhood = new Neighborhood(initialRoute);
 		
-		for(int i=0; i<=initialRoute.getCustomers().size()-2; i++) {
-			for(int j=i+2; j<=initialRoute.getCustomers().size(); j++) {
+		int numberOfCustomers = initialRoute.getCustomers().size();
+		for(int i=0; i<=numberOfCustomers-2; i++) {
+			for(int j=i+2; j<=numberOfCustomers; j++) {
 				List<Node> preparedNodes = this.swapAndReverse(new ArrayList<Node>(initialRoute.getNodes()), i, j);
 				
 				Route neighborRoute = new Route(initialRoute.getDepot());

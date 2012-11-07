@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import model.routes.Route;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TwoOptTest extends MoveTest {
@@ -21,7 +22,6 @@ public class TwoOptTest extends MoveTest {
 	@Override
 	@Test
 	public void testIntraRoute() {
-		System.out.println(route);
 		Neighborhood neighborhood = twoOpt.apply(route);
 		assertEquals(neighborhood.getInitialMovable(), route);
 		assertTrue(route.getCustomers().size() == 5);
@@ -30,7 +30,7 @@ public class TwoOptTest extends MoveTest {
 	}
 
 	@Override
-	@Test
+	@Ignore
 	public void testApplyToSolution() {
 		fail("Not implemented yet!");
 	}

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
 public class Fleet {
@@ -39,14 +40,14 @@ public class Fleet {
 		return trailerCapacity;
 	}
 	
-	public Truck getTruckWithMaxCapacity() {
+	public Truck getAvailableTruckWithMaxCapacity() {
 		checkState(hasAvailabeTrucks(),"there are no truck available");
-		return Collections.max(trucks);
+		return Collections.max(Collections2.filter(this.trucks, MovingObject.available()));
 	}
 	
-	public Trailer getTrailerWithMaxCapacity() {
+	public Trailer getAvailableTrailerWithMaxCapacity() {
 		checkState(hasAvailabeTrailers(),"there are no trailers available");
-		return Collections.max(trailers);
+		return Collections.max(Collections2.filter(this.trailers, MovingObject.available()));
 	}
 	
 	public boolean hasAvailabeTrucks() {

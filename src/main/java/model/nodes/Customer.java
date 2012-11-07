@@ -1,6 +1,7 @@
 package model.nodes;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 public class Customer extends Node {
 	
@@ -67,6 +68,10 @@ public class Customer extends Node {
 	
 	public static Predicate<Customer> satisfied() {
 		return new Predicate<Customer>(){public boolean apply(Customer c) {return c.isSatisfied;}};
+	}
+	
+	public static Predicate<Customer> notSatisfied() {
+		return Predicates.not(Customer.satisfied());
 	}
 	
 	

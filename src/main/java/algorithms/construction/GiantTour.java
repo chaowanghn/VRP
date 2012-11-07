@@ -30,20 +30,14 @@ public class GiantTour extends Route implements ConstructionHeuristic {
 		List<Customer> customers = new ArrayList<Customer>(ttrp.getCustomers());
 		GiantTour greedyGiantTour = new GiantTour(ttrp.getDepot());
 		
-		Predicate<Customer> notSatisfied = new Predicate<Customer>() {
-			public boolean apply(Customer c) {
-				return !c.isSatisfied();
-			}
-		};
-		
 		Customer firstCustomer = Node.nearestNode(customers, ttrp.getDepot());
 		greedyGiantTour.addCustomer(firstCustomer);
 		
-		while (Iterables.any(customers, notSatisfied)) {
+		while (Iterables.any(customers, Customer.notSatisfied())) {
 			/*
 			 * Get the unsatisfied customer who is nearest to the last serviced(visited) customer
 			 */
-			Customer nearestToTheLastVisitedOne = Node.nearestNode(Collections2.filter(customers, notSatisfied), greedyGiantTour.getLastCustomer());
+			Customer nearestToTheLastVisitedOne = Node.nearestNode(Collections2.filter(customers, Customer.notSatisfied()), greedyGiantTour.getLastCustomer());
 			greedyGiantTour.addCustomer(nearestToTheLastVisitedOne);
 		}		
 		return greedyGiantTour;

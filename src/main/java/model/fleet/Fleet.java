@@ -50,11 +50,11 @@ public class Fleet {
 	}
 	
 	public boolean hasAvailabeTrucks() {
-		return Iterables.any(this.trucks, MovingObject.availability());
+		return Iterables.any(this.trucks, MovingObject.available());
 	}
 	
 	public boolean hasAvailabeTrailers() {
-		return Iterables.any(this.trailers, MovingObject.availability());
+		return Iterables.any(this.trailers, MovingObject.available());
 	}
 
 }

@@ -49,7 +49,7 @@ public class MovingObject implements Comparable<MovingObject> {
 			return 0;	
 	}
 
-	public static Predicate<MovingObject> availability() {
+	public static Predicate<MovingObject> available() {
 		return new Predicate<MovingObject>() {
 			public boolean apply(MovingObject mo){
 				return mo.isAvailable();

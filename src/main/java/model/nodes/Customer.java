@@ -1,5 +1,7 @@
 package model.nodes;
 
+import com.google.common.base.Predicate;
+
 public class Customer extends Node {
 	
 	private static final long serialVersionUID = 1L;
@@ -63,7 +65,9 @@ public class Customer extends Node {
 		return this.location.getY();
 	}
 	
-	
+	public static Predicate<Customer> satisfied() {
+		return new Predicate<Customer>(){public boolean apply(Customer c) {return c.isSatisfied;}};
+	}
 	
 	
 }

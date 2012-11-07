@@ -5,14 +5,14 @@ import com.google.common.base.Predicate;
 import model.nodes.Location;
 
 public class MovingObject implements Comparable<MovingObject> {
-	
+	private static final Location DEFAULT_LOCATION = new Location(0, 0);
 	private double capacity; 
 	private boolean isAvailable = true;
 	private Location currentLocation;
 	
-	public MovingObject(double cap, Location loc) {
-		this.capacity = cap;
-		this.currentLocation = loc;
+	public MovingObject(double cap,Location loc) {
+		this.capacity = cap;		
+		this.currentLocation = (loc == null) ? DEFAULT_LOCATION : loc ;
 	}
 	
 	public void setAvailable(boolean exp) {

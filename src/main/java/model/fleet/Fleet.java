@@ -1,8 +1,14 @@
 package model.fleet;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 public class Fleet {
 	private double truckCapacity;
@@ -36,10 +42,21 @@ public class Fleet {
 	}
 	
 	public Truck getTruckWithMaxCapacity() {
+		checkState(hasAvailabeTrucks(),"there are no truck available");
 		return Collections.max(trucks);
 	}
 	
 	public Trailer getTrailerWithMaxCapacity() {
+		checkState(hasAvailabeTrailers(),"there are no trailers available");
 		return Collections.max(trailers);
 	}
+	
+	public boolean hasAvailabeTrucks() {
+		return Iterables.any(this.trucks, MovingObject.availability());
+	}
+	
+	public boolean hasAvailabeTrailers() {
+		return Iterables.any(this.trailers, MovingObject.availability());
+	}
+
 }

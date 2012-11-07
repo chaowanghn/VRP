@@ -1,5 +1,7 @@
 package model.fleet;
 
+import com.google.common.base.Predicate;
+
 import model.nodes.Location;
 
 public class MovingObject implements Comparable<MovingObject> {
@@ -46,4 +48,13 @@ public class MovingObject implements Comparable<MovingObject> {
 		else
 			return 0;	
 	}
+
+	public static Predicate<MovingObject> availability() {
+		return new Predicate<MovingObject>() {
+			public boolean apply(MovingObject mo){
+				return mo.isAvailable();
+			};
+		};	
+	}
+
 }

@@ -8,6 +8,10 @@ Different from the VRP, in the TTRP, customers are serviced by a fleet of trucks
 Due to some practical constraints, some customers can only be serviced by a single truck. 
 The other customers can be serviced by a single truck or a truck pulling a trailer. 
 
+For research publications on the TTRP see:
+		src/main/resources/papers
+
+
 License
 -------
 
@@ -27,4 +31,4 @@ License
 
 Repository Structure
 --------------------
- * For research papers on the TTRP see: src/main/resources/papers
+ * The project follows a standard maven structure

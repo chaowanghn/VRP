@@ -24,12 +24,12 @@ public class NodeTest {
 	@Test
 	public void test() {
 		List<Customer> customers = new ArrayList<Customer>(ttrp.getCustomers());
-		for (Node n : Node.nodesInAscendingDistance(customers, ttrp.getDepot())) {
+		for (Node n : Node.inAscendingDistance(customers, ttrp.getDepot())) {
 			System.out.println("Node id: " + n.getId() +" "+ n.distance(ttrp.getDepot()));
 		}
 		
-		System.out.println("The nearest node is: " +  Node.nearestNode(customers, ttrp.getDepot()).getId());
-		System.out.println("The farthest node is : " + Node.farthestNode(customers, ttrp.getDepot()).getId());
+		System.out.println("The nearest node is: " +  Node.nearest(customers, ttrp.getDepot()).getId());
+		System.out.println("The farthest node is : " + Node.farthest(customers, ttrp.getDepot()).getId());
 	}
 
 }

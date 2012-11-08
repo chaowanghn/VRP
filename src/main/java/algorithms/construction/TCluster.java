@@ -1,6 +1,7 @@
 package algorithms.construction;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -73,24 +74,17 @@ public class TCluster implements ConstructionHeuristic {
 		
 		while(Iterables.any(customers, Customer.notSatisfied())) {
 			
-			if(fleet.hasAvailabeTrailers() && fleet.hasAvailabeTrucks()) {
-				
-			}
-			
-			
-			
+			MovingObject vehicle = getUnusedVehicleWithMaxCapacity(fleet);
 			Customer seedCustomer = Node.farthest(customers, depot); // the seed customer
 			Truck truck = fleet.getAvailableTruckWithMaxCapacity();
 			Trailer trailer = fleet.getAvailableTrailerWithMaxCapacity();
 			
-			if (seedCustomer instanceof VehicleCustomer) {
+			if(seedCustomer instanceof VehicleCustomer) {
 				
 			}
 			
 			else {
-				checkArgument(seedCustomer instanceof TruckCustomer);
-				
-				
+				checkState(seedCustomer instanceof TruckCustomer, "should be a truck customer");
 			}
 			
 		}
@@ -98,4 +92,17 @@ public class TCluster implements ConstructionHeuristic {
 		return null;
 	}
 	
+	private MovingObject getUnusedVehicleWithMaxCapacity(Fleet fleet) {
+		
+		if(fleet.hasAvailabeTrailers() && fleet.hasAvailabeTrucks()) {
+			Trailer trailer = fleet.getAvailableTrailerWithMaxCapacity();
+			Truck truck = fleet.getAvailableTruckWithMaxCapacity();
+			return new CompleteVehicle(truck, trailer, null);
+		}
+		
+		else {
+			checkState(fleet.hasAvailabeTrucks(), "this shouldn't happen");
+			return fleet.getAvailableTruckWithMaxCapacity();
+		}
+	}
 }

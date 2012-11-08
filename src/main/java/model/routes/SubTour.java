@@ -8,4 +8,9 @@ public class SubTour {
 	public SubTour(Location root) {
 		this.root = root;
 	}
+
+	public double cost() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

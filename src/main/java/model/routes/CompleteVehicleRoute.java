@@ -5,26 +5,38 @@ import java.util.Set;
 
 import model.fleet.CompleteVehicle;
 import model.nodes.Depot;
+import model.nodes.VehicleCustomer;
 
 public class CompleteVehicleRoute extends PureVehicleRoute {
 
+	private PureVehicleRoute mainTour;
 	private Set<SubTour> subTours = new HashSet<SubTour>();
 	
 	public CompleteVehicleRoute(Depot d, CompleteVehicle vehicle) {
 		super(d, vehicle);
+		this.mainTour = new PureVehicleRoute(d, vehicle);
 	}
 
 	public CompleteVehicleRoute(Depot d) {
 		super(d);
+		this.mainTour = new PureVehicleRoute(d);
 	}
 	
 	public double cost() {
-		// TODO Implement it!
-		return 0;
+		double totalCost = 0;
+		totalCost+=mainTour.cost();
+		for(SubTour st : this.subTours) {
+			totalCost += st.cost();
+		}
+		return totalCost;
 	}
 	
 	public void addSubTour(SubTour st) {
 		this.subTours.add(st);
+	}
+	
+	public void addToMainTour(VehicleCustomer vCustomer) {
+		this.mainTour.addCustomer(vCustomer);
 	}
 
 }

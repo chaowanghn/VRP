@@ -3,7 +3,9 @@ package algorithms.construction;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Iterables;
@@ -100,7 +102,40 @@ public class TCluster implements ConstructionHeuristic {
 		return solution;
 	}
 
-	
+	private class NextCustomerComparator implements Comparator<Customer> {
+		private double DEFAULT_PI = 0.2;
+		private Depot depot;
+		private double pi;
+		private Customer u;
+		private Customer f;
+		public NextCustomerComparator(Depot depot, double pi, Customer u, Customer f) {
+			this.depot = depot;
+			this.pi = pi;
+			this.u = u;
+		}
+		
+		@Override
+		public int compare(Customer c1, Customer c2) {
+			double e1 = e(c1, u, f, depot);
+			double e2 = e(c2, u, f, depot);
+			
+			if (e1 < e2) {
+				return -1;
+			}
+			
+			else if (e1 > e2) {
+				return 1;
+			}
+			
+			else {
+				return 0;
+			}
+		}
+		
+		private double e(Customer k, Customer u, Customer f, Depot d) {
+			return k.distance(u) + k.distance(f) - pi * d.distance(k);
+		}
+	}
 	
 	private MovingObject getUnusedVehicleWithMaxCapacity(Fleet fleet) {
 		

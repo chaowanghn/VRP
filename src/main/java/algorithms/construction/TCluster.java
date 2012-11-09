@@ -66,6 +66,7 @@ public class TCluster implements ConstructionHeuristic {
 	}
 
 	public Solution apply(TTRP ttrp) {
+		Solution solution = new Solution();
 		Set<Customer> customers = ttrp.getCustomers();
 		Fleet fleet = ttrp.getFleet();
 		Depot depot = ttrp.getDepot();
@@ -73,24 +74,33 @@ public class TCluster implements ConstructionHeuristic {
 		Set<Route> routes = new HashSet<Route>();
 		
 		while(Iterables.any(customers, Customer.notSatisfied())) {
-			
+			Route route;
 			MovingObject vehicle = getUnusedVehicleWithMaxCapacity(fleet);
-			Customer seedCustomer = Node.farthest(customers, depot); // the seed customer
-			Truck truck = fleet.getAvailableTruckWithMaxCapacity();
-			Trailer trailer = fleet.getAvailableTrailerWithMaxCapacity();
+			Customer u = Node.farthest(customers, depot); // the seed customer
 			
-			if(seedCustomer instanceof VehicleCustomer) {
+			if (vehicle instanceof CompleteVehicle) {
+				route = new CompleteVehicleRoute(depot, (CompleteVehicle) vehicle);
+				if(u instanceof VehicleCustomer) {
+					((CompleteVehicleRoute) route).addToMainTour((VehicleCustomer) u);
+				}
 				
+				else {
+					checkState(u instanceof TruckCustomer, "Since it's not a VehicleCustomer, it has to be a TruckCustomer");
+					SubTour st = new SubTour(depot);
+					st.addCustomer((TruckCustomer) u);
+				}
 			}
 			
 			else {
-				checkState(seedCustomer instanceof TruckCustomer, "should be a truck customer");
+				//if a CompleteVehice can't be used (probably because there are no trailers available
 			}
 			
 		}
 		
-		return null;
+		return solution;
 	}
+
+	
 	
 	private MovingObject getUnusedVehicleWithMaxCapacity(Fleet fleet) {
 		

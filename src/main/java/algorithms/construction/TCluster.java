@@ -1,11 +1,14 @@
 package algorithms.construction;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
 import model.Solution;
@@ -72,6 +75,7 @@ import model.routes.Route;
  */
 
 public class TCluster implements ConstructionHeuristic {
+	private static double DEFAULT_PI = 0.5;
 	
 	public static void createInitialTCluster(TTRP ttrp) {
 		
@@ -85,15 +89,40 @@ public class TCluster implements ConstructionHeuristic {
 		
 		Set<Route> routes = new HashSet<Route>();
 		
+		/*
+		 * T-Cluster can be considered as a 
+		 * cluster-based sequential insertion procedure, 
+		 * where routes are constructed one by one up to full vehicle utilization.
+		 */
+		routeConstruction:
 		while(Iterables.any(customers, Customer.notSatisfied())) {
-			Route route;
-			MovingObject vehicle = getUnusedVehicleWithMaxCapacity(fleet);
-			Customer u = Node.farthest(customers, depot); // the seed customer
+			checkArgument(fleet.hasAvailabeTrailers() || fleet.hasAvailabeTrucks());
 			
+			//============================ ROUTE INITIALIZATION ============================
+			/*
+			 * A new route is initialized with the unrouted customer farthest away from the depot 
+			 * and the
+			 * unused vehicle having maximum total capacity. 
+			 * Thereby, complete vehicles are always preferred over pure trucks. 
+			 * */
+			
+			Route routeUnderConstruction;
+			MovingObject vehicle = getUnusedVehicleWithMaxCapacity(fleet);
+			Customer u = Node.farthest(Collections2.filter(customers, Customer.notSatisfied()), depot); // the seed customer
+			
+			/*
+			 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
+			 * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
+			 * */
+			//============================ ADD SEED CUSTOMER ============================
 			if (vehicle instanceof CompleteVehicle) {
-				route = new CompleteVehicleRoute(depot, (CompleteVehicle) vehicle);
+				/*
+				 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
+				 * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
+				 * */
+				routeUnderConstruction = new CompleteVehicleRoute(depot, (CompleteVehicle) vehicle);
 				if(u instanceof VehicleCustomer) {
-					((CompleteVehicleRoute) route).addToMainTour((VehicleCustomer) u);
+					((CompleteVehicleRoute) routeUnderConstruction).addToMainTour((VehicleCustomer) u);
 				}
 				
 				else {
@@ -101,6 +130,10 @@ public class TCluster implements ConstructionHeuristic {
 					SubTour st = new SubTour(depot);
 					st.addCustomer((TruckCustomer) u);
 				}
+				
+				//============================ ADD THE REST OF THE CUSTOMERS ============================
+				Customer k = Collections.min(customers, new NextCustomerComparator(depot, DEFAULT_PI, u, routeUnderConstruction));
+				
 			}
 			
 			else {
@@ -113,21 +146,21 @@ public class TCluster implements ConstructionHeuristic {
 	}
 
 	private class NextCustomerComparator implements Comparator<Customer> {
-		private double DEFAULT_PI = 0.2;
 		private Depot depot;
 		private double pi;
 		private Customer u;
-		private Customer f;
-		public NextCustomerComparator(Depot depot, double pi, Customer u, Customer f) {
+		private Route r;
+		public NextCustomerComparator(Depot depot, double pi, Customer u, Route r) {
 			this.depot = depot;
 			this.pi = pi;
 			this.u = u;
+			this.r = r;
 		}
 		
 		@Override
-		public int compare(Customer c1, Customer c2) {
-			double e1 = e(c1, u, f, depot);
-			double e2 = e(c2, u, f, depot);
+		public int compare(Customer k1, Customer k2) {
+			double e1 = e(k1, u, Node.nearest(r.getCustomers(), k1), depot);
+			double e2 = e(k2, u, Node.nearest(r.getCustomers(), k2), depot);
 			
 			if (e1 < e2) {
 				return -1;

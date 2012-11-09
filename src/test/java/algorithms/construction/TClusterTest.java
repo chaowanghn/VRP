@@ -7,18 +7,11 @@ import model.TTRP;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TClusterTest {
-
-	TTRP ttrp;
-	
-	@Before
-	public void setUp() throws Exception {
-		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
-	}
+public class TClusterTest extends ConctructionHeuristicTest {
 
 	@Test
-	public void test() {
-		assertTrue(ttrp.getAllNodes().size() != 0);
+	public void apply() {
+		
 	}
 
 }

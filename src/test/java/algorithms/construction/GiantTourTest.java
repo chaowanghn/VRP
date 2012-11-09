@@ -8,16 +8,10 @@ import model.TTRP;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GiantTourTest {
-	TTRP ttrp;
-
-	@Before
-	public void setUp() throws Exception {
-		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
-	}
+public class GiantTourTest extends ConctructionHeuristicTest {
 
 	@Test
-	public void test() {
+	public void apply() {
 		GiantTour greedyGiantTour = GiantTour.createGreedyGiantTour(ttrp);
 		assertTrue(greedyGiantTour.getCustomers().size() == ttrp.getCustomers().size());
 		System.out.println(greedyGiantTour);

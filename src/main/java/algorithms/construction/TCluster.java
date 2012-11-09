@@ -27,9 +27,11 @@ import model.routes.Route;
  * cluster-based sequential insertion procedure, 
  * where routes are constructed one by one up to full vehicle utilization.
  * 
- * A new route is initialized with the unrouted customers farthest away from the depot and the
- * unused vehicle having maximum total capacity. Thereby, complete vehicles are always preferred over
- * pure trucks. 
+ * A new route is initialized with the unrouted customers farthest away from the depot 
+ * and the
+ * unused vehicle having maximum total capacity. 
+ * Thereby, complete vehicles are always preferred over pure trucks. 
+ * 
  * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
  * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
  * 
@@ -55,15 +57,17 @@ import model.routes.Route;
  * 
  * Having specified the next customer k, 
  * a feasible insertion into the route is evaluated via cheapest 
- * insertion. In case of a CVR, 
- * VC customers are forced into the main-tour and TC customers into a new or existing sub-tour. 
- * Every VC customer on the main-tour and the depot can thereby be selected as a
- * trailer-parking place for a new sub-tour. 
+ * insertion. 
+ * In case of a CVR, 
+ * VC customers are forced into the main-tour and 
+ * TC customers into a new or existing sub-tour. 
  * 
- * If the insertion of customer k would result in a violation of
- * total vehicle capacity or maximum route length, a new route is initialized and the customer k remains
- * unrouted. Only the last route (and its sub-tours in case of a CVR) are allowed to become infeasible if no
- * more vehicle are available.
+ * Every VC customer on the main-tour and the depot can thereby be selected as a trailer-parking place for a new sub-tour. 
+ * 
+ * If the insertion of customer k would result in a violation of total vehicle capacity or maximum route length, 
+ * a new route is initialized and the customer k remains unrouted. 
+ * 
+ * Only the last route (and its sub-tours in case of a CVR) are allowed to become infeasible if no more vehicle are available.
  * 		 
  */
 

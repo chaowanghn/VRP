@@ -5,15 +5,23 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
+import model.fleet.Truck;
 import model.nodes.Customer;
 import model.nodes.Node;
 import model.nodes.TruckCustomer;
 
 public class SubTour {
+	Truck truck = null;;
 	private Node rootNode;
 	List<TruckCustomer> customers = new ArrayList<TruckCustomer>();
+	
 	public SubTour(Node rootNode) {
 		this.rootNode = rootNode;
+	}
+	
+	public SubTour(Node rootNode, Truck truck) {
+		this(rootNode);
+		this.truck = truck;
 	}
 
 	public double cost() {
@@ -36,5 +44,9 @@ public class SubTour {
 	
 	public void addCustomer(TruckCustomer tc) {
 		this.customers.add(tc);
+	}
+	
+	public boolean feasibleInsertion(TruckCustomer truckCustomer){
+		return truckCustomer.getDemand() <= Customer.totalDemand(customers);
 	}
 }

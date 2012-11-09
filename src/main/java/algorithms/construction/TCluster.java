@@ -193,4 +193,5 @@ public class TCluster implements ConstructionHeuristic {
 			return fleet.getAvailableTruckWithMaxCapacity();
 		}
 	}
+
 }

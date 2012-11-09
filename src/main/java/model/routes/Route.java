@@ -16,6 +16,8 @@ import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
+import model.nodes.TruckCustomer;
+import model.nodes.VehicleCustomer;
 
 public class Route implements Movable {
 	
@@ -125,4 +127,24 @@ public class Route implements Movable {
 		throw new Exception("not implemented yet!");
 	}
 	
+	public static boolean canServe(Route route, Customer customer) {
+		if(customer instanceof TruckCustomer) {
+			if (route instanceof PureTruckRoute) {
+				return customer.getDemand() <= route.availableLoad();
+			}
+			if (route instanceof CompleteVehicleRoute) {
+				CompleteVehicleRoute cvr = (CompleteVehicleRoute) route;
+				return cvr.feasibleInsertion((TruckCustomer) customer);
+			}
+		}
+		
+		else {
+			
+		}
+		
+	}
+	
+	public double availableLoad(){
+		return vehicle.getCapacity() - Customer.totalDemand(customers);
+	}
 }

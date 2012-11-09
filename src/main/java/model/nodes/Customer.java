@@ -1,5 +1,7 @@
 package model.nodes;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -72,6 +74,14 @@ public class Customer extends Node {
 	
 	public static Predicate<Customer> notSatisfied() {
 		return Predicates.not(Customer.satisfied());
+	}
+
+	public static double totalDemand(Iterable<? extends Customer> customers) {
+		double totalDemand=0;
+		for(Customer c:customers){
+			totalDemand += c.getDemand();
+		}
+		return totalDemand;
 	}
 	
 	

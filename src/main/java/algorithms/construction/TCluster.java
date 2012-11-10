@@ -106,10 +106,12 @@ public class TCluster implements ConstructionHeuristic {
 			 * Thereby, complete vehicles are always preferred over pure trucks. 
 			 * */
 			
-			Route routeUnderConstruction;
-			MovingObject vehicle = getUnusedVehicleWithMaxCapacity(fleet);
+			Route<?,?,?> routeUnderConstruction; // the exact type of route is not knwon yet
+			
 			Customer u = Node.farthest(Collections2.filter(customers, Customer.notSatisfied()), depot); // the seed customer
 			
+			
+			MovingObject vehicle = getUnusedVehicleWithMaxCapacity(fleet);
 			/*
 			 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
 			 * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
@@ -149,8 +151,8 @@ public class TCluster implements ConstructionHeuristic {
 		private Depot depot;
 		private double pi;
 		private Customer u;
-		private Route r;
-		public NextCustomerComparator(Depot depot, double pi, Customer u, Route r) {
+		private Route<?,?,?> r;
+		public NextCustomerComparator(Depot depot, double pi, Customer u, Route<?,?,?> r) {
 			this.depot = depot;
 			this.pi = pi;
 			this.u = u;

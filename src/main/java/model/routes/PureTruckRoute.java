@@ -15,4 +15,8 @@ public class PureTruckRoute extends Route<Node,Customer,Truck> {
 		this(d);
 		super.vehicle = truck;
 	}
+	
+	public <T extends Customer> boolean feasibleInsertion(T c) {
+		return c.getDemand() <= this.availableLoad();
+	}
 }

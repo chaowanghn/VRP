@@ -1,8 +1,10 @@
 package model.routes;
 
 import model.fleet.Truck;
+import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
+import model.nodes.TruckCustomer;
 
 public class SubTour extends PureTruckRoute {
 
@@ -19,4 +21,13 @@ public class SubTour extends PureTruckRoute {
 		return super.getDepot();
 	}
 	
+	public <T extends Customer> boolean feasibleInsertion(T c) {
+		if(c instanceof TruckCustomer) {
+			return c.getDemand() <= this.availableLoad();
+		}
+		else {
+			return false;
+		}
+		
+	}
 }

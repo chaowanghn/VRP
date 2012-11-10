@@ -1,10 +1,17 @@
 package model.routes;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import model.fleet.CompleteVehicle;
+import model.nodes.Customer;
 import model.nodes.Depot;
+import model.nodes.TruckCustomer;
 import model.nodes.VehicleCustomer;
 
 public class CompleteVehicleRoute extends PureVehicleRoute {
@@ -35,4 +42,18 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		super.addCustomer(vCustomer);
 	}
 	
+	public <T extends Customer> boolean feasibleInsertion(final T c) {
+		if(c instanceof TruckCustomer) {
+			Iterables.any(this.subTours, new Predicate<SubTour>() {
+				public boolean apply(SubTour st) {
+					return st.feasibleInsertion(c);
+				}
+			});
+		}
+		else {
+			checkArgument(c instanceof VehicleCustomer);
+			return c.getDemand() <= Customer.totalDemand(customers);
+		}
+		return false;
+	}
 }

@@ -15,7 +15,7 @@ import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Node;
 
-public class Route<N extends Node,C extends Customer, V extends MovingObject> implements Movable {
+public abstract class Route<N extends Node,C extends Customer, V extends MovingObject> implements Movable {
 	
 	protected V vehicle;
 	private N depot;
@@ -138,4 +138,6 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	public void addCustomers(List<C> custs) {
 		this.customers.addAll(custs);
 	}
+
+	public abstract <T extends Customer> boolean feasibleInsertion(T c);
 }

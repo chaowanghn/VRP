@@ -2,19 +2,21 @@ package algorithms.improvement;
 
 import static org.junit.Assert.*;
 
+import model.fleet.MovingObject;
+import model.nodes.Customer;
+import model.nodes.Depot;
 import model.routes.Route;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TwoOptTest extends MoveTest {
 	TwoOpt twoOpt;
-	Route route;
+	Route<Depot,Customer,MovingObject> route;
 	@Before
 	public void setUp() {
 		super.setUp();
-		route = new Route(ttrp.getDepot());
+		route = new Route<Depot, Customer, MovingObject>(ttrp.getDepot());
 		route.addCustomers(ttrp.getCustomers(2,4,3,1,5));
 		twoOpt = new TwoOpt();
 	}
@@ -30,9 +32,10 @@ public class TwoOptTest extends MoveTest {
 	}
 
 	@Override
-	@Ignore
+	@Test
 	public void testApplyToSolution() {
-		fail("Not implemented yet!");
+		// TODO Auto-generated method stub
+		
 	}
 
 

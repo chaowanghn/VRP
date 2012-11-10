@@ -1,7 +1,5 @@
 package algorithms.construction;
 
-import static org.junit.Assert.*;
-
 import model.TTRP;
 
 import org.junit.Before;

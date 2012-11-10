@@ -2,6 +2,7 @@ package model.routes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,6 @@ import com.google.common.collect.Iterables;
 import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Node;
-import model.nodes.TruckCustomer;
 
 public class Route<N extends Node,C extends Customer, V extends MovingObject> implements Movable {
 	
@@ -23,6 +23,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	
 	public Route(N d) {
 		this.depot = d;
+		this.customers = new ArrayList<C>();
 	}
 	
 	public Route(N d, Collection<C> customers) {
@@ -123,5 +124,9 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	
 	public double availableLoad(){
 		return vehicle.getCapacity() - Customer.totalDemand(customers);
+	}
+
+	public void addCustomers(List<C> custs) {
+		this.customers.addAll(custs);
 	}
 }

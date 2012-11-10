@@ -1,11 +1,7 @@
 package algorithms.construction;
 
 import static org.junit.Assert.*;
-import io.Visualizer;
 
-import model.TTRP;
-
-import org.junit.Before;
 import org.junit.Test;
 
 public class GiantTourTest extends ConctructionHeuristicTest {

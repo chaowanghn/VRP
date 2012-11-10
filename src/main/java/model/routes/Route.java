@@ -1,9 +1,7 @@
 package model.routes;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -14,37 +12,28 @@ import com.google.common.collect.Iterables;
 
 import model.fleet.MovingObject;
 import model.nodes.Customer;
-import model.nodes.Depot;
 import model.nodes.Node;
 import model.nodes.TruckCustomer;
-import model.nodes.VehicleCustomer;
 
-public class Route implements Movable {
+public class Route<N extends Node,C extends Customer, V extends MovingObject> implements Movable {
 	
-	protected MovingObject vehicle;
-	private Depot depot;
-	protected List<Customer> customers = new ArrayList<Customer>();
+	protected V vehicle;
+	private N depot;
+	protected List<C> customers;
 	
-	public Route(Depot d) {
+	public Route(N d) {
 		this.depot = d;
 	}
 	
-	public Route(Depot d, Collection<? extends Customer> customers) {
+	public Route(N d, Collection<C> customers) {
 		this(d);
 		this.customers.addAll(customers);
 	}
 	
-	public void addCustomer(Customer c) {
+	public void addCustomer(C c) {
 		checkNotNull(c);
 		c.setSatisfied(true);
 		customers.add(c);
-	}
-	
-	public void addCustomers(Collection<Customer> customers) {
-		checkArgument(!customers.isEmpty());
-		for (Customer c : customers ) {
-			addCustomer(c);
-		}
 	}
 	
 	public double cost() {
@@ -88,21 +77,21 @@ public class Route implements Movable {
 			return 0;
 	}
 
-	public Depot getDepot() {
+	public N getDepot() {
 		return this.depot;
 	}
 	
-	public List<Customer> getCustomers() {
+	public List<C> getCustomers() {
 		return this.customers;
 	}
 
-	public void setCustomers(List<Customer> customers) {
+	public void setCustomers(List<C> customers) {
 		this.customers = customers;
 	}
 
-	public static double costOfRoutes(Collection<? extends Route> routes) {
+	public static double costOfRoutes(Collection<? extends Route<?,?,?>> routes) {
 		double totalCost = 0;
-		for (Route r : routes)
+		for (Route<?,?,?> r : routes)
 			totalCost += r.cost();
 		return totalCost;
 	}

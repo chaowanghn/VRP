@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
 import model.Solution;
 import model.TTRP;
+import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
 import model.routes.Route;
 
-public class GiantTour extends Route implements ConstructionHeuristic {
+public class GiantTour extends Route<Depot,Customer,MovingObject> implements ConstructionHeuristic {
 
 	private GiantTour(Depot d) {
 		super(d);
+		super.customers = new ArrayList<Customer>();
 	}
 	
 	private GiantTour(Depot d, Collection<Customer> customers) {

@@ -7,7 +7,7 @@ import algorithms.improvement.Movable;
 import model.routes.Route;
 
 public class Solution implements Movable {
-	List<Route> routes = new LinkedList<Route>();
+	List<Route<?,?,?>> routes;
 	
 	public Solution() {
 		
@@ -34,9 +34,7 @@ public class Solution implements Movable {
 		return this.routes.contains(r);
 	}
 
-	public List<Route> getRoutes() {
-		return this.routes;
-	}
+	
 }
 
 

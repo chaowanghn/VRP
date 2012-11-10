@@ -48,4 +48,9 @@ public class GiantTour extends Route<Depot,Customer,MovingObject> implements Con
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public <T extends Customer> boolean feasibleInsertion(T c) {
+		return true;
+	}
 }

@@ -34,6 +34,14 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		return totalCost + super.cost();
 	}
 	
+	public double totalDemand(){
+		double totalDemandInSubTours=0;
+		for(SubTour st : this.subTours) {
+			totalDemandInSubTours += st.totalDemand();
+		}
+		return super.totalDemand() + totalDemandInSubTours;
+	}
+	
 	public void addSubTour(SubTour st) {
 		this.subTours.add(st);
 	}

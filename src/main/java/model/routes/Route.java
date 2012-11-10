@@ -131,8 +131,12 @@ public abstract class Route<N extends Node,C extends Customer, V extends MovingO
 		
 	}
 	
+	public double totalDemand(){
+		return Customer.totalDemand(this.customers);
+	}
+	
 	public double availableLoad(){
-		return vehicle.getCapacity() - Customer.totalDemand(customers);
+		return vehicle.getCapacity() - this.totalDemand();
 	}
 
 	public void addCustomers(List<C> custs) {

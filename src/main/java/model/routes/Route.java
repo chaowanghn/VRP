@@ -26,7 +26,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		this.customers = new ArrayList<C>();
 	}
 	
-	public Route(N d, Collection<C> customers) {
+	public Route(N d, Collection<? extends C> customers) {
 		this(d);
 		this.customers.addAll(customers);
 	}

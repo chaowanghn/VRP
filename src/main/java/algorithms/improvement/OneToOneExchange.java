@@ -1,5 +1,9 @@
 package algorithms.improvement;
 
+import model.fleet.MovingObject;
+import model.nodes.Customer;
+import model.nodes.Depot;
+import model.nodes.Node;
 import model.routes.Route;
 
 
@@ -20,12 +24,12 @@ public class OneToOneExchange implements Move {
 		return neighborhood;
 	}
 	
-	public Neighborhood apply(Route initialRoute) {
+	public Neighborhood apply(Route<? extends Depot,? extends Customer,? extends MovingObject> initialRoute) {
 		Neighborhood neighborhood = new Neighborhood(initialRoute);
 		
 		for(int i=1; i<=initialRoute.getCustomers().size()-1; i++) {
 			for(int j=i+1; j<=initialRoute.getCustomers().size(); j++) {
-				Route neighborRoute = new Route(initialRoute.getDepot(), initialRoute.getCustomers());
+				Route<Node,Customer,MovingObject> neighborRoute = new Route<Node, Customer, MovingObject>(initialRoute.getDepot(), initialRoute.getCustomers());
 				neighborRoute.swapCustomers(i, j);
 				neighborhood.addNeighbor(neighborRoute);
 			}

@@ -108,7 +108,7 @@ public class TCluster implements ConstructionHeuristic {
 			
 			Route<?,?,?> routeUnderConstruction; // the exact type of route is not knwon yet
 			
-			Customer u = Node.farthest(Collections2.filter(customers, Customer.notSatisfied()), depot); // the seed customer
+			Customer u = Node.farthest(Customer.getNotSatisfied(customers), depot); // the seed customer
 			
 			
 			MovingObject vehicle = fleet.getUnusedVehicleWithMaxCapacity();

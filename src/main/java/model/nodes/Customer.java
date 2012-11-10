@@ -1,8 +1,11 @@
 package model.nodes;
 
 
+import java.util.Collection;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Collections2;
 
 public class Customer extends Node {
 	
@@ -75,6 +78,10 @@ public class Customer extends Node {
 		return Predicates.not(Customer.satisfied());
 	}
 
+	public static <C extends Customer> Collection<C> getNotSatisfied(Collection<C> customers){
+		return Collections2.filter(customers, notSatisfied());
+	}
+	
 	public static double totalDemand(Iterable<? extends Customer> customers) {
 		double totalDemand=0;
 		for(Customer c:customers){

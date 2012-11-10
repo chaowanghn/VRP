@@ -3,12 +3,8 @@ package model.routes;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 import model.fleet.CompleteVehicle;
 import model.nodes.Depot;
-import model.nodes.TruckCustomer;
 import model.nodes.VehicleCustomer;
 
 public class CompleteVehicleRoute extends PureVehicleRoute {

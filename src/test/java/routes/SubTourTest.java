@@ -23,7 +23,7 @@ public class SubTourTest {
 
 	@Test
 	public void test() {
-		SubTour st = new SubTour(ttrp.getNode(0));
+		SubTour st = new SubTour(ttrp.getDepot());
 		Set<TruckCustomer> truckCustomers = ttrp.getTruckCustomers();
 		IntArrayList truckCustomerIds = new IntArrayList();
 		for (TruckCustomer tc : truckCustomers) {
@@ -38,7 +38,7 @@ public class SubTourTest {
 		st.addCustomer(t3);
 		
 		System.out.println(st);
-		//assertTrue(st.cost() == (ttrp.getNode(0).distance(t1) + t1.distance(t2) + t2.distance(t3) + t3.distance(ttrp.getNode(0))));
+		assertTrue(st.cost() == (ttrp.getNode(0).distance(t1) + t1.distance(t2) + t2.distance(t3) + t3.distance(ttrp.getNode(0))));
 		System.out.println(st.cost());
 		System.out.println(ttrp.getNode(0).distance(t1) + t1.distance(t2) + t2.distance(t3) + t3.distance(ttrp.getNode(0)));
 	}

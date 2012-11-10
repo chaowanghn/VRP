@@ -126,11 +126,6 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		throw new Exception("not implemented yet!");
 	}
 	
-	public static boolean feasibleInsertion(Route<?,?,?> route, Customer customer) {
-		return false;
-		
-	}
-	
 	public double totalDemand(){
 		return Customer.totalDemand(this.customers);
 	}

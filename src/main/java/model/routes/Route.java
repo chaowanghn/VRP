@@ -116,20 +116,8 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		throw new Exception("not implemented yet!");
 	}
 	
-	public static boolean canServe(Route route, Customer customer) {
-		if(customer instanceof TruckCustomer) {
-			if (route instanceof PureTruckRoute) {
-				return customer.getDemand() <= route.availableLoad();
-			}
-			if (route instanceof CompleteVehicleRoute) {
-				CompleteVehicleRoute cvr = (CompleteVehicleRoute) route;
-				return cvr.feasibleInsertion((TruckCustomer) customer);
-			}
-		}
-		
-		else {
-			
-		}
+	public static boolean feasibleInsertion(Route<?,?,?> route, Customer customer) {
+		return false;
 		
 	}
 	

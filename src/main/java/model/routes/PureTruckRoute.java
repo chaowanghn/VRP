@@ -1,10 +1,11 @@
 package model.routes;
 
 import model.fleet.Truck;
+import model.nodes.Customer;
 import model.nodes.Depot;
-import model.nodes.TruckCustomer;
+import model.nodes.Node;
 
-public class PureTruckRoute extends Route {
+public class PureTruckRoute extends Route<Node,Customer,Truck> {
 
 	public PureTruckRoute(Depot d) {
 		super(d);
@@ -14,9 +15,4 @@ public class PureTruckRoute extends Route {
 		this(d);
 		super.vehicle = truck;
 	}
-
-	public void addCustomer(TruckCustomer c) {
-		super.customers.add(c);
-	}
-
 }

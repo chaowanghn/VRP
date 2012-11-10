@@ -58,4 +58,17 @@ public class Fleet {
 		return Iterables.any(this.trailers, MovingObject.available());
 	}
 
+	public MovingObject getUnusedVehicleWithMaxCapacity() {
+		if(this.hasAvailabeTrailers() && this.hasAvailabeTrucks()) {
+			Trailer trailer = this.getAvailableTrailerWithMaxCapacity();
+			Truck truck = this.getAvailableTruckWithMaxCapacity();
+			return new CompleteVehicle(truck, trailer, null);
+		}
+		
+		if(this.hasAvailabeTrucks()) {
+			return this.getAvailableTruckWithMaxCapacity();
+		}
+		
+		else return null;
+	}
 }

@@ -20,8 +20,7 @@ public class OneToOneExchangeTest extends MoveTest {
 	@Test
 	public void testIntraRoute() {
 		int numberOfCustomer = route.getCustomers().size();
-		assertTrue
-		(numberOfCustomer == 6);
+		assertTrue(numberOfCustomer == 6);
 		
 		Neighborhood neighborhood = oneToOneExchange.apply(route);
 		
@@ -30,11 +29,11 @@ public class OneToOneExchangeTest extends MoveTest {
 		assertTrue("Neighborhood size: "+neighborhood.size(), neighborhood.size() == 15);
 	}
 
+
 	@Override
 	@Test
 	public void testApplyToSolution() {
-		Neighborhood neighborhood = oneToOneExchange.apply(initialSolution);
-		assertEquals(neighborhood.getInitialMovable(), initialSolution);
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -121,7 +121,7 @@ public class Visualizer {
 		frame.setVisible(true);
 	}
 
-	public static void visualizeRoute(Route r) {
+	public static void visualizeRoute(Route<?,?,?> r) {
 		visualizeNodesSequence(r.getNodes());
 	}
 }

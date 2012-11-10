@@ -87,7 +87,7 @@ public class TCluster implements ConstructionHeuristic {
 		Fleet fleet = ttrp.getFleet();
 		Depot depot = ttrp.getDepot();
 		
-		Set<Route> routes = new HashSet<Route>();
+		Set<Route<?,?,?>> routes = new HashSet<Route<?,?,?>>();
 		
 		/*
 		 * T-Cluster can be considered as a 
@@ -111,7 +111,7 @@ public class TCluster implements ConstructionHeuristic {
 			Customer u = Node.farthest(Collections2.filter(customers, Customer.notSatisfied()), depot); // the seed customer
 			
 			
-			MovingObject vehicle = getUnusedVehicleWithMaxCapacity(fleet);
+			MovingObject vehicle = fleet.getUnusedVehicleWithMaxCapacity();
 			/*
 			 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
 			 * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
@@ -183,18 +183,6 @@ public class TCluster implements ConstructionHeuristic {
 		}
 	}
 	
-	private MovingObject getUnusedVehicleWithMaxCapacity(Fleet fleet) {
-		
-		if(fleet.hasAvailabeTrailers() && fleet.hasAvailabeTrucks()) {
-			Trailer trailer = fleet.getAvailableTrailerWithMaxCapacity();
-			Truck truck = fleet.getAvailableTruckWithMaxCapacity();
-			return new CompleteVehicle(truck, trailer, null);
-		}
-		
-		else {
-			checkState(fleet.hasAvailabeTrucks(), "this shouldn't happen");
-			return fleet.getAvailableTruckWithMaxCapacity();
-		}
-	}
+	
 
 }

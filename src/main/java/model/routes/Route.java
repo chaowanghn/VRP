@@ -31,6 +31,15 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		this.customers.addAll(customers);
 	}
 	
+	public Route(N d, V vehicle) {
+		this(d);
+		this.vehicle = vehicle;
+	}
+	public Route(N d, Collection<? extends C> customers, V vehicle) {
+		this(d,customers);
+		this.vehicle = vehicle;
+	}
+	
 	public void addCustomer(C c) {
 		checkNotNull(c);
 		c.setSatisfied(true);

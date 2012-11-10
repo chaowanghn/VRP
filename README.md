@@ -8,9 +8,12 @@ Different from the VRP, in the TTRP, customers are serviced by a fleet of trucks
 Due to some practical constraints, some customers can only be serviced by a single truck. 
 The other customers can be serviced by a single truck or a truck pulling a trailer. 
 
-For research publications on the TTRP see:
-		src/main/resources/papers
+The problem was proposed by (Chao,2002)[http://140.113.119.114/students/thesis/096/2/Literature/VRP%20Variants/TTRP/2002_A%20TS%20method%20for%20the%20TTRP.pdf]
 
+The standard benchmark instances used can be found (here)[http://web.ntust.edu.tw/~vincent/ttrp/] 
+and are also available in the (project)[https://github.com/Flooorents/ttrp/tree/master/src/test/resources/instances/benchmark]
+
+For other research publications on the TTRP see (src/main/resources/papers)[https://github.com/Flooorents/ttrp/tree/master/src/main/resources/papers]:
 
 License
 -------

@@ -157,10 +157,11 @@ public class TCluster implements ConstructionHeuristic {
 			this.r = r;
 		}
 		
+		@SuppressWarnings("unchecked")
 		@Override
 		public int compare(Customer k1, Customer k2) {
-			double e1 = e(k1, u, Node.nearest(r.getCustomers(), k1), depot);
-			double e2 = e(k2, u, Node.nearest(r.getCustomers(), k2), depot);
+			double e1 = e(k1, u, (Customer) Node.nearest(r.getCustomers(), k1), depot);
+			double e2 = e(k2, u, (Customer) Node.nearest(r.getCustomers(), k2), depot);
 			
 			if (e1 < e2) {
 				return -1;

@@ -39,12 +39,4 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		super.addCustomer(vCustomer);
 	}
 	
-	public boolean feasibleInsertion(final TruckCustomer truckCustomer) {
-		return Iterables.any(subTours, new Predicate<SubTour>() {
-			public boolean apply(SubTour st) {
-				return st.feasibleInsertion(truckCustomer);
-			}
-		});
-	}
-
 }

@@ -1,52 +1,21 @@
 package model.routes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.common.collect.Iterables;
-
 import model.fleet.Truck;
-import model.nodes.Customer;
+import model.nodes.Depot;
 import model.nodes.Node;
-import model.nodes.TruckCustomer;
 
-public class SubTour {
-	Truck truck = null;;
-	private Node rootNode;
-	List<TruckCustomer> customers = new ArrayList<TruckCustomer>();
-	
-	public SubTour(Node rootNode) {
-		this.rootNode = rootNode;
-	}
-	
-	public SubTour(Node rootNode, Truck truck) {
-		this(rootNode);
-		this.truck = truck;
+public class SubTour extends PureTruckRoute {
+
+	public SubTour(Depot d, Truck truck) {
+		super(d, truck);
 	}
 
-	public double cost() {
-		double customerTraversingCost=0;
-		for(int i=1; i<customers.size(); i++) {
-			customerTraversingCost+=customers.get(i).distance(customers.get(i-1));
-		}
-		return rootNode.distance(Iterables.getFirst(customers, null)) + customerTraversingCost + Iterables.getLast(customers).distance(rootNode);
+	public SubTour(Depot d) {
+		super(d);
 	}
 	
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(rootNode.getId());
-		for (Customer c: customers) {
-			sb.append("-" + c.getId());
-		}
-		sb.append("-"+rootNode.getId());
-		return sb.toString();
+	public Node getRoot() {
+		return super.getDepot();
 	}
 	
-	public void addCustomer(TruckCustomer tc) {
-		this.customers.add(tc);
-	}
-	
-	public boolean feasibleInsertion(TruckCustomer truckCustomer){
-		return truckCustomer.getDemand() <= Customer.totalDemand(customers);
-	}
 }

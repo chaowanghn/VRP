@@ -113,46 +113,25 @@ public class TCluster implements ConstructionHeuristic {
 			checkNotNull(seedCustomer);
 			
 			if (vehicle instanceof CompleteVehicle) {
-				/*
-				 * In case of a complete vehicle, 
-				 * if the seed customer is a VC customer, then it is inserted into the main-tour. 
-				 * On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
-				 */
-				CompleteVehicle completeVehicle = (CompleteVehicle) vehicle;
-				CompleteVehicleRoute completeVehicleRoute = (CompleteVehicleRoute) routeUnderConstruction;
+				logger.info("complete vehicle route construction started");
+				// In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into the main-tour.  On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
 				if(seedCustomer instanceof VehicleCustomer) {
-					completeVehicleRoute.addToMainTour((VehicleCustomer) seedCustomer);
+					logger.info("adding seed customer to CVR");
+					((CompleteVehicleRoute) routeUnderConstruction).addToMainTour((VehicleCustomer) seedCustomer);
 				}
 				else {
 					checkState(seedCustomer instanceof TruckCustomer);
-					SubTour st = new SubTour(depot, completeVehicle.getTruck());
+					SubTour st = new SubTour(depot, ((CompleteVehicle) vehicle).getTruck());
 					st.addCustomer(seedCustomer);
+					logger.info("seed customer added to SubTour: " + st.toString());
 				}
 				
-				//Ordering<Customer> nextCustomersOrdering = Ordering.from(new NextCustomerComparator(depot, DEFAULT_PI, seedCustomer, routeUnderConstruction));
-				checkState(!Customer.getNotSatisfied(this.customers).isEmpty());
-				List<Customer> candidateNextCustomers =  new ArrayList<Customer>(Customer.getNotSatisfied(this.customers));
-				for(Customer k : candidateNextCustomers) {
-					completeVehicleRoute.feasibleInsertion(k);
-					if (k instanceof VehicleCustomer) {
-						completeVehicleRoute.addToMainTour((VehicleCustomer) k);
-					}
-					else {
-						SubTour existingSubTour = Iterables.getFirst(completeVehicleRoute.getSubTours(), null);
-						if (existingSubTour == null) {
-							SubTour st = new SubTour(completeVehicleRoute.getLastCustomer(), completeVehicle.getTruck());
-							st.addCustomer(k);
-						}
-						else {
-							existingSubTour.addCustomer(k);
-						}
-					}
-				}
+				
 			}
 			
 			else {
 				checkArgument(vehicle instanceof Truck);
-				//if a CompleteVehice can't be used (probably because there are no trailers available)
+				//if a CompleteVehice can't be used (probably because there are no trailers available) a new pure truck route is constructed
 				routeUnderConstruction = new PureTruckRoute(depot,(Truck) vehicle);
 			}
 			

@@ -134,6 +134,9 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return vehicle.getCapacity() - this.totalDemand();
 	}
 
+	public C getFirstCustomer() {
+		return Iterables.getFirst(this.customers, null);
+	}
 	public void addCustomers(List<C> custs) {
 		this.customers.addAll(custs);
 	}

@@ -7,11 +7,11 @@ import model.nodes.Node;
 
 public class PureTruckRoute extends Route<Node,Customer,Truck> {
 
-	public PureTruckRoute(Depot d) {
+	public PureTruckRoute(Node d) {
 		super(d);
 	}
 	
-	public PureTruckRoute(Depot d, Truck truck) {
+	public PureTruckRoute(Node d, Truck truck) {
 		this(d);
 		super.vehicle = truck;
 	}

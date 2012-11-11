@@ -12,5 +12,9 @@ public class CompleteVehicle extends MovingObject{
 		trailer.setAvailable(false);
 	}
 
+	public Truck getTruck() {
+		return truck;
+	}
+
 	
 }

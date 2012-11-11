@@ -1,6 +1,7 @@
 package algorithms.construction;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import java.util.ArrayList;
@@ -10,8 +11,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Ordering;
 
 import model.Solution;
 import model.TTRP;
@@ -77,6 +82,8 @@ import model.routes.Route;
  */
 
 public class TCluster implements ConstructionHeuristic {
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private static double DEFAULT_PI = 0.5;
 	private List<Customer> customers;
 	private Fleet fleet;
@@ -85,64 +92,62 @@ public class TCluster implements ConstructionHeuristic {
 	private Solution solution;
 
 	public Solution apply(TTRP ttrp) {
-		this.solution = new Solution();
+		checkState(Customer.getSatisfied(ttrp.getCustomers()).isEmpty(),"initially none of the customers is satisfied");
 		this.customers = new ArrayList<Customer>(ttrp.getCustomers());
+		checkState(ttrp.getFleet().hasAvailabeTrailers() && ttrp.getFleet().hasAvailabeTrucks(),"there have to be available vehicle in the depot");
 		this.fleet = ttrp.getFleet();
 		this.depot = ttrp.getDepot();
+		this.solution = new Solution();
 		
-	
 		// T-Cluster can be considered as a cluster-based sequential insertion procedure, where routes are constructed one by one up to full vehicle utilization.
 		Set<Route<?,?,?>> routes = new HashSet<Route<?,?,?>>(); 
-		
-		checkState(Customer.getSatisfied(customers).isEmpty(),"all customers are initially not satisfied");
 		while(Iterables.any(customers, Customer.notSatisfied())) {
-			checkArgument(fleet.hasAvailabeTrailers() || fleet.hasAvailabeTrucks());
+			logger.info("main loop started. Number of unsatisfied customers: " + Customer.getNotSatisfied(customers).size());
+			Route<?,?,?> routeUnderConstruction = this.initializeNewRoute(); // the exact type of route is not known yet. It's determined at runtime!
 			
-			//============================ ROUTE INITIALIZATION ============================
+			MovingObject vehicle = routeUnderConstruction.getVehicle(); 
+			logger.info("root initialized with type: " + routeUnderConstruction.getClass() + " and vehicle type" + vehicle.getClass());
+			checkNotNull(vehicle);
+			Customer seedCustomer = Node.farthest(Customer.getNotSatisfied(customers), depot);
+			logger.info("seed customer selected " + seedCustomer.getClass());
+			checkNotNull(seedCustomer);
 			
-			
-			Route<?,?,?> routeUnderConstruction; // the exact type of route is not knwon yet
-			
-			
-			/*
-			 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
-			 * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
-			 * */
-			//============================ ADD SEED CUSTOMER ============================
 			if (vehicle instanceof CompleteVehicle) {
 				/*
-				 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
-				 * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
-				 * */
-				routeUnderConstruction = new CompleteVehicleRoute(depot, (CompleteVehicle) vehicle);
-				if(u instanceof VehicleCustomer) {
-					((CompleteVehicleRoute) routeUnderConstruction).addToMainTour((VehicleCustomer) u);
+				 * In case of a complete vehicle, 
+				 * if the seed customer is a VC customer, then it is inserted into the main-tour. 
+				 * On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
+				 */
+				CompleteVehicle completeVehicle = (CompleteVehicle) vehicle;
+				CompleteVehicleRoute completeVehicleRoute = (CompleteVehicleRoute) routeUnderConstruction;
+				if(seedCustomer instanceof VehicleCustomer) {
+					completeVehicleRoute.addToMainTour((VehicleCustomer) seedCustomer);
 				}
-				
 				else {
-					checkState(u instanceof TruckCustomer, "Since it's not a VehicleCustomer, it has to be a TruckCustomer");
-					SubTour st = new SubTour(depot);
-					st.addCustomer((TruckCustomer) u);
+					checkState(seedCustomer instanceof TruckCustomer);
+					SubTour st = new SubTour(depot, completeVehicle.getTruck());
+					st.addCustomer(seedCustomer);
 				}
 				
-				//The next customer for insertion into the routes is then selected from the unrouted customers minimizing e(k)
-				//Customer k = Collections.min(customers, new NextCustomerComparator(depot, DEFAULT_PI, u, routeUnderConstruction));
-				//Collections.sort(Customer.getNotSatisfied(customers), new NextCustomerComparator(depot, DEFAULT_PI, u, routeUnderConstruction));
-				for (Customer k : Customer.getNotSatisfied(customers)){
-					if (routeUnderConstruction.feasibleInsertion(k)) {
-						if(routeUnderConstruction instanceof CompleteVehicleRoute) {
-							if(k instanceof TruckCustomer) {		
-								Iterables.getFirst(((CompleteVehicleRoute) routeUnderConstruction).getSubTours(), null).addCustomer(k);
-							}
-							else {
-								checkArgument(k instanceof VehicleCustomer);
-								((CompleteVehicleRoute) routeUnderConstruction).addToMainTour((VehicleCustomer) k);
-							}
+				//Ordering<Customer> nextCustomersOrdering = Ordering.from(new NextCustomerComparator(depot, DEFAULT_PI, seedCustomer, routeUnderConstruction));
+				checkState(!Customer.getNotSatisfied(this.customers).isEmpty());
+				List<Customer> candidateNextCustomers =  new ArrayList<Customer>(Customer.getNotSatisfied(this.customers));
+				for(Customer k : candidateNextCustomers) {
+					completeVehicleRoute.feasibleInsertion(k);
+					if (k instanceof VehicleCustomer) {
+						completeVehicleRoute.addToMainTour((VehicleCustomer) k);
+					}
+					else {
+						SubTour existingSubTour = Iterables.getFirst(completeVehicleRoute.getSubTours(), null);
+						if (existingSubTour == null) {
+							SubTour st = new SubTour(completeVehicleRoute.getLastCustomer(), completeVehicle.getTruck());
+							st.addCustomer(k);
 						}
+						else {
+							existingSubTour.addCustomer(k);
+						}
+					}
 				}
-				
-				}
-				
 			}
 			
 			else {
@@ -156,7 +161,7 @@ public class TCluster implements ConstructionHeuristic {
 		return solution;
 	}
 
-	private Route<Depot,Customer,MovingObject> initializeNewRoute() {
+	private Route<?,?,?> initializeNewRoute() {
 		/*
 		 * A new route is initialized with the unrouted customer farthest away from the depot 
 		 * and the
@@ -165,8 +170,15 @@ public class TCluster implements ConstructionHeuristic {
 		 * */
 		Customer u = Node.farthest(Customer.getNotSatisfied(customers), depot); // the seed customer
 		MovingObject vehicle = fleet.getUnusedVehicleWithMaxCapacity();
-		Route<Depot,Customer,MovingObject> route = new Route<Depot,Customer,MovingObject>(depot);
-		route.addCustomer(u);
+		checkNotNull(vehicle);
+		Route<?,?,?> route=null;
+		if (vehicle instanceof CompleteVehicle) {
+			route = new CompleteVehicleRoute(depot,(CompleteVehicle) vehicle);
+		}
+		else {
+			
+			route = new PureTruckRoute(depot, (Truck) vehicle);
+		}
 		return route;	
 	}
 	

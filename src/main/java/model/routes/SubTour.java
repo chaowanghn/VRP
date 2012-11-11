@@ -8,13 +8,14 @@ import model.nodes.TruckCustomer;
 
 public class SubTour extends PureTruckRoute {
 
-	public SubTour(Depot d, Truck truck) {
+	public SubTour(Node d, Truck truck) {
 		super(d, truck);
 	}
 
-	public SubTour(Depot d) {
+	public SubTour(Node d) {
 		super(d);
 	}
+	
 	
 	
 	public Node getRoot() {

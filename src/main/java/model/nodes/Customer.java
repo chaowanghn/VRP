@@ -80,8 +80,12 @@ public class Customer extends Node {
 		return Predicates.not(Customer.satisfied());
 	}
 
-	public static <C extends Customer> List<C> getNotSatisfied(Collection<C> customers){
-		return new ArrayList<C>(Collections2.filter(customers, notSatisfied()));
+	public static <C extends Customer> Collection<C> getNotSatisfied(Collection<C> customers){
+		return Collections2.filter(customers, notSatisfied());
+	}
+	
+	public static <C extends Customer> Collection<C> getSatisfied(Collection<C> customers){
+		return Collections2.filter(customers, satisfied());
 	}
 	
 	public static double totalDemand(Iterable<? extends Customer> customers) {

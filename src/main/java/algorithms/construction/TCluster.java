@@ -156,7 +156,7 @@ public class TCluster implements ConstructionHeuristic {
 							st.addCustomer((TruckCustomer) candidate);
 						}
 						else {
-							Iterables.getFirst(((CompleteVehicleRoute) routeUnderConstruction).getSubTours(), null).addCustomer((TruckCustomer)candidate);
+							Iterables.getFirst(((CompleteVehicleRoute) routeUnderConstruction).getSubTours(), null).addCustomer(candidate);
 						}
 					}
 				}

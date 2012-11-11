@@ -69,4 +69,7 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		return this.subTours;
 	}
 
+	public boolean hasSubTours() {
+		return !(this.subTours.size() == 0);
+	}
 }

@@ -17,7 +17,9 @@ public class SubTour extends PureTruckRoute {
 	}
 	
 	
-	
+	public void addCustomer(TruckCustomer truckCustomer){
+		super.addCustomer(truckCustomer);
+	}
 	public Node getRoot() {
 		return super.getDepot();
 	}

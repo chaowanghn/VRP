@@ -104,7 +104,7 @@ public class TCluster implements ConstructionHeuristic {
 		while(Iterables.any(customers, Customer.notSatisfied())) {
 			logger.info("main loop started. Number of unsatisfied customers: " + Customer.getNotSatisfied(customers).size());
 			Route<?,?,?> routeUnderConstruction = this.initializeNewRoute(); // the exact type of route is not known yet. It's determined at runtime!
-			
+			checkNotNull(routeUnderConstruction);
 			MovingObject vehicle = routeUnderConstruction.getVehicle(); 
 			logger.info("root initialized with type: " + routeUnderConstruction.getClass() + " and vehicle type" + vehicle.getClass());
 			checkNotNull(vehicle);
@@ -126,18 +126,46 @@ public class TCluster implements ConstructionHeuristic {
 					logger.info("seed customer added to SubTour: " + st.toString());
 				}
 				
+				List<Customer> candidateCustomers = this.candidateCustomersAfterTheSeed();
+				logger.info("adding the rest of the customers started. Candidates list size: " + candidateCustomers.size());
 				
 			}
 			
 			else {
 				checkArgument(vehicle instanceof Truck);
 				//if a CompleteVehice can't be used (probably because there are no trailers available) a new pure truck route is constructed
+				logger.info("Pure Truck Route construction started");
 				routeUnderConstruction = new PureTruckRoute(depot,(Truck) vehicle);
 			}
 			
 		}
 		
 		return solution;
+	}
+	
+	public void addRestOfTheCustomers(Route<?,?,?> routeUnderConstruction, List<Customer> candidateCustomers){
+		for(Customer candidate : candidateCustomers) {
+			if(routeUnderConstruction.feasibleInsertion(candidate)){
+				if(routeUnderConstruction instanceof CompleteVehicleRoute){
+					if(candidate instanceof VehicleCustomer) {
+						((CompleteVehicleRoute) routeUnderConstruction).addToMainTour((VehicleCustomer) candidate);
+					}
+					else {
+						if(! ((CompleteVehicleRoute) routeUnderConstruction).hasSubTours()) {
+							SubTour st = new SubTour(depot);
+							st.addCustomer((TruckCustomer) candidate);
+						}
+						else {
+							Iterables.getFirst(((CompleteVehicleRoute) routeUnderConstruction).getSubTours(), null).addCustomer((TruckCustomer)candidate);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private List<Customer> candidateCustomersAfterTheSeed() {
+		return new ArrayList<Customer>(Customer.getNotSatisfied(this.customers));
 	}
 
 	private Route<?,?,?> initializeNewRoute() {
@@ -155,7 +183,6 @@ public class TCluster implements ConstructionHeuristic {
 			route = new CompleteVehicleRoute(depot,(CompleteVehicle) vehicle);
 		}
 		else {
-			
 			route = new PureTruckRoute(depot, (Truck) vehicle);
 		}
 		return route;	

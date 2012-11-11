@@ -102,6 +102,7 @@ public class TCluster implements ConstructionHeuristic {
 		// T-Cluster can be considered as a cluster-based sequential insertion procedure, where routes are constructed one by one up to full vehicle utilization.
 		Set<Route<?,?,?>> routes = new HashSet<Route<?,?,?>>(); 
 		while(Iterables.any(customers, Customer.notSatisfied())) {
+			logger.info("=========================================");
 			logger.info("main loop started. Number of unsatisfied customers: " + Customer.getNotSatisfied(customers).size());
 			Route<?,?,?> routeUnderConstruction = this.initializeNewRoute(); // the exact type of route is not known yet. It's determined at runtime!
 			checkNotNull(routeUnderConstruction);
@@ -128,7 +129,7 @@ public class TCluster implements ConstructionHeuristic {
 				
 				List<Customer> candidateCustomers = this.candidateCustomersAfterTheSeed();
 				logger.info("adding the rest of the customers started. Candidates list size: " + candidateCustomers.size());
-				
+				addRestOfTheCustomers(routeUnderConstruction, candidateCustomers);
 			}
 			
 			else {
@@ -149,14 +150,17 @@ public class TCluster implements ConstructionHeuristic {
 				if(routeUnderConstruction instanceof CompleteVehicleRoute){
 					if(candidate instanceof VehicleCustomer) {
 						((CompleteVehicleRoute) routeUnderConstruction).addToMainTour((VehicleCustomer) candidate);
+						logger.info("NEXT CUSTOMER add to main tour");
 					}
 					else {
 						if(! ((CompleteVehicleRoute) routeUnderConstruction).hasSubTours()) {
 							SubTour st = new SubTour(depot);
 							st.addCustomer((TruckCustomer) candidate);
+							logger.info("NEXT CUSTOMER add to a new SubTour");
 						}
 						else {
 							Iterables.getFirst(((CompleteVehicleRoute) routeUnderConstruction).getSubTours(), null).addCustomer(candidate);
+							logger.info("NEXT CUSTOMER add to an existing SubTourr");
 						}
 					}
 				}

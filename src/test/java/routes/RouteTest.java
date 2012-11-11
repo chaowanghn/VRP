@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import io.InstanceImporterTest;
 
 import model.TTRP;
+import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.routes.Route;
@@ -14,18 +15,18 @@ import org.junit.Test;
 public class RouteTest {
 
 	TTRP ttrp; 
-	Route route;
+	Route<?,Customer,?> route;
 	Depot depot;
 	
 	@Before
 	public void setUp() throws Exception {
 		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
 		depot = ttrp.getDepot();
-		route = new Route(ttrp.getDepot());
+		route = new Route<Depot,Customer,MovingObject>(ttrp.getDepot());
 	}
 
 	@Test
-	public void test() {
+	public void testCost() {
 		Customer c1 = (Customer) ttrp.getNode(1);
 		route.addCustomer(c1);
 		Customer c2 = (Customer) ttrp.getNode(2);

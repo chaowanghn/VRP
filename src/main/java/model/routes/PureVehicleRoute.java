@@ -18,6 +18,7 @@ public class PureVehicleRoute extends Route<Depot,VehicleCustomer,CompleteVehicl
 
 	public void addCustomer(VehicleCustomer vCustomer) {
 		super.customers.add(vCustomer);
+		vCustomer.setSatisfied(true);
 	}
 
 	public <T extends Customer> boolean feasibleInsertion(T c){

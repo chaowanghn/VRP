@@ -78,40 +78,32 @@ import model.routes.Route;
 
 public class TCluster implements ConstructionHeuristic {
 	private static double DEFAULT_PI = 0.5;
-	
-	public static void createInitialTCluster(TTRP ttrp) {
-		
-	}
+	private List<Customer> customers;
+	private Fleet fleet;
+	private Depot depot;
+	private Set<Route<?,?,?>> routes;
+	private Solution solution;
 
 	public Solution apply(TTRP ttrp) {
-		Solution solution = new Solution();
-		List<Customer> customers = new ArrayList<Customer>(ttrp.getCustomers());
-		Fleet fleet = ttrp.getFleet();
-		Depot depot = ttrp.getDepot();
+		this.solution = new Solution();
+		this.customers = new ArrayList<Customer>(ttrp.getCustomers());
+		this.fleet = ttrp.getFleet();
+		this.depot = ttrp.getDepot();
 		
-		Set<Route<?,?,?>> routes = new HashSet<Route<?,?,?>>();
+	
+		// T-Cluster can be considered as a cluster-based sequential insertion procedure, where routes are constructed one by one up to full vehicle utilization.
+		Set<Route<?,?,?>> routes = new HashSet<Route<?,?,?>>(); 
 		
-		/*
-		 * T-Cluster can be considered as a 
-		 * cluster-based sequential insertion procedure, 
-		 * where routes are constructed one by one up to full vehicle utilization.
-		 */
-		routeConstruction:
+		checkState(Customer.getSatisfied(customers).isEmpty(),"all customers are initially not satisfied");
 		while(Iterables.any(customers, Customer.notSatisfied())) {
 			checkArgument(fleet.hasAvailabeTrailers() || fleet.hasAvailabeTrucks());
 			
 			//============================ ROUTE INITIALIZATION ============================
-			/*
-			 * A new route is initialized with the unrouted customer farthest away from the depot 
-			 * and the
-			 * unused vehicle having maximum total capacity. 
-			 * Thereby, complete vehicles are always preferred over pure trucks. 
-			 * */
+			
 			
 			Route<?,?,?> routeUnderConstruction; // the exact type of route is not knwon yet
 			
-			Customer u = Node.farthest(Customer.getNotSatisfied(customers), depot); // the seed customer
-			MovingObject vehicle = fleet.getUnusedVehicleWithMaxCapacity();
+			
 			/*
 			 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
 			 * the main-tour. On the other hand it is inserted into a new sub-tour to the depot, if it is a TC customer.
@@ -164,6 +156,21 @@ public class TCluster implements ConstructionHeuristic {
 		return solution;
 	}
 
+	private Route<Depot,Customer,MovingObject> initializeNewRoute() {
+		/*
+		 * A new route is initialized with the unrouted customer farthest away from the depot 
+		 * and the
+		 * unused vehicle having maximum total capacity. 
+		 * Thereby, complete vehicles are always preferred over pure trucks. 
+		 * */
+		Customer u = Node.farthest(Customer.getNotSatisfied(customers), depot); // the seed customer
+		MovingObject vehicle = fleet.getUnusedVehicleWithMaxCapacity();
+		Route<Depot,Customer,MovingObject> route = new Route<Depot,Customer,MovingObject>(depot);
+		route.addCustomer(u);
+		return route;	
+	}
+	
+	
 	private class NextCustomerComparator implements Comparator<Customer> {
 		private Depot depot;
 		private double pi;

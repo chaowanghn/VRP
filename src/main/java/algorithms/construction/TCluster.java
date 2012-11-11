@@ -3,9 +3,11 @@ package algorithms.construction;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Collections2;
@@ -83,7 +85,7 @@ public class TCluster implements ConstructionHeuristic {
 
 	public Solution apply(TTRP ttrp) {
 		Solution solution = new Solution();
-		Set<Customer> customers = ttrp.getCustomers();
+		List<Customer> customers = new ArrayList<Customer>(ttrp.getCustomers());
 		Fleet fleet = ttrp.getFleet();
 		Depot depot = ttrp.getDepot();
 		
@@ -109,8 +111,6 @@ public class TCluster implements ConstructionHeuristic {
 			Route<?,?,?> routeUnderConstruction; // the exact type of route is not knwon yet
 			
 			Customer u = Node.farthest(Customer.getNotSatisfied(customers), depot); // the seed customer
-			
-			
 			MovingObject vehicle = fleet.getUnusedVehicleWithMaxCapacity();
 			/*
 			 * In case of a complete vehicle, if the seed customer is a VC customer, then it is inserted into
@@ -133,13 +133,30 @@ public class TCluster implements ConstructionHeuristic {
 					st.addCustomer((TruckCustomer) u);
 				}
 				
-				//============================ ADD THE REST OF THE CUSTOMERS ============================
-				Customer k = Collections.min(customers, new NextCustomerComparator(depot, DEFAULT_PI, u, routeUnderConstruction));
+				//The next customer for insertion into the routes is then selected from the unrouted customers minimizing e(k)
+				//Customer k = Collections.min(customers, new NextCustomerComparator(depot, DEFAULT_PI, u, routeUnderConstruction));
+				//Collections.sort(Customer.getNotSatisfied(customers), new NextCustomerComparator(depot, DEFAULT_PI, u, routeUnderConstruction));
+				for (Customer k : Customer.getNotSatisfied(customers)){
+					if (routeUnderConstruction.feasibleInsertion(k)) {
+						if(routeUnderConstruction instanceof CompleteVehicleRoute) {
+							if(k instanceof TruckCustomer) {		
+								Iterables.getFirst(((CompleteVehicleRoute) routeUnderConstruction).getSubTours(), null).addCustomer(k);
+							}
+							else {
+								checkArgument(k instanceof VehicleCustomer);
+								((CompleteVehicleRoute) routeUnderConstruction).addToMainTour((VehicleCustomer) k);
+							}
+						}
+				}
+				
+				}
 				
 			}
 			
 			else {
-				//if a CompleteVehice can't be used (probably because there are no trailers available
+				checkArgument(vehicle instanceof Truck);
+				//if a CompleteVehice can't be used (probably because there are no trailers available)
+				routeUnderConstruction = new PureTruckRoute(depot,(Truck) vehicle);
 			}
 			
 		}

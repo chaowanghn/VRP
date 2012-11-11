@@ -1,7 +1,9 @@
 package model.nodes;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -78,8 +80,8 @@ public class Customer extends Node {
 		return Predicates.not(Customer.satisfied());
 	}
 
-	public static <C extends Customer> Collection<C> getNotSatisfied(Collection<C> customers){
-		return Collections2.filter(customers, notSatisfied());
+	public static <C extends Customer> List<C> getNotSatisfied(Collection<C> customers){
+		return new ArrayList<C>(Collections2.filter(customers, notSatisfied()));
 	}
 	
 	public static double totalDemand(Iterable<? extends Customer> customers) {

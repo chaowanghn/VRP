@@ -11,7 +11,7 @@ public class TClusterTest extends ConctructionHeuristicTest {
 
 	@Test
 	public void apply() {
-		
+		new TCluster().apply(ttrp);
 	}
 
 }

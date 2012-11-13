@@ -21,13 +21,4 @@ public class SubTour extends PureTruckRoute {
 		return super.getDepot();
 	}
 	
-	public <T extends Customer> boolean feasibleInsertion(T c) {
-		if(c instanceof TruckCustomer) {
-			return c.getDemand() <= this.availableLoad();
-		}
-		else {
-			return false;
-		}
-		
-	}
 }

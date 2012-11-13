@@ -2,12 +2,14 @@ package routes;
 
 import static org.junit.Assert.*;
 import io.InstanceImporterTest;
-
+import java.util.*;
 import model.TTRP;
 import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
+import model.nodes.TruckCustomer;
+import model.nodes.VehicleCustomer;
 import model.routes.Route;
 
 import org.junit.Before;
@@ -18,41 +20,22 @@ public class RouteTest {
 	TTRP ttrp; 
 	Route<?,Customer,?> route;
 	Depot depot;
+	List<TruckCustomer> truckCustomers;
+	List<VehicleCustomer> vehicleCustomers;
 	
 	@Before
 	public void setUp() throws Exception {
 		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
+		this.truckCustomers = new ArrayList<TruckCustomer>(ttrp.getTruckCustomers());
+		this.vehicleCustomers = new ArrayList<VehicleCustomer>(ttrp.getVehicleCustomers());
 		depot = ttrp.getDepot();
 		route = new Route<Node,Customer,MovingObject>(ttrp.getCustomer(1));
 	}
 
-	@Test
-	public void testCost() {
-		Customer c1 = (Customer) ttrp.getNode(1);
-		route.addCustomer(c1);
-		Customer c2 = (Customer) ttrp.getNode(2);
-		route.addCustomer(c2);
-		Customer c3 = (Customer) ttrp.getNode(3);
-		route.addCustomer(c3);
-		
-		double routeCost = route.cost();
-		double realCost = 
-				depot.distance(c1)
-				+ c1.distance(c2)
-				+ c2.distance(c3)
-				+ c3.distance(depot);
-		
-		assertTrue("Real Cost: "+realCost+ " Route Cost: " + routeCost, routeCost == realCost);		
-		assertTrue(route.getNodes().contains(c1) && route.getNodes().contains(c2) && route.getNodes().contains(c3) && route.getNodes().contains(depot));
-	}
+
 
 	@Test
 	public void testVisualization(){
-		//Simple Route
-		for(int i=5; i<=15; i++){
-			route.addCustomer((Customer) ttrp.getNode(i));
-		}
-		route.visualize();
-		while (1<2){}
+		
 	}
 }

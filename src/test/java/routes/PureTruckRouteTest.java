@@ -27,8 +27,7 @@ public class PureTruckRouteTest extends RouteTest {
 
 	@Test
 	public void testVisualize() {
-		ptr.visualize();
-		while(1<2){}
+		
 	}
 
 }

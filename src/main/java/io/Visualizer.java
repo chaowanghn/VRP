@@ -124,4 +124,5 @@ public class Visualizer {
 	public static void visualizeRoute(Route<?,?,?> r) {
 		visualizeNodesSequence(r.getNodes());
 	}
+	
 }

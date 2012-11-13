@@ -1,5 +1,6 @@
 package model.routes;
 
+import io.Visualizer;
 import model.fleet.Truck;
 import model.nodes.Customer;
 import model.nodes.Depot;
@@ -19,4 +20,5 @@ public class PureTruckRoute extends Route<Node,Customer,Truck> {
 	public <T extends Customer> boolean feasibleInsertion(T c) {
 		return c.getDemand() <= this.availableLoad();
 	}
+	
 }

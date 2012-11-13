@@ -7,6 +7,7 @@ import model.TTRP;
 import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Depot;
+import model.nodes.Node;
 import model.routes.Route;
 
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class RouteTest {
 	public void setUp() throws Exception {
 		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
 		depot = ttrp.getDepot();
-		route = new Route<Depot,Customer,MovingObject>(ttrp.getDepot());
+		route = new Route<Node,Customer,MovingObject>(ttrp.getCustomer(1));
 	}
 
 	@Test
@@ -52,6 +53,6 @@ public class RouteTest {
 			route.addCustomer((Customer) ttrp.getNode(i));
 		}
 		route.visualize();
-		
+		while (1<2){}
 	}
 }

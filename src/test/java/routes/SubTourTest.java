@@ -23,24 +23,4 @@ public class SubTourTest extends RouteTest {
 		assertFalse(super.vehicleCustomers.isEmpty());
 	}
 
-
-	@Test
-	public void testVisualize(){
-		this.subTour = new SubTour(vehicleCustomers.get(0), null);
-		System.out.println(vehicleCustomers.get(0).getId());
-		
-		this.subTour.addCustomer(vehicleCustomers.get(1));
-		this.subTour.addCustomer(truckCustomers.get(1));
-		this.subTour.addCustomer(vehicleCustomers.get(2));
-		this.subTour.addCustomer(truckCustomers.get(2));
-		this.subTour.addCustomer(vehicleCustomers.get(3));
-		this.subTour.addCustomer(truckCustomers.get(3));
-		
-		subTour.visualize();
-		
-		while (1<2){
-			
-		}
-		
-	}
 }

@@ -25,9 +25,6 @@ public class PureTruckRouteTest extends RouteTest {
 
 	}
 
-	@Test
-	public void testVisualize() {
-		
-	}
+
 
 }

@@ -29,9 +29,6 @@ public class CompleteVehicleRouteTest extends RouteTest {
 		
 	}
 
-	@Test
-	public void testVisualize() {
-		fail("Not yet implemented");
-	}
+
 
 }

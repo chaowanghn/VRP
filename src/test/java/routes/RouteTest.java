@@ -45,4 +45,13 @@ public class RouteTest {
 		assertTrue(route.getNodes().contains(c1) && route.getNodes().contains(c2) && route.getNodes().contains(c3) && route.getNodes().contains(depot));
 	}
 
+	@Test
+	public void testVisualization(){
+		//Simple Route
+		for(int i=5; i<=15; i++){
+			route.addCustomer((Customer) ttrp.getNode(i));
+		}
+		route.visualize();
+		
+	}
 }

@@ -2,6 +2,8 @@ package model.routes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import io.Visualizer;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -146,7 +148,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	}
 
 	public void visualize(){
-		
+		Visualizer.visualizeRoute(this);
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -51,8 +52,8 @@ public class Visualizer {
 		this.scalingcontrol.scale(visualViewer, scalingControl, point);
 	}
 	
-	private void setNodes(Collection<? extends Node> nodes) {
-		for (Node node : nodes) {
+	private <N extends Node> void setNodes(Collection<N> nodes) {
+		for (N node : nodes) {
 			this.graph.addVertex(node);
 			layout.setLocation(node, node);
 			layout.lock(node, true);
@@ -66,27 +67,13 @@ public class Visualizer {
 				}
 			});
 		
-	}
-	
-	private void setNodes(List<? extends Node> nodes) {
-		for (Node node : nodes) {
-			this.graph.addVertex(node);
-			layout.setLocation(node, node);
-			layout.lock(node, true);
-		}
-		
-		for (int i=1; i<=nodes.size()-1; i++) {
-			this.graph.addEdge(Integer.toString(i), nodes.get(i-1), nodes.get(i));
-		}
-		
-		visualViewer.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<String>());
-		visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColorTransformer());
-		visualViewer.getRenderContext().setVertexLabelTransformer(new Transformer<Node, String>() {
-			
-			public String transform(Node input) {
-				return Integer.toString(input.getId());
+		 if (nodes instanceof List) {
+			 List<N> nodesAsList = new ArrayList<N>(nodes);
+			 for (int i=1; i<=nodes.size()-1; i++) {
+					this.graph.addEdge(Integer.toString(i), nodesAsList.get(i-1), nodesAsList.get(i));
 			}
-		});
+			 visualViewer.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<String>());
+		 }
 	}
 	
 	private Transformer<Node,Paint> vertexColorTransformer() {

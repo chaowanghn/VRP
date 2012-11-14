@@ -167,6 +167,18 @@ public class SolutionImporter {
 	public void setSubTours(List<SubTour> subTours) {
 		this.subTours = subTours;
 	}
+
+	public Solution getSolution() {
+		Solution solution = new Solution();
+		for(CompleteVehicleRoute cvr : this.completeVehicleRoutes){
+			solution.add(cvr);
+		}
+		
+		for(PureTruckRoute ptr : this.pureTruckRoutes) {
+			solution.add(ptr);
+		}
+		return solution;
+	}
 	
 	
 

@@ -33,10 +33,9 @@ public class SolutionImporterTest {
 		assertTrue(solutionImporter.getNumberOfSubTours() == 6);
 		assertTrue(solutionImporter.getNumberOfTruckRoutes() == 2 );
 		assertTrue(solutionImporter.getNumberOfVehicleRoutes() == 3);
-		
-		for(CompleteVehicleRoute cvr : solutionImporter.getCompleteVehicleRoutes()) {
-			System.out.println(cvr);
-		}
+	
+		Solution solution = solutionImporter.getSolution();
+		assertTrue(solution.cost() == solutionImporter.getTotalCost());
 	}
 	
 	@Test

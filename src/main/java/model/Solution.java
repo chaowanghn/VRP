@@ -13,13 +13,21 @@ import model.nodes.*;
 public class Solution implements Movable {
 	public static String INPUT_FILE_PATH = "src/test/resources/instances/bestSolutions/sol-ttrp03.txt";
 
-	
-	List<Route<? extends Node, ? extends Customer, ? extends MovingObject>> routes = new ArrayList<Route<? extends Node, ? extends Customer, ? extends MovingObject>>();
+	Set<CompleteVehicleRoute> completeVehicleRoutes = new HashSet<CompleteVehicleRoute>();
+	Set<PureTruckRoute> pureTruckRoutes = new HashSet<PureTruckRoute>();
 	
 	public Solution() {
 		
 	}
 
+	public void add(CompleteVehicleRoute cvr){
+		this.completeVehicleRoutes.add(cvr);
+	}
+	
+	public void add(PureTruckRoute ptr){
+		this.pureTruckRoutes.add(ptr);
+	}
+	
 	public int compareTo(Movable o) {
 		if (this.cost() < o.cost())
 			return -1;	
@@ -29,27 +37,22 @@ public class Solution implements Movable {
 			return 0;
 	}
 
+
+
+	@Override
 	public double cost() {
-		return Route.costOfRoutes(routes);
-	}
-	
-	public void addRoute(Route<Node,Customer,MovingObject> r) {
-		this.routes.add(r);
-	}
-	
-	public void addAll(List<? extends Route<? extends Node,? extends Customer,? extends MovingObject>> pureTruckRoutes) {
-		this.routes.addAll(pureTruckRoutes);
-	}
-	
-	public boolean containsRoute(Route<Node,Customer,MovingObject> r) {
-		return this.routes.contains(r);
+		double totalCost=0;
+		totalCost += Route.costOfRoutes(completeVehicleRoutes);
+		totalCost += Route.costOfRoutes(pureTruckRoutes);
+		for(CompleteVehicleRoute cvr : this.completeVehicleRoutes) {
+			for (SubTour st : cvr.getSubTours()) {
+				totalCost += st.cost();
+			}
+		}
+		return totalCost;
 	}
 
-	public List<Route<? extends Node, ? extends Customer, ? extends MovingObject>> getRoutes() {
-		//List<Route<? extends Node, ? extends Customer, ? extends MovingObject>> routes = new ArrayList<Route<? extends Node, ? extends Customer, ? extends MovingObject>>();
-		return this.routes;
-	}
-
+	
 	
 	
 }

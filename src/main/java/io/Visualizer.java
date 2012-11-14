@@ -111,12 +111,12 @@ public class Visualizer {
 		visualizer.setNodes(r.getNodes());
 	}
 	
-	public static <R extends Route<?,?,?> , N extends Node>  void visualizeRoutes(Collection<N> nodes, Collection<R> routes) {
+	public static <R extends Route<?,?,?> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(nodes);
 		for (R r : routes) {
 			visualizer.addNodeSequence(r.getNodes());
 		}
-		show("", visualizer);
+		show(title, visualizer);
 	}
 }

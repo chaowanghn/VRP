@@ -9,7 +9,11 @@ import model.TTRP;
 import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Node;
+import model.nodes.VehicleCustomer;
+import model.routes.CompleteVehicleRoute;
+import model.routes.CompleteVehicleRoute;
 import model.routes.Route;
+import model.routes.SubTour;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,31 +30,34 @@ public class VisualizerTest {
 	}
 	
 	public static void main(String[] args) {
-		TTRP ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
+		TTRP ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);		
 		
-		Route<Node, Customer, MovingObject> route1 = new Route<Node, Customer, MovingObject>(ttrp.getDepot());
-		route1.addCustomer(ttrp.getCustomer(18));
-		route1.addCustomer(ttrp.getCustomer(14));
-		route1.addCustomer(ttrp.getCustomer(24));
-		route1.addCustomer(ttrp.getCustomer(43));
-		route1.addCustomer(ttrp.getCustomer(7));
-		route1.addCustomer(ttrp.getCustomer(23));
-		route1.addCustomer(ttrp.getCustomer(6));
+		CompleteVehicleRoute cvr = new CompleteVehicleRoute(ttrp.getDepot());
+		cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(6));
+		cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(24));
+		cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(43));
+		cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(48));
+		cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(27));
+
+		SubTour st1 = new SubTour(ttrp.getNode(6));
+		st1.addCustomer(ttrp.getCustomer(14));
+		st1.addCustomer(ttrp.getCustomer(25));
+		st1.addCustomer(ttrp.getCustomer(18));
 		
-		Route<Node, Customer, MovingObject> route2 = new Route<Node, Customer, MovingObject>(ttrp.getDepot());
-		route2.addCustomer(ttrp.getCustomer(12));
-		route2.addCustomer(ttrp.getCustomer(5));
-		route2.addCustomer(ttrp.getCustomer(38));
-		route2.addCustomer(ttrp.getCustomer(11));
-		route2.addCustomer(ttrp.getCustomer(2));
-		route2.addCustomer(ttrp.getCustomer(3));
-		route2.addCustomer(ttrp.getCustomer(32));
+		SubTour st2 = new SubTour(ttrp.getNode(48));
+		st2.addCustomer(ttrp.getCustomer(26));
+		st2.addCustomer(ttrp.getCustomer(31));
+		st2.addCustomer(ttrp.getCustomer(28));
+		st2.addCustomer(ttrp.getCustomer(8));
+		cvr.addSubTour(st1);
+		cvr.addSubTour(st2);
 		
-		List<Route<?,?,?>> routes = new ArrayList<Route<?,?,?>>();
-		routes.add(route1);
-		routes.add(route2);
+		List<Route<?,?,?>> routes = new ArrayList<>();
+		routes.add(cvr);
+		routes.add(st2);
+		routes.add(st1);
 		
-		Visualizer.visualizeRoutes(ttrp.getAllNodes(), routes);
+		Visualizer.visualizeRoutes("CVR with 2 Sub Tours",ttrp.getAllNodes(), routes);
 		
 	}
 

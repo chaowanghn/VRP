@@ -102,12 +102,6 @@ public class Visualizer {
 		return this.visualViewer;
 	}
 	
-	public static void visualizeTTRP(TTRP ttrp) {
-		Visualizer visualizer = new Visualizer();
-		visualizer.setNodes(ttrp.getAllNodes());
-		show(ttrp.toString(), visualizer);
-	}
-	
 	public static void show(String frameTitle, Visualizer visualizer ){
 		JFrame frame = new JFrame(frameTitle);
 		frame.getContentPane().add(visualizer.getVisualizationViewer());
@@ -130,13 +124,13 @@ public class Visualizer {
 		visualizer.setNodes(nodes);
 		for (R route : routes) {
 			visualizer.addNodeSequence(route.getNodes());
-			
 			// For a CVR we have to to add its subtours too (if any)
 			if(route instanceof CompleteVehicleRoute && ((CompleteVehicleRoute) route).hasSubTours()) {
 				for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
 					visualizer.addNodeSequence(st.getNodes());
 				}
 			}
+			
 		}
 		return visualizer;
 	}

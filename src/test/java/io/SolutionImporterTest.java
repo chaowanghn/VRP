@@ -34,7 +34,7 @@ public class SolutionImporterTest {
 		assertTrue(solutionImporter.getNumberOfTruckRoutes() == 2 );
 		assertTrue(solutionImporter.getNumberOfVehicleRoutes() == 3);
 	
-		Solution solution = solutionImporter.getSolution();
+		Solution solution = SolutionImporter.getSolution(ttrp, Solution.INPUT_FILE_PATH);
 		assertTrue(solution.cost() == solutionImporter.getTotalCost());
 	}
 	

@@ -179,7 +179,12 @@ public class SolutionImporter {
 		}
 		return solution;
 	}
-	
+
+	public static Solution getSolution(TTRP ttrp, String filePath){
+		SolutionImporter solutionImporter = new SolutionImporter(ttrp, new File(filePath));
+		solutionImporter.read();
+		return solutionImporter.getSolution();
+	}
 	
 
 }

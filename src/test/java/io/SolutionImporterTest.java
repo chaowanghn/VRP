@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 
 import model.Solution;
 import model.TTRP;
+import model.routes.CompleteVehicleRoute;
+import model.routes.PureTruckRoute;
+import model.routes.SubTour;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +33,10 @@ public class SolutionImporterTest {
 		assertTrue(solutionImporter.getNumberOfSubTours() == 6);
 		assertTrue(solutionImporter.getNumberOfTruckRoutes() == 2 );
 		assertTrue(solutionImporter.getNumberOfVehicleRoutes() == 3);
+		
+		for(SubTour ptr : solutionImporter.getSubTours()) {
+			System.out.println(ptr);
+		}
 	}
 	
 	@Test

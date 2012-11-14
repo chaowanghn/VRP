@@ -48,7 +48,7 @@ public class SolutionImporter {
 	}
 	
 	private void readTruckRoute(int stops, int lineNumber){
-		PureTruckRoute ptr = new PureTruckRoute(ttrp.getNode(getIntFromString(fileLines.get(lineNumber)+1)));
+		PureTruckRoute ptr = new PureTruckRoute(ttrp.getNode(getIntFromString(fileLines.get(lineNumber+1)+1)));
 		for(int i=lineNumber+6; i<=lineNumber+6+stops-1; i++){
 			ptr.addCustomer(ttrp.getCustomer(getIntFromString(fileLines.get(i))));
 		}
@@ -56,7 +56,7 @@ public class SolutionImporter {
 	}
 	
 	private void readSubTour(int stops, int lineNumber) {
-		SubTour st = new SubTour(ttrp.getNode(getIntFromString(fileLines.get(lineNumber)+1)));
+		SubTour st = new SubTour(ttrp.getNode(getIntFromString(fileLines.get(lineNumber+1)+1)));
 		for(int i=lineNumber+6; i<=lineNumber+6+stops-1; i++){
 			st.addCustomer(ttrp.getCustomer(getIntFromString(fileLines.get(i))));
 		}

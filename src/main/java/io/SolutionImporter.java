@@ -1,6 +1,8 @@
 package io;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import model.TTRP;
 import model.fleet.*;
@@ -37,4 +39,10 @@ public class SolutionImporter {
 		return null;
 	}
 
+	public static int getIntFromString(String str){
+		Pattern intsOnly = Pattern.compile("\\d+");
+		Matcher makeMatch = intsOnly.matcher(str);
+		makeMatch.find();
+		return Integer.parseInt(makeMatch.group());
+	}
 }

@@ -2,8 +2,13 @@ package io;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Paint;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import model.TTRP;
@@ -114,6 +120,11 @@ public class Visualizer {
 	}
 	
 	public static <R extends Route<?,?,?> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
+		show(title, createVisualizer(nodes, routes));
+	}
+
+
+	public static <R extends Route<?,?,?> , N extends Node> Visualizer createVisualizer(Collection<N> nodes, Collection<R> routes) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(nodes);
 		for (R route : routes) {
@@ -126,6 +137,7 @@ public class Visualizer {
 				}
 			}
 		}
-		show(title, visualizer);
+		return visualizer;
 	}
+
 }

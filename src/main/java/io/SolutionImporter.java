@@ -73,6 +73,7 @@ public class SolutionImporter {
 				for(SubTour st : this.subTours ){
 					if(st.getDepot().equals(getIntFromString(vehicleCustomerLine))){
 						correspondingSubTour = st;
+						cvr.addSubTour(correspondingSubTour);
 					}
 				}
 				cvr.addSubTour(correspondingSubTour);

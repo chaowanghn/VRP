@@ -87,7 +87,6 @@ public class Visualizer {
 		 for (int i=1; i<=sequence.size()-1; i++) {
 				this.graph.addEdge(Integer.toString(sequence.get(i-1).getId()) + Integer.toString(sequence.get(i).getId()), sequence.get(i-1), sequence.get(i));
 		}
-		 visualViewer.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<String>());
 	}
 	
 	private Transformer<Node,Paint> vertexColorTransformer() {

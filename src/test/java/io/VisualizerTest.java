@@ -54,9 +54,7 @@ public class VisualizerTest {
 		
 		List<Route<?,?,?>> routes = new ArrayList<>();
 		routes.add(cvr);
-		routes.add(st2);
-		routes.add(st1);
-		
+
 		Visualizer.visualizeRoutes("CVR with 2 Sub Tours",ttrp.getAllNodes(), routes);
 		
 	}

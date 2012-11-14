@@ -17,7 +17,9 @@ import model.TTRP;
 import model.nodes.Depot;
 import model.nodes.Node;
 import model.nodes.VehicleCustomer;
+import model.routes.CompleteVehicleRoute;
 import model.routes.Route;
+import model.routes.SubTour;
 
 import org.apache.commons.collections15.Transformer;
 
@@ -114,8 +116,15 @@ public class Visualizer {
 	public static <R extends Route<?,?,?> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(nodes);
-		for (R r : routes) {
-			visualizer.addNodeSequence(r.getNodes());
+		for (R route : routes) {
+			visualizer.addNodeSequence(route.getNodes());
+			
+			// For a CVR we have to to add its subtours too (if any)
+			if(route instanceof CompleteVehicleRoute && ((CompleteVehicleRoute) route).hasSubTours()) {
+				for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
+					visualizer.addNodeSequence(st.getNodes());
+				}
+			}
 		}
 		show(title, visualizer);
 	}

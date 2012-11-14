@@ -11,17 +11,20 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
 import com.google.common.io.Files;
 
+import model.Solution;
 import model.TTRP;
 import model.fleet.*;
 import model.nodes.*;
 import model.routes.*;
 
 public class SolutionImporter {
+	
 	private TTRP ttrp;
 	
 	private double totalCost;
 	
 	private int numberOfVehicleRoutes;
+	private List<CompleteVehicleRoute> completeVehicleRoutes = new ArrayList<CompleteVehicleRoute>();
 	
 	private int numberOfTruckRoutes;
 	private List<PureTruckRoute> pureTruckRoutes = new ArrayList<PureTruckRoute>();
@@ -43,10 +46,6 @@ public class SolutionImporter {
 			e.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		
-	}
 	
 	private void readTruckRoute(int stops, int lineNumber){
 		PureTruckRoute ptr = new PureTruckRoute(ttrp.getNode(getIntFromString(fileLines.get(lineNumber)+1)));
@@ -65,14 +64,21 @@ public class SolutionImporter {
 	}
 	
 	private void readVehicleRoute(int stops, int lineNumber){
-		CompleteVehicleRoute cvr = new CompleteVehicleRoute((Depot) ttrp.getNode(getIntFromString(fileLines.get(lineNumber)+1)));
+		CompleteVehicleRoute cvr = new CompleteVehicleRoute(ttrp.getDepot());
 		for(int i=lineNumber+6; i<=lineNumber+6+stops-1; i++){
 			String vehicleCustomerLine = fileLines.get(i);
-			cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(getIntFromString(vehicleCustomerLine));
-			if(vehicleCustomerLine.contains("")) {
-				
+			cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(getIntFromString(vehicleCustomerLine)));
+			if(vehicleCustomerLine.contains("Vehicle Customer root of subtours")) {
+				SubTour correspondingSubTour = null;
+				for(SubTour st : this.subTours ){
+					if(st.getDepot().equals(getIntFromString(vehicleCustomerLine))){
+						correspondingSubTour = st;
+					}
+				}
+				cvr.addSubTour(correspondingSubTour);
 			}
 		}
+		this.completeVehicleRoutes.add(cvr);
 	}
 
 	private void readBasicInfo(List<String> lines){
@@ -118,7 +124,7 @@ public class SolutionImporter {
 	}
 
 	public int getNumberOfVehicleRoutes() {
-		return numberOfVehicleRoutes;
+		return this.completeVehicleRoutes.size();
 	}
 
 	public int getNumberOfTrucksUsed() {
@@ -136,6 +142,32 @@ public class SolutionImporter {
 	public int getNumberOfTruckRoutes(){
 		return this.pureTruckRoutes.size();
 	}
+	
+	public List<CompleteVehicleRoute> getCompleteVehicleRoutes() {
+		return completeVehicleRoutes;
+	}
+
+	public void setCompleteVehicleRoutes(
+			List<CompleteVehicleRoute> completeVehicleRoutes) {
+		this.completeVehicleRoutes = completeVehicleRoutes;
+	}
+
+	public List<PureTruckRoute> getPureTruckRoutes() {
+		return pureTruckRoutes;
+	}
+
+	public void setPureTruckRoutes(List<PureTruckRoute> pureTruckRoutes) {
+		this.pureTruckRoutes = pureTruckRoutes;
+	}
+
+	public List<SubTour> getSubTours() {
+		return subTours;
+	}
+
+	public void setSubTours(List<SubTour> subTours) {
+		this.subTours = subTours;
+	}
+	
 	
 
 }

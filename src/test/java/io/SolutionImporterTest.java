@@ -29,6 +29,7 @@ public class SolutionImporterTest {
 		assertTrue(solutionImporter.getNumberOfTruckRoutes() == 2);
 		assertTrue(solutionImporter.getNumberOfSubTours() == 6);
 		assertTrue(solutionImporter.getNumberOfTruckRoutes() == 2 );
+		assertTrue(solutionImporter.getNumberOfVehicleRoutes() == 3);
 	}
 	
 	@Test

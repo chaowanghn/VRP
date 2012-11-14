@@ -54,7 +54,7 @@ public class VisualizerTest {
 		cvr.addSubTour(st1);
 		cvr.addSubTour(st2);
 		
-		List<Route<?,?,?>> routes = new ArrayList<>();
+		List<Route<? extends Node,? extends Customer,? extends MovingObject>> routes = new ArrayList<>();
 		routes.add(cvr);
 
 		Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));

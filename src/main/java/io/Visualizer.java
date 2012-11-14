@@ -20,6 +20,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import model.TTRP;
+import model.fleet.MovingObject;
+import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
 import model.nodes.VehicleCustomer;
@@ -114,16 +116,16 @@ public class Visualizer {
 		frame.setVisible(true);
 	}
 
-	public static void visualizeRoute(Route<?,?,?> r) {
+	public static void visualizeRoute(Route<? extends Node,? extends Customer,? extends MovingObject> r) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(r.getNodes());
 	}
 	
-	public static <R extends Route<?,?,?> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
+	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
 		show(title, createVisualizer(nodes, routes));
 	}
 
-	public static <R extends Route<?,?,?> , N extends Node> Visualizer createVisualizer(Collection<N> nodes, Collection<R> routes) {
+	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node> Visualizer createVisualizer(Collection<N> nodes, Collection<R> routes) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(nodes);
 		for (R route : routes) {

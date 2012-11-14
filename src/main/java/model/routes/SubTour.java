@@ -1,5 +1,6 @@
 package model.routes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import model.fleet.Truck;
 import model.nodes.Customer;
 import model.nodes.Depot;
@@ -16,9 +17,20 @@ public class SubTour extends PureTruckRoute {
 		super(d);
 	}
 	
-	
 	public Node getRoot() {
 		return super.getDepot();
+	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getRoot().getId()+"-");
+		for(Customer c : customers) {
+			checkNotNull(c);
+			sb.append(c.getId() + "-");
+		}
+		sb.append(this.getRoot().getId());
+		sb.append(" Cost: " + cost());
+		return sb.toString();
 	}
 	
 }

@@ -34,8 +34,8 @@ public class SolutionImporterTest {
 		assertTrue(solutionImporter.getNumberOfTruckRoutes() == 2 );
 		assertTrue(solutionImporter.getNumberOfVehicleRoutes() == 3);
 		
-		for(SubTour ptr : solutionImporter.getSubTours()) {
-			System.out.println(ptr);
+		for(CompleteVehicleRoute cvr : solutionImporter.getCompleteVehicleRoutes()) {
+			System.out.println(cvr);
 		}
 	}
 	

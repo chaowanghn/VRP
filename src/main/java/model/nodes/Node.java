@@ -37,4 +37,6 @@ public abstract class Node extends Point2D.Double {
 	public static <O extends Node, T extends Node> O farthest(Collection<? extends O> of,final T to) {
 		return Iterables.getLast(inAscendingDistance(of, to));
 	}
+
+	
 }

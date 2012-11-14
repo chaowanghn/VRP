@@ -7,6 +7,9 @@ import algorithms.improvement.Movable;
 import model.routes.Route;
 
 public class Solution implements Movable {
+	public static String INPUT_FILE_PATH = "src/test/resources/instances/bestSolutions/sol-ttrp03.txt";
+
+	
 	List<Route<?,?,?>> routes;
 	
 	public Solution() {

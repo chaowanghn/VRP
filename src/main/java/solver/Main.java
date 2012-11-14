@@ -7,6 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		TTRP ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
+		ttrp.visualize();
 		GiantTour.createGreedyGiantTour(ttrp).visualize();
 	}
 

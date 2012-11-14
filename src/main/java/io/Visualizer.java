@@ -93,16 +93,17 @@ public class Visualizer {
 	public static void visualizeTTRP(TTRP ttrp) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(ttrp.getAllNodes());
-		JFrame frame = new JFrame(ttrp.toString());
-		frame.getContentPane().add(visualizer.getVisualizationViewer());
-		frame.pack();
-		frame.setVisible(true);
+		show(ttrp.toString(), visualizer);
 	}
 	
 	public static void visualizeNodesSequence(List<? extends Node> nodes) {
 		Visualizer visualizer = new Visualizer();
-		JFrame frame = new JFrame();
 		visualizer.setNodes(nodes);
+		show("",visualizer);
+	}
+	
+	private static void show(String frameTitle, Visualizer visualizer ){
+		JFrame frame = new JFrame(frameTitle);
 		frame.getContentPane().add(visualizer.getVisualizationViewer());
 		frame.pack();
 		frame.setVisible(true);

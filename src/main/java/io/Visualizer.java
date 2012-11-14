@@ -106,7 +106,7 @@ public class Visualizer {
 		show(ttrp.toString(), visualizer);
 	}
 	
-	private static void show(String frameTitle, Visualizer visualizer ){
+	public static void show(String frameTitle, Visualizer visualizer ){
 		JFrame frame = new JFrame(frameTitle);
 		frame.getContentPane().add(visualizer.getVisualizationViewer());
 		frame.pack();
@@ -122,7 +122,6 @@ public class Visualizer {
 	public static <R extends Route<?,?,?> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
 		show(title, createVisualizer(nodes, routes));
 	}
-
 
 	public static <R extends Route<?,?,?> , N extends Node> Visualizer createVisualizer(Collection<N> nodes, Collection<R> routes) {
 		Visualizer visualizer = new Visualizer();
@@ -140,4 +139,16 @@ public class Visualizer {
 		return visualizer;
 	}
 
+	public static void exportToFile(File outputFile, Visualizer visualizer) throws Exception {
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(visualizer.getVisualizationViewer());
+		frame.pack();
+		Image img = frame.getIconImage();
+		BufferedImage bi = new BufferedImage(DEFAULT_LAYOUT_SIZE.width,DEFAULT_LAYOUT_SIZE.height,BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = bi.createGraphics();
+        g2.drawImage(img, 0, 0, null);
+
+        ImageIO.write(bi, "jpeg", outputFile);
+        throw new Exception("Not implemented yet!");
+	}
 }

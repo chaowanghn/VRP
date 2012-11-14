@@ -2,6 +2,8 @@ package io;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class VisualizerTest {
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		TTRP ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);		
 		
 		CompleteVehicleRoute cvr = new CompleteVehicleRoute(ttrp.getDepot());
@@ -55,7 +57,9 @@ public class VisualizerTest {
 		List<Route<?,?,?>> routes = new ArrayList<>();
 		routes.add(cvr);
 
-		Visualizer.visualizeRoutes("CVR with 2 Sub Tours",ttrp.getAllNodes(), routes);
+		//Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
+		
+		Visualizer.exportToFile(new File("test.jpeg"), Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
 		
 	}
 

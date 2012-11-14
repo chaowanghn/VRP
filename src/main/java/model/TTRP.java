@@ -103,7 +103,7 @@ public class TTRP {
 	}
 	
 	public void visualize() {
-		Visualizer.visualizeTTRP(this);
+		Visualizer.show(this.toString(), Visualizer.createVisualizer(this.getAllNodes(), null));
 	}
 
 	public List<Customer> getCustomers(int...ids) {

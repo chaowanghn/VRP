@@ -31,6 +31,8 @@ import model.routes.SubTour;
 
 import org.apache.commons.collections15.Transformer;
 
+import com.google.common.collect.Collections2;
+
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.*;
@@ -122,15 +124,16 @@ public class Visualizer {
 	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node> Visualizer createVisualizer(Collection<N> nodes, Collection<R> routes) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(nodes);
-		for (R route : routes) {
-			visualizer.addNodeSequence(route.getNodes());
-			// For a CVR we have to to add its subtours too (if any)
-			if(route instanceof CompleteVehicleRoute && ((CompleteVehicleRoute) route).hasSubTours()) {
-				for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
-					visualizer.addNodeSequence(st.getNodes());
+		if(routes!=null){
+			for (R route : routes) {
+				visualizer.addNodeSequence(route.getNodes());
+				// For a CVR we have to to add its subtours too (if any)
+				if(route instanceof CompleteVehicleRoute && ((CompleteVehicleRoute) route).hasSubTours()) {
+					for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
+						visualizer.addNodeSequence(st.getNodes());
+					}
 				}
-			}
-			
+			}	
 		}
 		return visualizer;
 	}

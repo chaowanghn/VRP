@@ -64,12 +64,15 @@ public class SolutionImporter {
 		this.subTours.add(st);
 	}
 	
-	private PureVehicleRoute readPureVehicleRoue(List<String> lines){
-		return null;
-	}
-	
-	private CompleteVehicleRoute readVehicleRouteWithSubTours(List<String> lines){
-		return null;
+	private void readVehicleRoute(int stops, int lineNumber){
+		CompleteVehicleRoute cvr = new CompleteVehicleRoute((Depot) ttrp.getNode(getIntFromString(fileLines.get(lineNumber)+1)));
+		for(int i=lineNumber+6; i<=lineNumber+6+stops-1; i++){
+			String vehicleCustomerLine = fileLines.get(i);
+			cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(getIntFromString(vehicleCustomerLine));
+			if(vehicleCustomerLine.contains("")) {
+				
+			}
+		}
 	}
 
 	private void readBasicInfo(List<String> lines){
@@ -99,6 +102,10 @@ public class SolutionImporter {
 				
 				else if(fileLines.get(lineNumber + 1).contains("(TRUCK ROUTE")){
 					this.readTruckRoute(stops, lineNumber);
+				}
+				
+				else if(fileLines.get(lineNumber + 1).contains("VEHICLE ROUTE")) {
+					this.readVehicleRoute(stops, lineNumber);
 				}
 			}
 			

@@ -6,7 +6,10 @@ import java.awt.Paint;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import javax.swing.JFrame;
 
@@ -60,20 +63,19 @@ public class Visualizer {
 		}
 				    
 		 visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColorTransformer());
-		 visualViewer.getRenderContext().setVertexLabelTransformer(new Transformer<Node, String>() {
-				
+		 visualViewer.getRenderContext().setVertexLabelTransformer(new Transformer<Node, String>() {			
 				public String transform(Node input) {
 					return Integer.toString(input.getId());
 				}
 			});
-		
-		 if (nodes instanceof List) {
-			 List<N> nodesAsList = new ArrayList<N>(nodes);
-			 for (int i=1; i<=nodes.size()-1; i++) {
-					this.graph.addEdge(Integer.toString(i), nodesAsList.get(i-1), nodesAsList.get(i));
-			}
-			 visualViewer.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<String>());
-		 }
+
+	}
+	
+	public <N extends Node> void addNodeSequence(List<N> sequence) {
+		 for (int i=1; i<=sequence.size()-1; i++) {
+				this.graph.addEdge(Integer.toString(sequence.get(i-1).getId()) + Integer.toString(sequence.get(i).getId()), sequence.get(i-1), sequence.get(i));
+		}
+		 visualViewer.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<String>());
 	}
 	
 	private Transformer<Node,Paint> vertexColorTransformer() {
@@ -96,21 +98,25 @@ public class Visualizer {
 		show(ttrp.toString(), visualizer);
 	}
 	
-	public static void visualizeNodesSequence(List<? extends Node> nodes) {
-		Visualizer visualizer = new Visualizer();
-		visualizer.setNodes(nodes);
-		show("",visualizer);
-	}
-	
 	private static void show(String frameTitle, Visualizer visualizer ){
 		JFrame frame = new JFrame(frameTitle);
 		frame.getContentPane().add(visualizer.getVisualizationViewer());
 		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 
 	public static void visualizeRoute(Route<?,?,?> r) {
-		visualizeNodesSequence(r.getNodes());
+		Visualizer visualizer = new Visualizer();
+		visualizer.setNodes(r.getNodes());
 	}
 	
+	public static <R extends Route<?,?,?> , N extends Node>  void visualizeRoutes(Collection<N> nodes, Collection<R> routes) {
+		Visualizer visualizer = new Visualizer();
+		visualizer.setNodes(nodes);
+		for (R r : routes) {
+			visualizer.addNodeSequence(r.getNodes());
+		}
+		show("", visualizer);
+	}
 }

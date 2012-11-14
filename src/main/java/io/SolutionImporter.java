@@ -169,7 +169,7 @@ public class SolutionImporter {
 	}
 
 	public Solution getSolution() {
-		Solution solution = new Solution();
+		Solution solution = new Solution(this.ttrp);
 		for(CompleteVehicleRoute cvr : this.completeVehicleRoutes){
 			solution.add(cvr);
 		}

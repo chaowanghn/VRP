@@ -1,5 +1,7 @@
 package model;
 
+import io.Visualizer;
+
 import java.util.*;
 
 import com.google.common.collect.ImmutableList;
@@ -13,11 +15,12 @@ import model.nodes.*;
 public class Solution implements Movable {
 	public static String INPUT_FILE_PATH = "src/test/resources/instances/bestSolutions/sol-ttrp03.txt";
 
+	private TTRP ttrp;
 	Set<CompleteVehicleRoute> completeVehicleRoutes = new HashSet<CompleteVehicleRoute>();
 	Set<PureTruckRoute> pureTruckRoutes = new HashSet<PureTruckRoute>();
 	
-	public Solution() {
-		
+	public Solution(TTRP ttrp) {
+		this.ttrp = ttrp;
 	}
 
 	public void add(CompleteVehicleRoute cvr){
@@ -52,7 +55,13 @@ public class Solution implements Movable {
 		return totalCost;
 	}
 
-	
+	public void visualize(){
+		List<Route<? extends Node,? extends Customer,? extends MovingObject>> routes = new ArrayList<>();
+		routes.addAll(completeVehicleRoutes);
+		routes.addAll(pureTruckRoutes);
+		
+		Visualizer.show("Solution Cost: "+this.cost(),Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
+	}
 	
 	
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Solution;
 import model.TTRP;
 import model.fleet.MovingObject;
 import model.nodes.Customer;
@@ -57,8 +58,8 @@ public class VisualizerTest {
 		List<Route<? extends Node,? extends Customer,? extends MovingObject>> routes = new ArrayList<>();
 		routes.add(cvr);
 
-		Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
-				
+		//Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
+		SolutionImporter.getSolution(ttrp, Solution.INPUT_FILE_PATH).visualize();		
 	}
 
 }

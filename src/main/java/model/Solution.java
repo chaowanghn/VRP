@@ -23,6 +23,9 @@ public class Solution implements Movable {
 		this.ttrp = ttrp;
 	}
 
+	public Solution() {
+	}
+
 	public void add(CompleteVehicleRoute cvr){
 		this.completeVehicleRoutes.add(cvr);
 	}

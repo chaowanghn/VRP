@@ -57,10 +57,8 @@ public class VisualizerTest {
 		List<Route<?,?,?>> routes = new ArrayList<>();
 		routes.add(cvr);
 
-		//Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
-		
-		Visualizer.exportToFile(new File("test.jpeg"), Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
-		
+		Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
+				
 	}
 
 }

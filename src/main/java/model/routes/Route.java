@@ -103,13 +103,6 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		this.customers = customers;
 	}
 
-	public static double costOfRoutes(Collection<? extends Route<?,?,?>> routes) {
-		double totalCost = 0;
-		for (Route<?,?,?> r : routes)
-			totalCost += r.cost();
-		return totalCost;
-	}
-
 	public Customer getLastCustomer() {
 		return Iterables.getLast(this.customers);
 	}
@@ -145,6 +138,16 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		this.customers.addAll(custs);
 	}
 
+	public ImmutableList<Edge> getEdges(){
+		ImmutableList.Builder<Edge> builder = new ImmutableList.Builder<Edge>();
+		builder.add(new Edge(this.depot,this.getFirstCustomer()));
+		for(int i=1; i<this.customers.size(); i++){
+			builder.add(new Edge(customers.get(i-1),customers.get(i)));
+		}
+		builder.add(new Edge(getLastCustomer(), this.depot));
+		return builder.build();
+	}
+	
 	public <T extends Customer> boolean feasibleInsertion(T c){
 		return c.getDemand() < this.availableLoad();
 	}

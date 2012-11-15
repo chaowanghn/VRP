@@ -71,7 +71,7 @@ public class SolutionImporter {
 			if(vehicleCustomerLine.contains("Vehicle Customer root of subtours")) {
 				SubTour correspondingSubTour = null;
 				for(SubTour st : this.subTours ){
-					if(st.getDepot().getId() == (getIntFromString(vehicleCustomerLine))){
+					if(st.getDepot().equals((ttrp.getCustomer(getIntFromString(vehicleCustomerLine))))){
 						correspondingSubTour = st;
 						cvr.addSubTour(correspondingSubTour);
 					}

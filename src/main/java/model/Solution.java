@@ -6,6 +6,8 @@ import io.Visualizer;
 import java.io.File;
 import java.util.*;
 
+import util.Routes;
+
 import com.google.common.collect.ImmutableList;
 
 import algorithms.improvement.Movable;
@@ -48,8 +50,8 @@ public class Solution implements Movable {
 	@Override
 	public double cost() {
 		double totalCost=0;
-		totalCost += Route.costOfRoutes(completeVehicleRoutes);
-		totalCost += Route.costOfRoutes(pureTruckRoutes);
+		totalCost += Routes.costOfRoutes(completeVehicleRoutes);
+		totalCost += Routes.costOfRoutes(pureTruckRoutes);
 		for(CompleteVehicleRoute cvr : this.completeVehicleRoutes) {
 			for (SubTour st : cvr.getSubTours()) {
 				totalCost += st.cost();

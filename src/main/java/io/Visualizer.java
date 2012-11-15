@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Paint;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -36,8 +38,10 @@ import com.google.common.collect.Collections2;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.*;
+import edu.uci.ics.jung.graph.util.Context;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbsoluteCrossoverScalingControl;
+import edu.uci.ics.jung.visualization.decorators.EdgeShape.Line;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 
 public class Visualizer {
@@ -81,6 +85,7 @@ public class Visualizer {
 				}
 			});
 
+		 visualViewer.getRenderContext().setEdgeShapeTransformer(new Line<Node, String>());
 	}
 	
 	public <N extends Node> void addNodeSequence(List<N> sequence) {

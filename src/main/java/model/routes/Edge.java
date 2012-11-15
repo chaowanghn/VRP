@@ -38,8 +38,14 @@ public class Edge implements Comparable<Edge>{
 		return Objects.hashCode(n1,n2);
 	}
 	
-	public boolean equals(Edge other){
-		return other.n1.equals(this.n1) && other.n2.equals(this.n2);
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof Node) {
+			Edge other = (Edge) obj;
+			return other.n1.equals(this.n1) && other.n2.equals(this.n2);
+		}
+		return false;
+		
 	}
 
 	

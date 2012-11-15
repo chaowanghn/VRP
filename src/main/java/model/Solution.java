@@ -1,7 +1,9 @@
 package model;
 
+import io.SolutionImporter;
 import io.Visualizer;
 
+import java.io.File;
 import java.util.*;
 
 import com.google.common.collect.ImmutableList;
@@ -43,8 +45,6 @@ public class Solution implements Movable {
 			return 0;
 	}
 
-
-
 	@Override
 	public double cost() {
 		double totalCost=0;
@@ -66,7 +66,15 @@ public class Solution implements Movable {
 		Visualizer.show("Solution Cost: "+this.cost(),Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
 	}
 	
+	public static Solution createSolutionFromFile(TTRP ttrp, String solutionFilePath){
+		SolutionImporter solutionImporter = new SolutionImporter(ttrp, new File(solutionFilePath));
+		solutionImporter.read();
+		return solutionImporter.getSolution();
+	}
 	
+	public static Solution createSolutionFromFile(String ttrpInstanceFilePath, String solutionFilePath){
+		return createSolutionFromFile(TTRP.createInstanceFromFile(ttrpInstanceFilePath), solutionFilePath);
+	}
 }
 
 

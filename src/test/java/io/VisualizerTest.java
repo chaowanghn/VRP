@@ -59,7 +59,7 @@ public class VisualizerTest {
 		routes.add(cvr);
 
 		//Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
-		SolutionImporter.getSolution(ttrp, Solution.INPUT_FILE_PATH).visualize();		
+		Solution.createSolutionFromFile(ttrp, Solution.INPUT_FILE_PATH).visualize();		
 	}
 
 }

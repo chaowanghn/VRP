@@ -14,6 +14,9 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import util.Customers;
+import util.Nodes;
+
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
@@ -92,7 +95,7 @@ public class TCluster implements ConstructionHeuristic {
 	private Solution solution;
 
 	public Solution apply(TTRP ttrp) {
-		checkState(Customer.getSatisfied(ttrp.getCustomers()).isEmpty(),"initially none of the customers is satisfied");
+		checkState(Customers.getSatisfied(ttrp.getCustomers()).isEmpty(),"initially none of the customers is satisfied");
 		this.customers = new ArrayList<Customer>(ttrp.getCustomers());
 		checkState(ttrp.getFleet().hasAvailabeTrailers() && ttrp.getFleet().hasAvailabeTrucks(),"there have to be available vehicle in the depot");
 		this.fleet = ttrp.getFleet();
@@ -101,15 +104,15 @@ public class TCluster implements ConstructionHeuristic {
 		
 		// T-Cluster can be considered as a cluster-based sequential insertion procedure, where routes are constructed one by one up to full vehicle utilization.
 		Set<Route<?,?,?>> routes = new HashSet<Route<?,?,?>>(); 
-		while(Iterables.any(customers, Customer.notSatisfied())) {
+		while(Iterables.any(customers, Customers.notSatisfied())) {
 			logger.info("=========================================");
-			logger.info("main loop started. Number of unsatisfied customers: " + Customer.getNotSatisfied(customers).size());
+			logger.info("main loop started. Number of unsatisfied customers: " + Customers.getNotSatisfied(customers).size());
 			Route<?,?,?> routeUnderConstruction = this.initializeNewRoute(); // the exact type of route is not known yet. It's determined at runtime!
 			checkNotNull(routeUnderConstruction);
 			MovingObject vehicle = routeUnderConstruction.getVehicle(); 
 			logger.info("root initialized with type: " + routeUnderConstruction.getClass() + " and vehicle type" + vehicle.getClass());
 			checkNotNull(vehicle);
-			Customer seedCustomer = Node.farthest(Customer.getNotSatisfied(customers), depot);
+			Customer seedCustomer = Nodes.farthest(Customers.getNotSatisfied(customers), depot);
 			logger.info("seed customer selected " + seedCustomer.getClass());
 			checkNotNull(seedCustomer);
 			
@@ -169,7 +172,7 @@ public class TCluster implements ConstructionHeuristic {
 	}
 
 	private List<Customer> candidateCustomersAfterTheSeed() {
-		return new ArrayList<Customer>(Customer.getNotSatisfied(this.customers));
+		return new ArrayList<Customer>(Customers.getNotSatisfied(this.customers));
 	}
 
 	private Route<?,?,?> initializeNewRoute() {
@@ -179,7 +182,7 @@ public class TCluster implements ConstructionHeuristic {
 		 * unused vehicle having maximum total capacity. 
 		 * Thereby, complete vehicles are always preferred over pure trucks. 
 		 * */
-		Customer u = Node.farthest(Customer.getNotSatisfied(customers), depot); // the seed customer
+		Customer u = Nodes.farthest(Customers.getNotSatisfied(customers), depot); // the seed customer
 		MovingObject vehicle = fleet.getUnusedVehicleWithMaxCapacity();
 		checkNotNull(vehicle);
 		Route<?,?,?> route=null;
@@ -208,8 +211,8 @@ public class TCluster implements ConstructionHeuristic {
 		@SuppressWarnings("unchecked")
 		@Override
 		public int compare(Customer k1, Customer k2) {
-			double e1 = e(k1, u, (Customer) Node.nearest(r.getCustomers(), k1), depot);
-			double e2 = e(k2, u, (Customer) Node.nearest(r.getCustomers(), k2), depot);
+			double e1 = e(k1, u, (Customer) Nodes.nearest(r.getCustomers(), k1), depot);
+			double e2 = e(k2, u, (Customer) Nodes.nearest(r.getCustomers(), k2), depot);
 			
 			if (e1 < e2) {
 				return -1;

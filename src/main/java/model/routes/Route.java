@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import util.Customers;
 import algorithms.improvement.Movable;
 
 import com.google.common.collect.ImmutableList;
@@ -129,7 +131,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	}
 	
 	public double totalDemand(){
-		return Customer.totalDemand(this.customers);
+		return Customers.totalDemand(this.customers);
 	}
 	
 	public double availableLoad(){

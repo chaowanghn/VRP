@@ -6,6 +6,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+import util.Customers;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -53,7 +55,7 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		}
 		else {
 			checkArgument(c instanceof VehicleCustomer);
-			return c.getDemand() <= Customer.totalDemand(customers);
+			return c.getDemand() <= Customers.totalDemand(customers);
 		}
 		return false;
 	}

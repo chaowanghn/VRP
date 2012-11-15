@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import util.Customers;
+import util.Nodes;
+
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
@@ -31,14 +34,14 @@ public class GiantTour extends Route<Depot,Customer,MovingObject> implements Con
 		List<Customer> customers = new ArrayList<Customer>(ttrp.getCustomers());
 		GiantTour greedyGiantTour = new GiantTour(ttrp.getDepot());
 		
-		Customer firstCustomer = Node.nearest(customers, ttrp.getDepot());
+		Customer firstCustomer = Nodes.nearest(customers, ttrp.getDepot());
 		greedyGiantTour.addCustomer(firstCustomer);
 		
-		while (Iterables.any(customers, Customer.notSatisfied())) {
+		while (Iterables.any(customers, Customers.notSatisfied())) {
 			/*
 			 * Get the unsatisfied customer who is nearest to the last serviced(visited) customer
 			 */
-			Customer nearestToTheLastVisitedOne = Node.nearest(Collections2.filter(customers, Customer.notSatisfied()), greedyGiantTour.getLastCustomer());
+			Customer nearestToTheLastVisitedOne = Nodes.nearest(Collections2.filter(customers, Customers.notSatisfied()), greedyGiantTour.getLastCustomer());
 			greedyGiantTour.addCustomer(nearestToTheLastVisitedOne);
 		}		
 		return greedyGiantTour;

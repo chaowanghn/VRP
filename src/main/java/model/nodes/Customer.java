@@ -72,29 +72,6 @@ public class Customer extends Node {
 		return this.location.getY();
 	}
 	
-	public static Predicate<Customer> satisfied() {
-		return new Predicate<Customer>(){public boolean apply(Customer c) {return c.isSatisfied;}};
-	}
-	
-	public static Predicate<Customer> notSatisfied() {
-		return Predicates.not(Customer.satisfied());
-	}
-
-	public static <C extends Customer> Collection<C> getNotSatisfied(Collection<C> customers){
-		return Collections2.filter(customers, notSatisfied());
-	}
-	
-	public static <C extends Customer> Collection<C> getSatisfied(Collection<C> customers){
-		return Collections2.filter(customers, satisfied());
-	}
-	
-	public static double totalDemand(Iterable<? extends Customer> customers) {
-		double totalDemand=0;
-		for(Customer c:customers){
-			totalDemand += c.getDemand();
-		}
-		return totalDemand;
-	}
 	
 	
 }

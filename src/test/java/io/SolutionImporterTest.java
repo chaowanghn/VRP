@@ -20,8 +20,8 @@ public class SolutionImporterTest {
 	TTRP ttrp;
 	@Before
 	public void setUp() throws Exception {
-		this.ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
-		this.solutionImporter = new SolutionImporter(ttrp, new File(Solution.INPUT_FILE_PATH));
+		this.ttrp = TTRP.createInstanceFromFile(TTRP.TTRP_03_INSTANCE);
+		this.solutionImporter = new SolutionImporter(ttrp, new File(Solution.TTRP_03_BEST_KNOWN_SOLUTION));
 		this.solutionImporter.read();
 	}
 
@@ -34,7 +34,7 @@ public class SolutionImporterTest {
 		assertTrue(solutionImporter.getNumberOfTruckRoutes() == 2 );
 		assertTrue(solutionImporter.getNumberOfVehicleRoutes() == 3);
 	
-		Solution solution = Solution.createSolutionFromFile(ttrp, Solution.INPUT_FILE_PATH);
+		Solution solution = Solution.createSolutionFromFile(ttrp, Solution.TTRP_03_BEST_KNOWN_SOLUTION);
 		assertTrue(solution.cost() == solutionImporter.getTotalCost());
 	}
 	

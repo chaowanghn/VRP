@@ -15,7 +15,7 @@ import model.routes.*;
 import model.nodes.*;
 
 public class Solution implements Movable {
-	public static String INPUT_FILE_PATH = "src/test/resources/instances/bestSolutions/sol-ttrp03.txt";
+	public static String TTRP_03_BEST_KNOWN_SOLUTION = "src/test/resources/instances/bestSolutions/sol-ttrp03.txt";
 
 	private TTRP ttrp;
 	Set<CompleteVehicleRoute> completeVehicleRoutes = new HashSet<CompleteVehicleRoute>();

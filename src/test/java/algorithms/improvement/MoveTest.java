@@ -20,7 +20,7 @@ public abstract class MoveTest {
 
 	@Before
 	public void setUp() {
-		this.ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
+		this.ttrp = TTRP.createInstanceFromFile(TTRP.TTRP_03_INSTANCE);
 		this.route = new Route<Depot,Customer,MovingObject>(ttrp.getDepot());
 		customers = ttrp.getCustomers(3,6,2,5,1,4);
 		route.addCustomers(customers);

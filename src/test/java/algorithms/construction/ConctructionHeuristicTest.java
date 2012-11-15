@@ -11,7 +11,7 @@ public abstract class ConctructionHeuristicTest {
 
 	@Before
 	public void setUp() throws Exception {
-		ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);
+		ttrp = TTRP.createInstanceFromFile(TTRP.TTRP_03_INSTANCE);
 	}
 
 	@Test

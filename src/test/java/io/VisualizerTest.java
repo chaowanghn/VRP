@@ -33,7 +33,7 @@ public class VisualizerTest {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		TTRP ttrp = TTRP.createInstanceFromFile(TTRP.INPUT_FILE_PATH);		
+		TTRP ttrp = TTRP.createInstanceFromFile(TTRP.TTRP_03_INSTANCE);		
 		
 		CompleteVehicleRoute cvr = new CompleteVehicleRoute(ttrp.getDepot());
 		cvr.addCustomer((VehicleCustomer) ttrp.getCustomer(6));
@@ -59,7 +59,7 @@ public class VisualizerTest {
 		routes.add(cvr);
 
 		//Visualizer.show("CVR with 2 Sub Tours",Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
-		Solution.createSolutionFromFile(ttrp, Solution.INPUT_FILE_PATH).visualize();		
+		Solution.createSolutionFromFile(ttrp, Solution.TTRP_03_BEST_KNOWN_SOLUTION).visualize();		
 	}
 
 }

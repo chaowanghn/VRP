@@ -1,5 +1,7 @@
 package algorithms.improvement;
-
+/*
+ * Implements the Or-Opt. See [8]
+ */
 public class OrOpt implements Move {
 
 	private MoveConfiguration configuration;

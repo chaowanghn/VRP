@@ -28,6 +28,7 @@ import model.nodes.Depot;
 import model.nodes.Node;
 import model.nodes.VehicleCustomer;
 import model.routes.CompleteVehicleRoute;
+import model.routes.Edge;
 import model.routes.Route;
 import model.routes.SubTour;
 
@@ -50,16 +51,16 @@ public class Visualizer {
 	public static Dimension DEFAULT_LAYOUT_SIZE = new Dimension(1000,1000);
 	public static Dimension DEFAULT_VV_SIZE = new Dimension(800, 800);
 	
-	private Graph<Node, String> graph;
-	private Layout<Node, String> layout;
-	private VisualizationViewer<Node,String> visualViewer;
+	private Graph<Node, Edge> graph;
+	private Layout<Node, Edge> layout;
+	private VisualizationViewer<Node,Edge> visualViewer;
 	private AbsoluteCrossoverScalingControl scalingcontrol;	
 	
 	private Visualizer() {
-		this.graph = new DirectedOrderedSparseMultigraph<Node, String>();
-		this.layout = new CircleLayout<Node,String>(graph);
+		this.graph = new DirectedOrderedSparseMultigraph<Node, Edge>();
+		this.layout = new CircleLayout<Node,Edge>(graph);
 		this.layout.setSize(DEFAULT_LAYOUT_SIZE);
-		this.visualViewer = new VisualizationViewer<Node, String>(layout);
+		this.visualViewer = new VisualizationViewer<Node, Edge>(layout);
 		this.visualViewer.setPreferredSize(DEFAULT_VV_SIZE);
 		this.scalingcontrol = new AbsoluteCrossoverScalingControl();
 		this.scalingcontrol.scale(visualViewer, DEFAULT_SCALING_CONTROL, new Point2D.Double(0,0));
@@ -85,12 +86,12 @@ public class Visualizer {
 				}
 			});
 
-		 visualViewer.getRenderContext().setEdgeShapeTransformer(new Line<Node, String>());
+		 visualViewer.getRenderContext().setEdgeShapeTransformer(new Line<Node, Edge>());
 	}
 	
-	public <N extends Node> void addNodeSequence(List<N> sequence) {
-		 for (int i=1; i<=sequence.size()-1; i++) {
-				this.graph.addEdge(Integer.toString(sequence.get(i-1).getId()) + Integer.toString(sequence.get(i).getId()), sequence.get(i-1), sequence.get(i));
+	public void addEdges(Collection<Edge> edges) {
+		for(Edge e : edges) {
+			this.graph.addEdge(e, e.getN1(), e.getN2());
 		}
 	}
 	
@@ -104,7 +105,7 @@ public class Visualizer {
 		    };
 	}
 
-	private VisualizationViewer<Node, String> getVisualizationViewer() {
+	private VisualizationViewer<Node, Edge> getVisualizationViewer() {
 		return this.visualViewer;
 	}
 	
@@ -119,6 +120,9 @@ public class Visualizer {
 	public static void visualizeRoute(Route<? extends Node,? extends Customer,? extends MovingObject> r) {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(r.getNodes());
+		visualizer.addEdges(r.getEdges());
+		show("", visualizer);
+		
 	}
 	
 	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
@@ -130,11 +134,11 @@ public class Visualizer {
 		visualizer.setNodes(nodes);
 		if(routes!=null){
 			for (R route : routes) {
-				visualizer.addNodeSequence(route.getNodes());
+				visualizer.addEdges(route.getEdges());
 				// For a CVR we have to to add its subtours too (if any)
 				if(route instanceof CompleteVehicleRoute && ((CompleteVehicleRoute) route).hasSubTours()) {
 					for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
-						visualizer.addNodeSequence(st.getNodes());
+						visualizer.addEdges(st.getEdges());
 					}
 				}
 			}	

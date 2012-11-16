@@ -43,6 +43,8 @@ public class Neighborhood {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("Initial: \n" + this.initial.toString());
+		sb.append("\n Neighbors");
 		for (Movable m : neighbors) {
 			sb.append("\n"+m.toString());
 		}

@@ -65,5 +65,7 @@ public class Edge implements Comparable<Edge>{
 		this.n2 = n2;
 	}
 
-	
+	public String toString(){
+		return new StringBuilder().append("[").append(n1.getId()).append(",").append(n2.getId()).append("] ").append(this.cost()).toString();
+	}
 }

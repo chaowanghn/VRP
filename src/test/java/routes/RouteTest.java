@@ -9,6 +9,8 @@ import model.fleet.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import algorithms.construction.GiantTour;
+
 import util.Routes;
 
 public class RouteTest {

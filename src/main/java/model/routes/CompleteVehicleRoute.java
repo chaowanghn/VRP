@@ -9,11 +9,14 @@ import java.util.Set;
 import util.Customers;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 
 import model.fleet.CompleteVehicle;
 import model.nodes.Customer;
 import model.nodes.Depot;
+import model.nodes.Node;
 import model.nodes.TruckCustomer;
 import model.nodes.VehicleCustomer;
 
@@ -64,6 +67,16 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		return this.subTours;
 	}
 
+	public ImmutableSet<Node> getNodes(){
+		ImmutableSet.Builder<Node> builder = new Builder<Node>();
+		if(hasSubTours()) {
+			for(SubTour st : subTours) {
+				builder.addAll(st.getNodes());
+			}
+		}
+		return builder.addAll(super.getNodes()).build();
+	}
+	
 	public boolean hasSubTours() {
 		return !(this.subTours.isEmpty());
 	}

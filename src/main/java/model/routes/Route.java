@@ -13,6 +13,7 @@ import util.Customers;
 import algorithms.improvement.Movable;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
 import model.fleet.MovingObject;
@@ -74,8 +75,8 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return sb.toString();
 	}
 	
-	public ImmutableList<Node> getNodes() {	
-		return new ImmutableList.Builder<Node>().add(depot).addAll(customers).add(depot).build();
+	public ImmutableSet<Node> getNodes() {	
+		return new ImmutableSet.Builder<Node>().add(depot).addAll(customers).add(depot).build();
 	}
 
 	public void shuffleCustomers() {

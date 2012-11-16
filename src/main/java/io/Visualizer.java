@@ -34,7 +34,10 @@ import model.routes.SubTour;
 
 import org.apache.commons.collections15.Transformer;
 
+import util.Routes;
+
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -116,13 +119,12 @@ public class Visualizer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
-
-	public static void visualizeRoute(Route<? extends Node,? extends Customer,? extends MovingObject> r) {
-		Visualizer visualizer = new Visualizer();
-		visualizer.setNodes(r.getNodes());
-		visualizer.addEdges(r.getEdges());
-		show("", visualizer);
-		
+	
+	
+	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node> void visualizeRoute(R route){
+		List<R> singleRoute = new ArrayList<R>(1);
+		singleRoute.add(route);
+		visualizeRoutes("",route.getNodes(),singleRoute);
 	}
 	
 	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
@@ -133,15 +135,7 @@ public class Visualizer {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(nodes);
 		if(routes!=null){
-			for (R route : routes) {
-				visualizer.addEdges(route.getEdges());
-				// For a CVR we have to to add its subtours too (if any)
-				if(route instanceof CompleteVehicleRoute && ((CompleteVehicleRoute) route).hasSubTours()) {
-					for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
-						visualizer.addEdges(st.getEdges());
-					}
-				}
-			}	
+			visualizer.addEdges(Routes.getAllEdges(routes));	
 		}
 		return visualizer;
 	}

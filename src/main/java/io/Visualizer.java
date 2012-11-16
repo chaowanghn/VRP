@@ -1,7 +1,9 @@
 package io;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Paint;
@@ -19,6 +21,7 @@ import java.util.Random;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import model.TTRP;
@@ -47,6 +50,9 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbsoluteCrossoverScalingControl;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape.Line;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import edu.uci.ics.jung.visualization.renderers.BasicVertexLabelRenderer;
+import edu.uci.ics.jung.visualization.renderers.Renderer;
+import edu.uci.ics.jung.visualization.renderers.VertexLabelRenderer;
 
 public class Visualizer {
 	
@@ -88,8 +94,10 @@ public class Visualizer {
 					return Integer.toString(input.getId());
 				}
 			});
-
 		 visualViewer.getRenderContext().setEdgeShapeTransformer(new Line<Node, Edge>());
+		 visualViewer.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
+			
+		
 	}
 	
 	public void addEdges(Collection<Edge> edges) {

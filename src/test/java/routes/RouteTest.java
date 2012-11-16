@@ -30,5 +30,12 @@ public class RouteTest {
 		assertTrue(route.getEdges().size() == 5);
 		assertTrue(Routes.costOfEdges(route.getEdges()) == route.cost());
 	}
+	
+	@Test
+	public void testIndexOf(){
+		assertTrue(route.indexOf(ttrp.getCustomer(2)) == 2);
+		route.swapCustomers(ttrp.getCustomer(2), ttrp.getCustomer(3));
+		System.out.println(route);
+	}
 
 }

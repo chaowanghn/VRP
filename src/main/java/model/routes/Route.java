@@ -1,5 +1,6 @@
 package model.routes;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import io.Visualizable;
@@ -41,6 +42,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		this(d);
 		this.vehicle = vehicle;
 	}
+	
 	public Route(N d, Collection<? extends C> customers, V vehicle) {
 		this(d,customers);
 		this.vehicle = vehicle;
@@ -118,12 +120,17 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return this.customers.contains(c);
 	}
 	
+	public int indexOf(Customer c){
+		checkArgument(this.containsCustomer(c));
+		return customers.indexOf(c) + 1 ;
+	}
+	
 	public void swapCustomers(int i, int j) {
 		Collections.swap(this.customers, --i, --j);
 	}
-
-	public void swapNodes(int i, int j) throws Exception {
-		throw new Exception("not implemented yet!");
+	
+	public void swapCustomers(Customer i, Customer j){
+		this.swapCustomers(indexOf(i), indexOf(j));
 	}
 	
 	public double totalDemand(){

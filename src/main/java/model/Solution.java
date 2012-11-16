@@ -61,14 +61,6 @@ public class Solution implements Movable,Visualizable{
 		}
 		return totalCost;
 	}
-
-	public void visualize(){
-		List<Route<? extends Node,? extends Customer,? extends MovingObject>> routes = new ArrayList<>();
-		routes.addAll(completeVehicleRoutes);
-		routes.addAll(pureTruckRoutes);
-		
-		Visualizer.show("Solution Cost: "+this.cost(),Visualizer.createVisualizer(ttrp.getAllNodes(), routes));
-	}
 	
 	public static Solution createSolutionFromFile(TTRP ttrp, String solutionFilePath){
 		SolutionImporter solutionImporter = new SolutionImporter(ttrp, new File(solutionFilePath));

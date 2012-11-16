@@ -56,9 +56,9 @@ import edu.uci.ics.jung.visualization.renderers.VertexLabelRenderer;
 
 public class Visualizer {
 	
-	public static float DEFAULT_SCALING_CONTROL = 10;
-	public static Dimension DEFAULT_LAYOUT_SIZE = new Dimension(1000,1000);
-	public static Dimension DEFAULT_VV_SIZE = new Dimension(800, 800);
+	private static float DEFAULT_SCALING_CONTROL = 10;
+	private static Dimension DEFAULT_LAYOUT_SIZE = new Dimension(1000,1000);
+	private static Dimension DEFAULT_VV_SIZE = new Dimension(800, 800);
 	
 	private Graph<Node, Edge> graph;
 	private Layout<Node, Edge> layout;
@@ -100,7 +100,7 @@ public class Visualizer {
 		
 	}
 	
-	public void addEdges(Collection<Edge> edges) {
+	private void addEdges(Collection<Edge> edges) {
 		for(Edge e : edges) {
 			this.graph.addEdge(e, e.getN1(), e.getN2());
 		}
@@ -120,32 +120,12 @@ public class Visualizer {
 		return this.visualViewer;
 	}
 	
-	public static void show(String frameTitle, Visualizer visualizer ){
+	private static void show(String frameTitle, Visualizer visualizer ){
 		JFrame frame = new JFrame(frameTitle);
 		frame.getContentPane().add(visualizer.getVisualizationViewer());
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-	}
-	
-	
-	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node> void visualizeRoute(R route){
-		List<R> singleRoute = new ArrayList<R>(1);
-		singleRoute.add(route);
-		visualizeRoutes("",route.getNodes(),singleRoute);
-	}
-	
-	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node>  void visualizeRoutes(String title,Collection<N> nodes, Collection<R> routes) {
-		show(title, createVisualizer(nodes, routes));
-	}
-
-	public static <R extends Route<? extends Node,? extends Customer,? extends MovingObject> , N extends Node> Visualizer createVisualizer(Collection<N> nodes, Collection<R> routes) {
-		Visualizer visualizer = new Visualizer();
-		visualizer.setNodes(nodes);
-		if(routes!=null){
-			visualizer.addEdges(Routes.getAllEdges(routes));	
-		}
-		return visualizer;
 	}
 	
 	public static void visualize(Visualizable visualizable){

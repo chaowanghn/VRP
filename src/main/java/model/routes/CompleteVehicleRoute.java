@@ -7,8 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import util.Customers;
+import util.Routes;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
@@ -98,4 +100,9 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		}
 		return sb.toString();
 	}
+	
+	public ImmutableList<Edge> getEdges(){
+		return new ImmutableList.Builder<Edge>().addAll(super.getEdges()).addAll(Routes.getAllEdges(subTours)).build();
+	}
+
 }

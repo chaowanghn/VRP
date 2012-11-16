@@ -4,6 +4,7 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import io.InstanceImporter;
+import io.Visualizable;
 import io.Visualizer;
 
 import java.io.File;
@@ -18,6 +19,7 @@ import com.google.common.collect.Sets;
 
 import model.fleet.*;
 import model.nodes.*;
+import model.routes.Edge;
 
 /* PROBLEM OBJECTIVE:
  * 
@@ -31,7 +33,7 @@ import model.nodes.*;
  * 
  * 
  */
-public class TTRP {
+public class TTRP implements Visualizable {
 	
 	public static String TTRP_03_INSTANCE = "src/test/resources/instances/benchmark/ttrp03.dat";
 		
@@ -70,7 +72,7 @@ public class TTRP {
 		return Sets.union(truckCustomers, vehicleCustomers);
 	}
 	
-	public Set<Node> getAllNodes() {
+	public Set<Node> getNodes() {
 		Set<Node> allNodes = new HashSet<Node>();
 		allNodes.addAll(getCustomers());
 		allNodes.add(depot);
@@ -83,7 +85,7 @@ public class TTRP {
 	
 	public TIntObjectMap<Node> nodesMap() {
 		TIntObjectHashMap<Node> map = new TIntObjectHashMap<Node>();
-		for (Node n : getAllNodes()) {
+		for (Node n : getNodes()) {
 			map.put(n.getId(), n);
 		}
 		return map;
@@ -100,10 +102,6 @@ public class TTRP {
 			}
 		}), null); 
 		
-	}
-	
-	public void visualize() {
-		Visualizer.show(this.toString(), Visualizer.createVisualizer(this.getAllNodes(), null));
 	}
 
 	public List<Customer> getCustomers(int...ids) {
@@ -128,5 +126,10 @@ public class TTRP {
 	
 	public static TTRP createInstanceFromFile(String inputFilePath) {
 		return createInstanceFromFile(new File(inputFilePath));
+	}
+
+	@Override
+	public Collection<Edge> getEdges() {
+		return new ArrayList<Edge>();
 	}
 }

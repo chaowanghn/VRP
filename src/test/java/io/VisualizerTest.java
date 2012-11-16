@@ -58,7 +58,7 @@ public class VisualizerTest {
 		List<Route<? extends Node,? extends Customer,? extends MovingObject>> routes = new ArrayList<>();
 		routes.add(cvr);
 
-		Visualizer.visualizeRoute(cvr);	
+		Visualizer.visualize(cvr);	
 	}
 
 }

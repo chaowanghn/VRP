@@ -155,8 +155,4 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return c.getDemand() < this.availableLoad();
 	}
 
-	public void visualize(){
-		Visualizer.visualizeRoute(this);
-	}
-	
 }

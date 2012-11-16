@@ -1,6 +1,7 @@
 package model;
 
 import io.SolutionImporter;
+import io.Visualizable;
 import io.Visualizer;
 
 import java.io.File;
@@ -9,6 +10,7 @@ import java.util.*;
 import util.Routes;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 
 import algorithms.improvement.Movable;
 
@@ -16,7 +18,7 @@ import model.fleet.MovingObject;
 import model.routes.*;
 import model.nodes.*;
 
-public class Solution implements Movable {
+public class Solution implements Movable,Visualizable{
 	public static String TTRP_03_BEST_KNOWN_SOLUTION = "src/test/resources/instances/bestSolutions/sol-ttrp03.txt";
 
 	private TTRP ttrp;
@@ -76,6 +78,16 @@ public class Solution implements Movable {
 	
 	public static Solution createSolutionFromFile(String ttrpInstanceFilePath, String solutionFilePath){
 		return createSolutionFromFile(TTRP.createInstanceFromFile(ttrpInstanceFilePath), solutionFilePath);
+	}
+
+	@Override
+	public Collection<Node> getNodes() {
+		return Sets.union(Routes.getAllNodes(pureTruckRoutes), Routes.getAllNodes(completeVehicleRoutes));
+	}
+
+	@Override
+	public Collection<Edge> getEdges() {
+		return Sets.union(Routes.getAllEdges(pureTruckRoutes), Routes.getAllEdges(completeVehicleRoutes));
 	}
 }
 

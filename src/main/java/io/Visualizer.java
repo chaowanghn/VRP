@@ -147,6 +147,13 @@ public class Visualizer {
 		}
 		return visualizer;
 	}
+	
+	public static void visualize(Visualizable visualizable){
+		Visualizer visualizer = new Visualizer();
+		visualizer.setNodes(visualizable.getNodes());
+		visualizer.addEdges(visualizable.getEdges());
+		show("",visualizer);
+	}
 
 	public static void exportToFile(File outputFile, Visualizer visualizer) throws Exception {
 		JFrame frame = new JFrame();

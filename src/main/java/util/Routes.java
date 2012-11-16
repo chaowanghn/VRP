@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import com.google.common.collect.ImmutableSet;
 
+import model.nodes.Node;
 import model.routes.CompleteVehicleRoute;
 import model.routes.Edge;
 import model.routes.Route;
@@ -41,4 +42,18 @@ public class Routes {
 		return builder.build();
 	}
 
+	public static ImmutableSet<Node> getAllNodes(Collection<? extends Route<?,?,?>> routes) {
+		ImmutableSet.Builder<Node> builder = new ImmutableSet.Builder<Node>();
+		for(Route<?,?,?> route : routes){
+			builder.addAll(route.getNodes());
+			if(route instanceof CompleteVehicleRoute) {
+				if (((CompleteVehicleRoute) route).hasSubTours()) {
+					for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
+						builder.addAll(st.getNodes());
+					}
+				}
+			}
+		}
+		return builder.build();
+	}
 }

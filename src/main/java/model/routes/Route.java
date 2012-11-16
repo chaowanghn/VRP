@@ -2,6 +2,7 @@ package model.routes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import io.Visualizable;
 import io.Visualizer;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Node;
 
-public class Route<N extends Node,C extends Customer, V extends MovingObject> implements Movable {
+public class Route<N extends Node,C extends Customer, V extends MovingObject> implements Movable,Visualizable {
 	
 	protected V vehicle;
 	private N depot;
@@ -75,6 +76,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return sb.toString();
 	}
 	
+	@Override
 	public ImmutableSet<Node> getNodes() {	
 		return new ImmutableSet.Builder<Node>().add(depot).addAll(customers).add(depot).build();
 	}

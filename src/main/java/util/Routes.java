@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import com.google.common.collect.ImmutableSet;
 
+import model.fleet.MovingObject;
+import model.nodes.Customer;
 import model.nodes.Node;
 import model.routes.CompleteVehicleRoute;
 import model.routes.Edge;
@@ -27,9 +29,9 @@ public class Routes {
 		return totalCost;
 	}
 	
-	public static ImmutableSet<Edge> getAllEdges(Collection<? extends Route<?,?,?>> routes) {
+	public static ImmutableSet<Edge> getAllEdges(Collection<? extends Route<? extends Node,? extends Customer,? extends MovingObject>> routes) {
 		ImmutableSet.Builder<Edge> builder = new ImmutableSet.Builder<Edge>();
-		for(Route<?,?,?> route : routes){
+		for(Route<? extends Node,? extends Customer,? extends MovingObject> route : routes){
 			builder.addAll(route.getEdges());
 			if(route instanceof CompleteVehicleRoute) {
 				if (((CompleteVehicleRoute) route).hasSubTours()) {

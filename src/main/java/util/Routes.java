@@ -33,13 +33,6 @@ public class Routes {
 		ImmutableSet.Builder<Edge> builder = new ImmutableSet.Builder<Edge>();
 		for(Route<? extends Node,? extends Customer,? extends MovingObject> route : routes){
 			builder.addAll(route.getEdges());
-			if(route instanceof CompleteVehicleRoute) {
-				if (((CompleteVehicleRoute) route).hasSubTours()) {
-					for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
-						builder.addAll(st.getEdges());
-					}
-				}
-			}
 		}
 		return builder.build();
 	}
@@ -48,13 +41,6 @@ public class Routes {
 		ImmutableSet.Builder<Node> builder = new ImmutableSet.Builder<Node>();
 		for(Route<? extends Node,? extends Customer,? extends MovingObject> route : routes){
 			builder.addAll(route.getNodes());
-			if(route instanceof CompleteVehicleRoute) {
-				if (((CompleteVehicleRoute) route).hasSubTours()) {
-					for (SubTour st : ((CompleteVehicleRoute) route).getSubTours()) {
-						builder.addAll(st.getNodes());
-					}
-				}
-			}
 		}
 		return builder.build();
 	}

@@ -1,4 +1,5 @@
 
+
 Truck And Trailer Routing Problem 
 =================================
 
@@ -19,7 +20,7 @@ For other research publications on the TTRP see [src/main/resources/papers](http
 License
 -------
 
- Copyright [2012] [Florents Tselai](<tselai@dmst.aueb.gr>)
+ Copyright [2012] [Florents Tselai](<mailto:tselai@dmst.aueb.gr>)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

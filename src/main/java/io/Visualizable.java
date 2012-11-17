@@ -7,4 +7,5 @@ import model.routes.Edge;
 public interface Visualizable {
 	Collection<Node> getNodes();
 	Collection<Edge> getEdges();
+	String getVisualizationTitle();
 }

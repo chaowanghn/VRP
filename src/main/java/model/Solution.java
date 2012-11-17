@@ -81,6 +81,11 @@ public class Solution implements Movable,Visualizable{
 	public Collection<Edge> getEdges() {
 		return Sets.union(Routes.getAllEdges(pureTruckRoutes), Routes.getAllEdges(completeVehicleRoutes));
 	}
+
+	@Override
+	public String getVisualizationTitle() {
+		return new StringBuilder().append("Solution Cost: " + this.cost()).toString();
+	}
 }
 
 

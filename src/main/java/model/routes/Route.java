@@ -165,4 +165,9 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return c.getDemand() < this.availableLoad();
 	}
 
+	@Override
+	public String getVisualizationTitle() {
+		return new StringBuilder().append("Route Cost: " + this.cost()).toString();
+	}
+
 }

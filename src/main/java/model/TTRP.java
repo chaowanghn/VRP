@@ -128,4 +128,9 @@ public class TTRP implements Visualizable {
 	public Collection<Edge> getEdges() {
 		return Collections.emptySet();
 	}
+
+	@Override
+	public String getVisualizationTitle() {
+		return this.toString();
+	}
 }

@@ -145,7 +145,7 @@ public class Visualizer {
 		visualizer.setNodes(visualizable.getNodes());
 		visualizer.addEdges(visualizable.getEdges());
 		visualizer.setStyle();
-		show("",visualizer);
+		show(visualizable.getVisualizationTitle(),visualizer);
 	}
 
 	public static void exportToFile(File outputFile, Visualizer visualizer) throws Exception {

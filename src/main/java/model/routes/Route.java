@@ -81,7 +81,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	
 	@Override
 	public ImmutableSet<Node> getNodes() {	
-		return new ImmutableSet.Builder<Node>().add(depot).addAll(customers).add(depot).build();
+		return new ImmutableSet.Builder<Node>().addAll(customers).add(depot).build();
 	}
 
 	public void shuffleCustomers() {
@@ -145,6 +145,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	public C getFirstCustomer() {
 		return Iterables.getFirst(this.customers, null);
 	}
+	
 	public void addCustomers(List<C> custs) {
 		this.customers.addAll(custs);
 	}
@@ -156,7 +157,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 			Edge e = new Edge(customers.get(i-1),customers.get(i));
 			builder.add(e);
 		}
-		builder.add(new Edge(getLastCustomer(), this.depot));
+		builder.add(new Edge(this.getLastCustomer(), this.depot));
 		return builder.build();
 	}
 	

@@ -44,9 +44,9 @@ public class Routes {
 		return builder.build();
 	}
 
-	public static ImmutableSet<Node> getAllNodes(Collection<? extends Route<?,?,?>> routes) {
+	public static ImmutableSet<Node> getAllNodes(Collection<? extends Route<? extends Node,? extends Customer,? extends MovingObject>> routes) {
 		ImmutableSet.Builder<Node> builder = new ImmutableSet.Builder<Node>();
-		for(Route<?,?,?> route : routes){
+		for(Route<? extends Node,? extends Customer,? extends MovingObject> route : routes){
 			builder.addAll(route.getNodes());
 			if(route instanceof CompleteVehicleRoute) {
 				if (((CompleteVehicleRoute) route).hasSubTours()) {

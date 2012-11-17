@@ -15,6 +15,7 @@ import java.util.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -70,14 +71,11 @@ public class TTRP implements Visualizable {
 	} 
 	
 	public Set<Customer> getCustomers() {
-		return Sets.union(truckCustomers, vehicleCustomers);
+		return new ImmutableSet.Builder<Customer>().addAll(truckCustomers).addAll(vehicleCustomers).build();
 	}
 	
 	public Set<Node> getNodes() {
-		Set<Node> allNodes = new HashSet<Node>();
-		allNodes.addAll(getCustomers());
-		allNodes.add(depot);
-		return allNodes;	
+		return new ImmutableSet.Builder<Node>().addAll(getCustomers()).add(depot).build();
 	}
 	
 	public String toString() {

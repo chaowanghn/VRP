@@ -1,5 +1,6 @@
 package model;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -96,11 +97,8 @@ public class TTRP implements Visualizable {
 	}
 	
 	public Customer getCustomer(final int id) {
-		return Iterables.getFirst(Collections2.filter(getCustomers(), new Predicate<Customer>() {
-			public boolean apply(Customer c) {
-				return c.getId() == id;
-			}
-		}), null); 
+		checkArgument(id > 0, "customer id is a non-zero non-negative");
+		return (Customer) getNode(id);
 		
 	}
 

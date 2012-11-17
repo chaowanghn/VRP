@@ -87,36 +87,13 @@ public class Visualizer {
 			this.graph.addVertex(node);
 			layout.setLocation(node, node);
 			layout.lock(node, true);
-		}
-				    
-		 visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColorTransformer());
-		 visualViewer.getRenderContext().setVertexLabelTransformer(new Transformer<Node, String>() {			
-				public String transform(Node input) {
-					return Integer.toString(input.getId());
-				}
-			});
-		 visualViewer.getRenderContext().setEdgeShapeTransformer(new Line<Node, Edge>());
-		 visualViewer.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
-		 
-		
+		} 
 	}
 	
 	private void addEdges(Collection<Edge> edges) {
 		for(Edge e : edges) {
 			this.graph.addEdge(e, e.getN1(), e.getN2());
 		}
-		
-		visualViewer.getRenderContext().setEdgeDrawPaintTransformer(new Transformer<Edge, Paint>() {
-			@Override
-			public Paint transform(Edge input) {
-				if(input.getType().equals(EdgeType.TRUCK_EDGE)){
-					return Color.RED;
-				}
-				else {
-					return Color.BLUE;
-				}
-			}
-		});
 	}
 	
 	private Transformer<Node,Paint> vertexColorTransformer() {
@@ -129,6 +106,28 @@ public class Visualizer {
 		    };
 	}
 
+	public void setStyle(){
+		 visualViewer.getRenderContext().setVertexFillPaintTransformer(vertexColorTransformer());
+		 visualViewer.getRenderContext().setVertexLabelTransformer(new Transformer<Node, String>() {
+				public String transform(Node input) {
+					return Integer.toString(input.getId());
+				}
+			});
+		 visualViewer.getRenderContext().setEdgeShapeTransformer(new Line<Node, Edge>());
+		 visualViewer.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
+		 visualViewer.getRenderContext().setEdgeDrawPaintTransformer(new Transformer<Edge, Paint>() {
+				@Override
+				public Paint transform(Edge input) {
+					if(input.getType().equals(EdgeType.TRUCK_EDGE)){
+						return Color.RED;
+					}
+					else {
+						return Color.BLUE;
+					}
+				}
+			});
+	}
+	
 	private VisualizationViewer<Node, Edge> getVisualizationViewer() {
 		return this.visualViewer;
 	}
@@ -145,6 +144,7 @@ public class Visualizer {
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(visualizable.getNodes());
 		visualizer.addEdges(visualizable.getEdges());
+		visualizer.setStyle();
 		show("",visualizer);
 	}
 

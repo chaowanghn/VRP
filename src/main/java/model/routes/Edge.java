@@ -7,8 +7,9 @@ import model.nodes.Node;
 public class Edge implements Comparable<Edge>{
 	private Node n1;
 	private Node n2;
+	private EdgeType type;
 	
-	public Edge(Node n1, Node n2){
+ 	public Edge(Node n1, Node n2){
 		this.n1 = n1;
 		this.n2 = n2;
 		
@@ -68,4 +69,21 @@ public class Edge implements Comparable<Edge>{
 	public String toString(){
 		return new StringBuilder().append("[").append(n1.getId()).append(",").append(n2.getId()).append("] ").append(this.cost()).toString();
 	}
+
+	
+	public EdgeType getType() {
+		return type;
+	}
+
+	public void setType(EdgeType type) {
+		this.type = type;
+	}
+
+
+
+	public static enum EdgeType {
+		COMPLETE_VEHICLE_EDGE,TRUCK_EDGE
+	}
+
+
 }

@@ -21,6 +21,7 @@ import com.google.common.collect.Iterables;
 import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Node;
+import model.routes.Edge.EdgeType;
 
 public class Route<N extends Node,C extends Customer, V extends MovingObject> implements Movable,Visualizable {
 	
@@ -152,7 +153,14 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		ImmutableList.Builder<Edge> builder = new ImmutableList.Builder<Edge>();
 		builder.add(new Edge(this.depot,this.getFirstCustomer()));
 		for(int i=1; i<this.customers.size(); i++){
-			builder.add(new Edge(customers.get(i-1),customers.get(i)));
+			Edge e = new Edge(customers.get(i-1),customers.get(i));
+			if(this instanceof PureTruckRoute || this instanceof SubTour) {
+				e.setType(EdgeType.TRUCK_EDGE);
+			}
+			else {
+				e.setType(EdgeType.COMPLETE_VEHICLE_EDGE);
+			}
+			builder.add(e);
 		}
 		builder.add(new Edge(getLastCustomer(), this.depot));
 		return builder.build();

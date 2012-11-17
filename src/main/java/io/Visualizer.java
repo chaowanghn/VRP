@@ -32,6 +32,7 @@ import model.nodes.Node;
 import model.nodes.VehicleCustomer;
 import model.routes.CompleteVehicleRoute;
 import model.routes.Edge;
+import model.routes.Edge.EdgeType;
 import model.routes.Route;
 import model.routes.SubTour;
 
@@ -96,7 +97,7 @@ public class Visualizer {
 			});
 		 visualViewer.getRenderContext().setEdgeShapeTransformer(new Line<Node, Edge>());
 		 visualViewer.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
-			
+		 
 		
 	}
 	
@@ -104,13 +105,25 @@ public class Visualizer {
 		for(Edge e : edges) {
 			this.graph.addEdge(e, e.getN1(), e.getN2());
 		}
+		
+		visualViewer.getRenderContext().setEdgeDrawPaintTransformer(new Transformer<Edge, Paint>() {
+			@Override
+			public Paint transform(Edge input) {
+				if(input.getType().equals(EdgeType.TRUCK_EDGE)){
+					return Color.RED;
+				}
+				else {
+					return Color.BLUE;
+				}
+			}
+		});
 	}
 	
 	private Transformer<Node,Paint> vertexColorTransformer() {
 		return new Transformer<Node,Paint>() {
 			public Paint transform(Node node) {
 						if (node instanceof Depot) {return Color.BLACK;}
-						if (node instanceof VehicleCustomer ) {return Color.BLUE;}
+						if (node instanceof VehicleCustomer ) {return Color.CYAN;}
 						else return Color.RED;
 					}
 		    };

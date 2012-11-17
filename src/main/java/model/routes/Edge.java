@@ -7,7 +7,7 @@ import model.nodes.Node;
 public class Edge implements Comparable<Edge>{
 	private Node n1;
 	private Node n2;
-	private EdgeType type;
+	private EdgeType type = EdgeType.COMPLETE_VEHICLE_EDGE;
 	
  	public Edge(Node n1, Node n2){
 		this.n1 = n1;

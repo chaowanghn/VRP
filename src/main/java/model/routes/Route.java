@@ -154,12 +154,6 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		builder.add(new Edge(this.depot,this.getFirstCustomer()));
 		for(int i=1; i<this.customers.size(); i++){
 			Edge e = new Edge(customers.get(i-1),customers.get(i));
-			if(this instanceof PureTruckRoute || this instanceof SubTour) {
-				e.setType(EdgeType.TRUCK_EDGE);
-			}
-			else {
-				e.setType(EdgeType.COMPLETE_VEHICLE_EDGE);
-			}
 			builder.add(e);
 		}
 		builder.add(new Edge(getLastCustomer(), this.depot));

@@ -69,8 +69,8 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 		return this.subTours;
 	}
 
-	public ImmutableSet<Node> getNodes(){
-		ImmutableSet.Builder<Node> builder = new Builder<Node>();
+	public ImmutableList<Node> getNodes(){
+		ImmutableList.Builder<Node> builder = new ImmutableList.Builder<Node>();
 		if(hasSubTours()) {
 			for(SubTour st : subTours) {
 				builder.addAll(st.getNodes());

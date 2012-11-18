@@ -7,6 +7,9 @@ import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import model.fleet.MovingObject;
 import model.nodes.*;
 import model.routes.Route;
@@ -38,15 +41,17 @@ public class TwoOpt implements Move {
 		int numberOfCustomers = initialRoute.getCustomers().size();
 		for(int i=0; i<=numberOfCustomers-2; i++) {
 			for(int j=i+2; j<=numberOfCustomers; j++) {
-				List<Node> preparedNodes = this.swapAndReverse(new ArrayList<Node>(initialRoute.getNodes()), i, j);
+				List<Node> allNodes = new ArrayList<Node>(initialRoute.getNodes());
+				Collections.swap(allNodes, i+1, j);
+				Collections.reverse(allNodes.subList(i+2, j));
 				
-				Route<Node,Customer,MovingObject> neighborRoute = (Route<Node, Customer, MovingObject>) initialRoute.getCopy();
-
-				for (Node n : preparedNodes) {
-					if (n instanceof Customer) {
+				Route<Node, Customer, MovingObject> neighborRoute = new Route<Node, Customer, MovingObject>(initialRoute.getDepot());
+				for(Node n : allNodes) {
+					if(n instanceof Customer) {
 						neighborRoute.addCustomer((Customer) n);
 					}
 				}
+				
 				logger.info("\tNeighbor: " + neighborRoute.toString());
 				neighborhood.addNeighbor(neighborRoute);
 			}
@@ -56,12 +61,6 @@ public class TwoOpt implements Move {
 		
 		checkNotNull(neighborhood);
 		return neighborhood;
-	}
-	
-	private List<Node> swapAndReverse(List<Node> nodes, int i, int j) {
-		Collections.swap(nodes, i+1, j);
-		Collections.reverse(nodes.subList(i+2, j-1+1));
-		return nodes;
 	}
 	
 	public void setConfiguration(MoveConfiguration config) {

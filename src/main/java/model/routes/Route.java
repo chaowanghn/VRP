@@ -80,8 +80,8 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	}
 	
 	@Override
-	public ImmutableSet<Node> getNodes() {	
-		return new ImmutableSet.Builder<Node>().addAll(customers).add(depot).build();
+	public ImmutableList<Node> getNodes() {	
+		return new ImmutableList.Builder<Node>().add(depot).addAll(customers).add(depot).build();
 	}
 
 	public void shuffleCustomers() {

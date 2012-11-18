@@ -33,9 +33,11 @@ private MoveConfiguration configuration;
 		
 		for(int i=0; i<initialRoute.getCustomers().size(); i++) {
 			for(int j=i+1; j<initialRoute.getCustomers().size(); j++) {
-				List<Customer> customers = new ArrayList<>(initialRoute.getCustomers());
-				Collections.swap(customers, i, j);
-				Route<Node,Customer,MovingObject> neighborRoute = new Route<Node, Customer, MovingObject>(initialRoute.getDepot(), customers, initialRoute.getVehicle());
+				List<Customer> customers  =  new ArrayList<Customer>(initialRoute.getCustomers());
+				Customer toBeReinserted = customers.get(i);
+				customers.remove(i);
+				customers.add(j, toBeReinserted);
+				Route<Node,Customer,MovingObject> neighborRoute = new Route<Node, Customer, MovingObject>(initialRoute.getDepot(), customers, initialRoute.getVehicle());			
 				neighborhood.addNeighbor(neighborRoute);
 			}
 		}

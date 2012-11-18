@@ -24,16 +24,10 @@ public class ZeroOneExchangeTest extends MoveTest{
 		zeroOneExchange = new ZeroOneExchange();
 	}
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
 	@Override
 	@Test
 	public void testIntraRoute() {
-		// TODO Auto-generated method stub
-		
+		assertTrue(zeroOneExchange.apply(route).size() == 6);
 	}
 
 	@Override

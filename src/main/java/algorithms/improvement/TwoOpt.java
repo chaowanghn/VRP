@@ -7,6 +7,8 @@ import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import util.Customers;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -46,12 +48,8 @@ public class TwoOpt implements Move {
 				Collections.reverse(allNodes.subList(i+2, j));
 				
 				Route<Node, Customer, MovingObject> neighborRoute = new Route<Node, Customer, MovingObject>(initialRoute.getDepot());
-				for(Node n : allNodes) {
-					if(n instanceof Customer) {
-						neighborRoute.addCustomer((Customer) n);
-					}
-				}
-				
+				neighborRoute.addCustomers(Customers.getCustomers(allNodes));
+
 				logger.info("\tNeighbor: " + neighborRoute.toString());
 				neighborhood.addNeighbor(neighborRoute);
 			}

@@ -1,8 +1,11 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import model.nodes.Customer;
+import model.nodes.Node;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -34,4 +37,16 @@ public class Customers {
 		}
 		return totalDemand;
 	}
+
+	public static <C extends Customer> List<C> getCustomers(Collection<? extends Node> nodes){
+		List<C> customers = new ArrayList<C>();
+		for(Node n : nodes){
+			if(n instanceof Customer){
+				customers.add((C) n);
+			}
+		}
+		return customers;
+	}
+
+
 }

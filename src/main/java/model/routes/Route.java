@@ -170,4 +170,9 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return new StringBuilder().append("Route Cost: " + this.cost()).toString();
 	}
 
+	@Override
+	public Movable getCopy() {
+		return new Route<N,C,V>(this.depot,this.customers,this.vehicle);
+	}
+
 }

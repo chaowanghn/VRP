@@ -86,6 +86,14 @@ public class Solution implements Movable,Visualizable{
 	public String getVisualizationTitle() {
 		return new StringBuilder().append("Solution Cost: " + this.cost()).toString();
 	}
+
+	@Override
+	public Movable getCopy() {
+		Solution copy = new Solution();
+		copy.completeVehicleRoutes.addAll(this.completeVehicleRoutes);
+		copy.pureTruckRoutes.addAll(this.pureTruckRoutes);
+		return copy;
+	}
 }
 
 

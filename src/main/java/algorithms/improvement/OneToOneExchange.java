@@ -29,7 +29,7 @@ public class OneToOneExchange implements Move {
 		
 		for(int i=1; i<=initialRoute.getCustomers().size()-1; i++) {
 			for(int j=i+1; j<=initialRoute.getCustomers().size(); j++) {
-				Route<Node,Customer,MovingObject> neighborRoute = new Route<Node, Customer, MovingObject>(initialRoute.getDepot(), initialRoute.getCustomers());
+				Route<Node,Customer,MovingObject> neighborRoute = (Route<Node, Customer, MovingObject>) initialRoute.getCopy();
 				neighborRoute.swapCustomers(i, j);
 				neighborhood.addNeighbor(neighborRoute);
 			}

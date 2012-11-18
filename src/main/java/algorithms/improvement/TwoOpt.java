@@ -40,7 +40,7 @@ public class TwoOpt implements Move {
 			for(int j=i+2; j<=numberOfCustomers; j++) {
 				List<Node> preparedNodes = this.swapAndReverse(new ArrayList<Node>(initialRoute.getNodes()), i, j);
 				
-				Route<Node,Customer,MovingObject> neighborRoute = new Route<Node,Customer,MovingObject>(initialRoute.getDepot(),initialRoute.getVehicle());
+				Route<Node,Customer,MovingObject> neighborRoute = (Route<Node, Customer, MovingObject>) initialRoute.getCopy();
 
 				for (Node n : preparedNodes) {
 					if (n instanceof Customer) {

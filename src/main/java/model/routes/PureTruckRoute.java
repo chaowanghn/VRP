@@ -1,5 +1,7 @@
 package model.routes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.common.collect.ImmutableList;
 
 import io.Visualizer;
@@ -7,6 +9,7 @@ import model.fleet.Truck;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
+import model.nodes.TruckCustomer;
 import model.routes.Edge.EdgeType;
 
 public class PureTruckRoute extends Route<Node,Customer,Truck> {

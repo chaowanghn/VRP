@@ -35,6 +35,21 @@ public class RouteTest {
 	public void testIndexOf(){
 		assertTrue(route.indexOf(ttrp.getCustomer(2)) == 2);
 		route.swapCustomers(ttrp.getCustomer(2), ttrp.getCustomer(3));
+		//System.out.println(route);
+	}
+	
+	@Test
+	public void testSwap(){
+		//System.out.println(route);
+		//route.swap(ttrp.getCustomer(1), ttrp.getCustomer(4));
+		//System.out.println(route);
+	}
+	
+	@Test
+	public void testSwapAndReverse(){
+		System.out.println("=========");
+		System.out.println(route);
+		route.swapAndReverse(ttrp.getCustomer(1), ttrp.getCustomer(4));
 		System.out.println(route);
 	}
 

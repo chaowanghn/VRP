@@ -134,6 +134,19 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		this.swapCustomers(indexOf(i), indexOf(j));
 	}
 	
+	public void swap(Customer c1, Customer c2){
+		Collections.swap(this.customers, this.customers.indexOf(c1), this.customers.indexOf(c2));
+	}
+	
+	public void reverseBetween(Customer c1, Customer c2){
+		Collections.reverse(this.customers.subList(this.customers.indexOf(c1)+1, this.customers.indexOf(c2)));
+	}
+	
+	public void swapAndReverse(Customer c1, Customer c2){
+		this.reverseBetween(c1, c2);
+		this.swap(c1, c2);
+	}
+	
 	public double totalDemand(){
 		return Customers.totalDemand(this.customers);
 	}

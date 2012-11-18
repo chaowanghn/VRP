@@ -40,6 +40,9 @@ import org.apache.commons.collections15.Transformer;
 
 import util.Routes;
 
+import algorithms.improvement.Movable;
+import algorithms.improvement.Neighborhood;
+
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
@@ -141,6 +144,12 @@ public class Visualizer {
 	}
 	
 	public static void visualize(Visualizable visualizable){
+		if(visualizable instanceof Neighborhood) {
+			visualize(((Neighborhood) visualizable).getInitialMovable());
+			for(Movable m : ((Neighborhood) visualizable).getNeighbors()) {
+				visualize(m);
+			}
+		}
 		Visualizer visualizer = new Visualizer();
 		visualizer.setNodes(visualizable.getNodes());
 		visualizer.addEdges(visualizable.getEdges());

@@ -1,10 +1,16 @@
 package algorithms.improvement;
 
+import io.Visualizable;
+
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Neighborhood {
+import model.nodes.Node;
+import model.routes.Edge;
+
+public class Neighborhood implements Visualizable{
 	Movable initial;
 	Set<Movable> neighbors;
 	
@@ -49,5 +55,20 @@ public class Neighborhood {
 			sb.append("\n"+m.toString());
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public Collection<Node> getNodes() {
+		return Collections.emptySet();
+	}
+
+	@Override
+	public Collection<Edge> getEdges() {
+		return Collections.emptySet();
+	}
+
+	@Override
+	public String getVisualizationTitle() {
+		return "";
 	}
 }

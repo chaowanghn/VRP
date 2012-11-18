@@ -21,6 +21,9 @@ import model.routes.SubTour;
 import org.junit.Before;
 import org.junit.Test;
 
+import algorithms.improvement.TwoOpt;
+import algorithms.improvement.ZeroOneExchange;
+
 public class VisualizerTest {
 
 	@Before
@@ -58,7 +61,7 @@ public class VisualizerTest {
 		List<Route<? extends Node,? extends Customer,? extends MovingObject>> routes = new ArrayList<>();
 		routes.add(cvr);
 
-		Visualizer.visualize(cvr);	
+		Visualizer.visualize(new TwoOpt().apply(cvr));	
 	}
 
 }

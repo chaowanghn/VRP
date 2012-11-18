@@ -1,6 +1,8 @@
 package algorithms.improvement;
 
-public interface Movable extends Comparable<Movable>{
+import io.Visualizable;
+
+public interface Movable extends Comparable<Movable>, Visualizable{
 	double cost();
 	
 	Movable getCopy();

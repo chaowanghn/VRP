@@ -6,13 +6,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OneToOneExchangeTest extends MoveTest {
-	OneToOneExchange oneToOneExchange;
+public class OneOneExchangeTest extends MoveTest {
+	OneOneExchange oneToOneExchange;
 
 	@Before
 	public void setUp(){
 		super.setUp();
-		oneToOneExchange = new OneToOneExchange();
+		oneToOneExchange = new OneOneExchange();
 	}
 
 

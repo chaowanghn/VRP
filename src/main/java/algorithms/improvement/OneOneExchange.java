@@ -1,5 +1,9 @@
 package algorithms.improvement;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import model.fleet.MovingObject;
 import model.nodes.Customer;
 import model.nodes.Depot;
@@ -7,14 +11,14 @@ import model.nodes.Node;
 import model.routes.Route;
 
 
-public class OneToOneExchange implements Move {
+public class OneOneExchange implements Move {
 	private MoveConfiguration configuration;
 	
-	public OneToOneExchange() {
+	public OneOneExchange() {
 		
 	}
 	
-	public OneToOneExchange(MoveConfiguration config) {
+	public OneOneExchange(MoveConfiguration config) {
 		this.configuration = config;
 	}
 	
@@ -27,10 +31,11 @@ public class OneToOneExchange implements Move {
 	public Neighborhood apply(Route<? extends Depot,? extends Customer,? extends MovingObject> initialRoute) {
 		Neighborhood neighborhood = new Neighborhood(initialRoute);
 		
-		for(int i=1; i<=initialRoute.getCustomers().size()-1; i++) {
-			for(int j=i+1; j<=initialRoute.getCustomers().size(); j++) {
-				Route<Node,Customer,MovingObject> neighborRoute = (Route<Node, Customer, MovingObject>) initialRoute.getCopy();
-				neighborRoute.swapCustomers(i, j);
+		for(int i=0; i<initialRoute.getCustomers().size(); i++) {
+			for(int j=i+1; j<initialRoute.getCustomers().size(); j++) {
+				List<Customer> customers = new ArrayList<>(initialRoute.getCustomers());
+				Collections.swap(customers, i, j);
+				Route<Node,Customer,MovingObject> neighborRoute = new Route<Node, Customer, MovingObject>(initialRoute.getDepot(), customers, initialRoute.getVehicle());
 				neighborhood.addNeighbor(neighborRoute);
 			}
 		}

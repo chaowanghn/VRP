@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import util.Customers;
 import model.Solution;
 import model.TTRP;
+import model.nodes.Depot;
 import model.nodes.Node;
 import model.nodes.VehicleCustomer;
 
@@ -91,35 +92,35 @@ import model.nodes.VehicleCustomer;
  */
 
 public class StringSolutionRepresentation implements ConstructionHeuristic{
+	int permutationSize;
 	TTRP ttrp;
-	final Logger logger = LoggerFactory.getLogger(this.getClass());
-	List<Node> artificialDepots;
+	List<Depot> artificialDepots;
 	private int nDummy;
 	Map<VehicleCustomer, ServiceType> vcsServiceType = new HashMap<VehicleCustomer, ServiceType>();
-	List<? extends Node> representation;
+	List<Node> permutation;
 
 	@Override
 	public Solution apply(TTRP ttrp) {
 		checkNotNull(ttrp);
 		this.ttrp = ttrp;
-		this.nDummy = this.nDummy(ttrp);
-		this.createArtificialDepots();
-		checkArgument(!this.artificialDepots.isEmpty());
-		checkArgument(this.artificialDepots.size()==nDummy);
-		this.representation = new ArrayList<Node>(ttrp.getCustomers().size() + this.nDummy);
-		logger.info("\nNdummy parameter for "+ttrp.toString()+" calculated and set to: "+this.nDummy);
-		logger.info("\n\nString representation permutation size is: "+(ttrp.getCustomers().size() + this.nDummy));
-		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers()); 
-		logger.info("\nVehicle Customer types: ");
-		for(Entry<VehicleCustomer, ServiceType> vc : this.vcsServiceType.entrySet()) {
-			logger.info("\n" + "VC: "+vc.getKey().getId()+" Service Type: "+vc.getValue().toString());
-		}
+		this.nDummy = this.calculateNdummy(ttrp);
+		this.createRandomPermutation();		
+		checkArgument(this.permutation.size() == this.permutationSize);
 		
 		return null;
 		
 	}
 	
-	private int nDummy(TTRP ttrp){
+	private void createRandomPermutation(){
+		this.permutationSize = ttrp.getCustomers().size() + this.nDummy;
+		this.permutation = new ArrayList<Node>(permutationSize);
+		
+		this.createArtificialDepots();
+		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers()); 
+		this.fillThePerumtationRandomly();
+	}
+	
+	private int calculateNdummy(TTRP ttrp){
 		/*The parameter Ndummy is calculated by [Σ(d_i)/Qk], where
 		 * [.] denote the largest integer which is smaller than or equal to the
 		 * enclosed number. 
@@ -128,7 +129,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	}
 	
 	private void createArtificialDepots(){
-		this.artificialDepots = new ArrayList<Node>(nDummy);
+		this.artificialDepots = new ArrayList<Depot>(nDummy);
 		for(int i=0; i<nDummy; i++){
 			this.artificialDepots.add(i, ttrp.getDepot());
 		}
@@ -141,6 +142,12 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		}
 	}
 
+	private void fillThePerumtationRandomly(){
+		this.permutation.addAll(this.ttrp.getCustomers());
+		this.permutation.addAll(this.artificialDepots);
+		Collections.shuffle(this.permutation);
+	}
+	
 	public static enum ServiceType{
 		COMPLETE_VEHICLE,TRUCK;
 		private static final List<ServiceType> VALUES = Collections.unmodifiableList(Arrays.asList(values()));

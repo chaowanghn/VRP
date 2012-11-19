@@ -78,6 +78,9 @@ import model.nodes.VehicleCustomer;
  * the number of available vehicle or there are no routes can be combined 
  * without violating the capacity constraint of the vehicle in use.
  * 
+ * If the resulting solution still uses more vehicles than available,
+ * for each extra truck or trailer used, a penalty P is added to the
+ * objective function to make such solutions unattractive.
  * 
  * 
  */

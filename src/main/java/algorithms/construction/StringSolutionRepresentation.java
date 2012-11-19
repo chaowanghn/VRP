@@ -4,17 +4,18 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.*;
-import java.util.Map.Entry;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cern.colt.list.IntArrayList;
+
+
 
 import util.Customers;
 import model.Solution;
 import model.TTRP;
-import model.nodes.Depot;
-import model.nodes.Node;
-import model.nodes.VehicleCustomer;
+import model.nodes.*;
+import model.routes.*;
+import model.fleet.*;
+
 
 /*
  * Implements the construction heuristic based on a String representation of a TTRP solution
@@ -98,6 +99,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	private int nDummy;
 	Map<VehicleCustomer, ServiceType> vcsServiceType = new HashMap<VehicleCustomer, ServiceType>();
 	List<Node> permutation;
+	Set<Route<Node,Customer,MovingObject>> routes = new HashSet<Route<Node,Customer,MovingObject>>();
 
 	@Override
 	public Solution apply(TTRP ttrp) {
@@ -107,10 +109,22 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		this.createRandomPermutation();		
 		checkArgument(this.permutation.size() == this.permutationSize);
 		
+		checkArgument(this.artificialDepotsIndices().size() == this.nDummy);
 		return null;
 		
 	}
 	
+	private IntArrayList artificialDepotsIndices() {
+		IntArrayList artificialDepotsIndices = new IntArrayList();
+		for(int i=0; i<this.permutation.size(); i++) {
+			if(this.permutation.get(i).equals(ttrp.getDepot())) {
+				artificialDepotsIndices.add(i);
+			}
+		}
+		return artificialDepotsIndices;
+		
+	}
+
 	private void createRandomPermutation(){
 		this.permutationSize = ttrp.getCustomers().size() + this.nDummy;
 		this.permutation = new ArrayList<Node>(permutationSize);

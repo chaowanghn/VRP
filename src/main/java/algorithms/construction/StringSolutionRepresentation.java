@@ -100,7 +100,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	public Solution apply(TTRP ttrp) {
 		checkNotNull(ttrp);
 		this.nDummy = this.nDummy(ttrp); logger.info("Ndummy parameter for "+ttrp.toString()+" calculated and set to: "+this.nDummy);
-		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers());
+		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers()); 
 		
 		return null;
 		

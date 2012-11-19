@@ -62,6 +62,24 @@ import model.nodes.VehicleCustomer;
  * tour of a CVR.In this case, the vehicle will return to the depot, and 
  * the route is terminated. 
  * 
+ * Whenever a route is terminated and there are customers that
+ * haven't been serviced, a new route will be generated starting with
+ * the next customer in the solution representation.It can ver verified
+ * that this solution representation always gives a TTRP solution with-
+ * out violating the capacity constraint of vehicle in use.However, the
+ * number of vehicle used may exceed the number of vehicles available 
+ * using this solution representation. Therefore, a route combination
+ * procedure that tries to reduce the number of vehicles used is needed 
+ * after the routes are generated from the solution representation.
+ * The route combination procedure simply checks if it is possible
+ * to combine two existing routes without violating vehicle's capacity
+ * constraint.If so, the routes are merged without any modification.
+ * The procedure continues until the number of vehicle used is no more than
+ * the number of available vehicle or there are no routes can be combined 
+ * without violating the capacity constraint of the vehicle in use.
+ * 
+ * 
+ * 
  */
 
 public class StringSolutionRepresentation implements ConstructionHeuristic{

@@ -2,8 +2,11 @@ package algorithms.construction;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.HashMap;
+import java.util.*;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,6 +85,9 @@ import model.nodes.VehicleCustomer;
  * for each extra truck or trailer used, a penalty P is added to the
  * objective function to make such solutions unattractive.
  * 
+ * The initial solution is randomly generated. It is comprised of a
+ * randomly ordered sequence of the customers and the dummy zeros,
+ * and randomly set service vehicle types of VCs.
  * 
  */
 
@@ -94,6 +100,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	public Solution apply(TTRP ttrp) {
 		checkNotNull(ttrp);
 		this.nDummy = this.nDummy(ttrp); logger.info("Ndummy parameter for "+ttrp.toString()+" calculated and set to: "+this.nDummy);
+		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers());
 		
 		return null;
 		
@@ -106,9 +113,22 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		 */ 
 		return (int) Math.floor(Customers.totalDemand(ttrp.getCustomers()) / ttrp.getFleet().getTruckCapacity());
 	}
+	
+	private void setRandomServiceTypeForVCs(Set<VehicleCustomer> vehicleCustomers){
+		final Random random = new Random();
+		for(VehicleCustomer vc : vehicleCustomers) {
+			this.vcsServiceType.put(vc, ServiceType.randomServiceType(random));
+		}
+	}
 
 	public static enum ServiceType{
-		COMPLETE_VEHICLE,TRUCK
+		COMPLETE_VEHICLE,TRUCK;
+		private static final List<ServiceType> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+		private static final int SIZE = VALUES.size();
+		
+		public static ServiceType randomServiceType(Random random)  {
+			return VALUES.get(random.nextInt(SIZE));
+		}
 	}
 	
 }

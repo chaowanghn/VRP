@@ -43,6 +43,24 @@ import model.nodes.VehicleCustomer;
  * the VC so that each solution representation corresponds to exactly
  * one TTRP solution.
  * 
+ * The solution representation is further explained as follows. The
+ * first number in the solution indicates the first customer to be serviced
+ * in the first route. If the first customer on a route is to be serviced
+ * by a single truck, the route is set to be a PTR. Other customers are 
+ * added to the route one by one from left to right to represent the 
+ * sequence in which they are serviced, provided that the capacity of
+ * the vehicle in use is not violated. Note that, depending on the capacity of
+ * the vehicle in use is not violated. Note that, depending on the type of
+ * the service vehicle in use, the capacity of the vehicle may be (Qk+Qt)
+ * if it is a complete vehicle on a PVR or on main tour of a CVR; 
+ * or Qt if it is a truck servicing customers alone, on a PTR or on a sub-
+ * tour of a CVR. If the next customer to be serviced in the solution 
+ * representation is zero, the vehicle will either return to the root of a
+ * sub-tour or the depot. If it is on a sub-tour of a CVR, it will return 
+ * to the root of the sub-tour where the trailer was parked and the sub-
+ * tour is terminated. Otherwise, it is on a PTR, on a PVR, or on a main 
+ * tour of a CVR.In this case, the vehicle will return to the depot, and 
+ * the route is terminated. 
  * 
  */
 

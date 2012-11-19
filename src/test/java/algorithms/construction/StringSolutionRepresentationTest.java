@@ -18,22 +18,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StringSolutionRepresentationTest extends ConctructionHeuristicTest {
+	private StringSolutionRepresentation stringRepresentation;
 	
 	@Before
 	public void setUp() throws Exception {
-		
-		
-	}
-
-	@Test
-	public void test() {
-		
+		super.setUp();
+		this.stringRepresentation = new StringSolutionRepresentation();
 	}
 
 	@Override
 	@Test
 	public void apply() {
-		fail("Not yet implemented");
+		stringRepresentation.apply(ttrp);
 	}
 
 }

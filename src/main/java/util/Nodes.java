@@ -34,4 +34,26 @@ public class Nodes {
 	public static <O extends Node, T extends Node> O farthest(Collection<? extends O> of,final T to) {
 		return Iterables.getLast(inAscendingDistance(of, to));
 	}
+
+	public static List<List<Node>> partition(List<Node> nodes, int[] indices){
+		/*
+		 * Input: 1-2-3-0-4-0-5-6-0-7-8-9
+		 * 		int[] indices = {3,5,8};
+		 * Output:
+		 * 1-2-3
+		 * 4
+		 * 5-6
+		 */
+		List<List<Node>> lists = new ArrayList<List<Node>>();
+		for(int i=0; i<indices.length; i++) {
+			if(i==0) {
+				lists.add(nodes.subList(i, indices[i]));
+			}
+			else {
+				lists.add(nodes.subList(indices[i-1]+1, indices[i]));
+			}
+		}
+		return lists;
+	}
+
 }

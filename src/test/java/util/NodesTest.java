@@ -55,5 +55,15 @@ public class NodesTest {
 		assertTrue(lists.get(2).size() == 2);
 		
 	}
+	
 
+	@Test
+	public void testToString(){
+		List<Node> nodes = new ArrayList<Node>();
+		nodes.add(new Customer(1, 0, null, false));
+		nodes.add(new Customer(2, 0, null, false));
+		nodes.add(new Customer(3, 0, null, false));
+		assertEquals("1-2-3", Nodes.toString(nodes));		
+		
+	}
 }

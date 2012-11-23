@@ -17,6 +17,8 @@ import model.routes.SubTour;
 import org.junit.Before;
 import org.junit.Test;
 
+import util.Nodes;
+
 public class StringSolutionRepresentationTest extends ConctructionHeuristicTest {
 	private StringSolutionRepresentation stringRepresentation;
 	
@@ -30,6 +32,7 @@ public class StringSolutionRepresentationTest extends ConctructionHeuristicTest 
 	@Test
 	public void apply() {
 		stringRepresentation.apply(ttrp);
+		assertTrue(stringRepresentation.getPermutation().containsAll(ttrp.getNodes()));
 	}
 
 }

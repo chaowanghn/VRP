@@ -101,6 +101,8 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	List<Node> permutation;
 	Set<Route<Node,Customer,MovingObject>> routes = new HashSet<Route<Node,Customer,MovingObject>>();
 
+	
+	
 	@Override
 	public Solution apply(TTRP ttrp) {
 		checkNotNull(ttrp);
@@ -108,7 +110,6 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		this.nDummy = this.calculateNdummy(ttrp);
 		this.createRandomPermutation();		
 		checkArgument(this.permutation.size() == this.permutationSize);
-		
 		checkArgument(this.artificialDepotsIndices().size() == this.nDummy);
 		return null;
 		
@@ -163,5 +164,9 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	}
 	
 
+	public List<Node> getPermutation(){
+		return this.permutation;
+	}
+	
 	
 }

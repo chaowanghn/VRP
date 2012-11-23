@@ -56,4 +56,13 @@ public class Nodes {
 		return lists;
 	}
 
+	public static String toString(Iterable<Node> nodes){
+		StringBuilder sb = new StringBuilder();
+		for(Node n : nodes){
+			sb.append("-"+n.getId());
+		}
+		sb.deleteCharAt(0);
+		return sb.toString();
+		
+	}
 }

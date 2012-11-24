@@ -111,14 +111,19 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		
 	}
 	
-	private IntArrayList artificialDepotsIndices() {
-		IntArrayList artificialDepotsIndices = new IntArrayList();
-		for(int i=0; i<this.permutation.size(); i++) {
-			if(this.permutation.get(i).equals(ttrp.getDepot())) {
-				artificialDepotsIndices.add(i);
+	public int[] depotIndices(List<Node> permutation) {
+		IntArrayList depotIndices = new IntArrayList();
+		for(int i=0; i<permutation.size(); i++) {
+			if(permutation.get(i).equals(ttrp.getDepot())) {
+				depotIndices.add(i);
 			}
 		}
-		return artificialDepotsIndices;
+		
+		int[] indices = new int[depotIndices.size()];
+		for(int i=0; i<indices.length; i++){
+			indices[i] = depotIndices.get(i);
+		}
+		return indices;
 		
 	}
 
@@ -130,7 +135,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		return randomPermutation;
 	}
 	
-	private int calculateNdummy(TTRP ttrp){
+	public int calculateNdummy(TTRP ttrp){
 		/*The parameter Ndummy is calculated by [Σ(d_i)/Qk], where
 		 * [.] denote the largest integer which is smaller than or equal to the
 		 * enclosed number. 

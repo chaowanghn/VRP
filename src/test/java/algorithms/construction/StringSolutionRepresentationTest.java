@@ -2,11 +2,13 @@ package algorithms.construction;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Set;
 
 import model.fleet.CompleteVehicle;
 import model.nodes.Depot;
 import model.nodes.Location;
+import model.nodes.Node;
 import model.nodes.TruckCustomer;
 import model.nodes.VehicleCustomer;
 import model.routes.CompleteVehicleRoute;
@@ -17,7 +19,6 @@ import model.routes.SubTour;
 import org.junit.Before;
 import org.junit.Test;
 
-import util.Nodes;
 
 public class StringSolutionRepresentationTest extends ConctructionHeuristicTest {
 	private StringSolutionRepresentation stringRepresentation;
@@ -32,7 +33,9 @@ public class StringSolutionRepresentationTest extends ConctructionHeuristicTest 
 	@Test
 	public void apply() {
 		stringRepresentation.apply(ttrp);
-		assertTrue(stringRepresentation.getPermutation().containsAll(ttrp.getNodes()));
+		List<Node> permutation = stringRepresentation.getPermutation();
+		assertTrue(permutation.containsAll(ttrp.getNodes()));
+		assertTrue(stringRepresentation.getPotentialRoutes().size() == stringRepresentation.depotIndices(permutation).length+1);
 	}
 
 }

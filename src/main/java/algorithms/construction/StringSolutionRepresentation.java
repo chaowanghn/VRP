@@ -10,6 +10,7 @@ import cern.colt.list.IntArrayList;
 
 
 import util.Customers;
+import util.Nodes;
 import model.Solution;
 import model.TTRP;
 import model.nodes.*;
@@ -93,11 +94,11 @@ import model.fleet.*;
  */
 
 public class StringSolutionRepresentation implements ConstructionHeuristic{
-	TTRP ttrp;
-	List<Node> permutation;
-	Map<VehicleCustomer, ServiceType> vcsServiceType = new HashMap<VehicleCustomer, ServiceType>();
-	Set<Route<Node,Customer,MovingObject>> routes = new HashSet<Route<Node,Customer,MovingObject>>();
-
+	private TTRP ttrp;
+	private List<Node> permutation;
+	private Map<VehicleCustomer, ServiceType> vcsServiceType = new HashMap<VehicleCustomer, ServiceType>();
+	private Set<Route<Node,Customer,MovingObject>> routes = new HashSet<Route<Node,Customer,MovingObject>>();
+	private List<List<Node>> potentialRoutes;
 	
 	
 	@Override
@@ -107,6 +108,9 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers());
 		int nDummy = calculateNdummy(ttrp);
 		this.permutation = createRandomPermutation(createArtificialDepots(ttrp, nDummy), ttrp.getCustomers());
+		this.potentialRoutes = Nodes.partition(this.permutation, this.depotIndices(permutation));
+		
+		
 		return null;
 		
 	}
@@ -162,5 +166,9 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		return this.permutation;
 	}
 	
-	
+	public List<List<Node>> getPotentialRoutes(){
+		return this.potentialRoutes;
+	}
+
+
 }

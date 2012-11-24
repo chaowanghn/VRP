@@ -115,6 +115,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		
 	}
 	
+	
 	public int[] depotIndices(List<Node> permutation) {
 		IntArrayList depotIndices = new IntArrayList();
 		for(int i=0; i<permutation.size(); i++) {
@@ -170,5 +171,13 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		return this.potentialRoutes;
 	}
 
-
+	private ServiceType getServiceType(Customer customer){
+		if(customer instanceof TruckCustomer) {
+			return ServiceType.TRUCK;
+		}
+		else {
+			return this.vcsServiceType.get((VehicleCustomer) customer);
+		}
+	}
+	
 }

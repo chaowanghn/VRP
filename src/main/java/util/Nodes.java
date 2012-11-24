@@ -15,6 +15,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 public class Nodes {
 
@@ -70,7 +71,7 @@ public class Nodes {
 		
 	}
 	
-	public Collection<Customer> transformToCustomers(Collection<Node> nodes){
+	public static List<Customer> transformToCustomers(List<Node> nodes){
 		checkArgument(Iterables.all(nodes, new Predicate<Node>() {
 			public boolean apply(Node n) {
 				return n instanceof Customer;
@@ -83,7 +84,7 @@ public class Nodes {
 			}
 		};
 		
-		return Collections2.transform(nodes, fromNodeToCustomer);
+		return Lists.transform(nodes, fromNodeToCustomer);
 	
 	}
 

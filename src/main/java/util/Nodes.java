@@ -1,13 +1,19 @@
 package util;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import model.nodes.Customer;
 import model.nodes.Node;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
 public class Nodes {
@@ -63,4 +69,22 @@ public class Nodes {
 		return sb.toString();
 		
 	}
+	
+	public Collection<Customer> transformToCustomers(Collection<Node> nodes){
+		checkArgument(Iterables.all(nodes, new Predicate<Node>() {
+			public boolean apply(Node n) {
+				return n instanceof Customer;
+			}
+		}));
+		
+		Function<Node,Customer> fromNodeToCustomer = new Function<Node,Customer>() {
+			public Customer apply(Node node) {
+				return (Customer) node;
+			}
+		};
+		
+		return Collections2.transform(nodes, fromNodeToCustomer);
+	
+	}
+
 }

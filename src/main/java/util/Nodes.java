@@ -43,16 +43,14 @@ public class Nodes {
 		 * 1-2-3
 		 * 4
 		 * 5-6
+		 * 7-8-9
 		 */
 		List<List<Node>> lists = new ArrayList<List<Node>>();
-		for(int i=0; i<indices.length; i++) {
-			if(i==0) {
-				lists.add(nodes.subList(i, indices[i]));
-			}
-			else {
+		lists.add(nodes.subList(0, indices[0]));
+		for(int i=1; i<indices.length; i++) {
 				lists.add(nodes.subList(indices[i-1]+1, indices[i]));
-			}
 		}
+		lists.add(nodes.subList(indices[indices.length-1]+1, nodes.size()));
 		return lists;
 	}
 

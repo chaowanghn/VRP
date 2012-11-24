@@ -18,9 +18,9 @@ public class NodesTest {
 	Customer c4 = new Customer(4, 0, null, false);
 	Customer c5 = new Customer(5, 0, null, false);
 	Customer c6 = new Customer(6, 0, null, false);
-	Customer c7 = new Customer(6, 0, null, false);
-	Customer c8 = new Customer(6, 0, null, false);
-	Customer c9 = new Customer(6, 0, null, false);
+	Customer c7 = new Customer(7, 0, null, false);
+	Customer c8 = new Customer(8, 0, null, false);
+	Customer c9 = new Customer(9, 0, null, false);
 	
 
 	@Before
@@ -53,6 +53,14 @@ public class NodesTest {
 		assertTrue(lists.get(0).size() == 3);
 		assertTrue(lists.get(1).size() == 1);
 		assertTrue(lists.get(2).size() == 2);
+		assertTrue(lists.get(3).size() == 3);
+		assertTrue(Nodes.toString(lists.get(0)).equals("1-2-3")
+				&& Nodes.toString(lists.get(1)).equals("4")
+				&& Nodes.toString(lists.get(2)).equals("5-6")
+				&& Nodes.toString(lists.get(3)).equals("7-8-9")
+				);
+		
+
 		
 	}
 	

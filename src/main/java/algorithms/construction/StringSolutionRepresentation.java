@@ -93,12 +93,9 @@ import model.fleet.*;
  */
 
 public class StringSolutionRepresentation implements ConstructionHeuristic{
-	int permutationSize;
 	TTRP ttrp;
-	List<Depot> artificialDepots;
-	private int nDummy;
-	Map<VehicleCustomer, ServiceType> vcsServiceType = new HashMap<VehicleCustomer, ServiceType>();
 	List<Node> permutation;
+	Map<VehicleCustomer, ServiceType> vcsServiceType = new HashMap<VehicleCustomer, ServiceType>();
 	Set<Route<Node,Customer,MovingObject>> routes = new HashSet<Route<Node,Customer,MovingObject>>();
 
 	
@@ -107,10 +104,9 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	public Solution apply(TTRP ttrp) {
 		checkNotNull(ttrp);
 		this.ttrp = ttrp;
-		this.nDummy = this.calculateNdummy(ttrp);
-		this.createRandomPermutation();		
-		checkArgument(this.permutation.size() == this.permutationSize);
-		checkArgument(this.artificialDepotsIndices().size() == this.nDummy);
+		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers());
+		int nDummy = calculateNdummy(ttrp);
+		this.permutation = createRandomPermutation(createArtificialDepots(ttrp, nDummy), ttrp.getCustomers());
 		return null;
 		
 	}
@@ -126,13 +122,12 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		
 	}
 
-	private void createRandomPermutation(){
-		this.permutationSize = ttrp.getCustomers().size() + this.nDummy;
-		this.permutation = new ArrayList<Node>(permutationSize);
-		
-		this.createArtificialDepots();
-		this.setRandomServiceTypeForVCs(ttrp.getVehicleCustomers()); 
-		this.fillThePerumtationRandomly();
+	public List<Node> createRandomPermutation(Collection<Depot> artificialDepots, Collection<? extends Customer> customers){
+		List<Node> randomPermutation = new ArrayList<Node>();
+		randomPermutation.addAll(artificialDepots);
+		randomPermutation.addAll(customers);
+		Collections.shuffle(randomPermutation);
+		return randomPermutation;
 	}
 	
 	private int calculateNdummy(TTRP ttrp){
@@ -143,11 +138,12 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		return (int) Math.floor(Customers.totalDemand(ttrp.getCustomers()) / ttrp.getFleet().getTruckCapacity());
 	}
 	
-	private void createArtificialDepots(){
-		this.artificialDepots = new ArrayList<Depot>(nDummy);
-		for(int i=0; i<nDummy; i++){
-			this.artificialDepots.add(i, ttrp.getDepot());
+	public List<Depot> createArtificialDepots(TTRP ttrp, int numberOfDepots){
+		List<Depot> artificialDepots = new ArrayList<Depot>(numberOfDepots);
+		for(int i=0; i<numberOfDepots; i++){
+			artificialDepots.add(i, ttrp.getDepot());
 		}
+		return artificialDepots;
 	}
 	
 	private void setRandomServiceTypeForVCs(Set<VehicleCustomer> vehicleCustomers){
@@ -156,14 +152,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 			this.vcsServiceType.put(vc, ServiceType.randomServiceType(random));
 		}
 	}
-
-	private void fillThePerumtationRandomly(){
-		this.permutation.addAll(this.ttrp.getCustomers());
-		this.permutation.addAll(this.artificialDepots);
-		Collections.shuffle(this.permutation);
-	}
 	
-
 	public List<Node> getPermutation(){
 		return this.permutation;
 	}

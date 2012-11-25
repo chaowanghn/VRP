@@ -169,9 +169,10 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 			ListIterator<Customer> iterator = customers.listIterator();
 			while(iterator.hasNext()){
 				if(this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)) {
-					SubTour st = new SubTour(customers.get(iterator.previousIndex()), cvr.getTruck());
+					checkNotNull(truck);
+					SubTour st = new SubTour(customers.get(iterator.previousIndex()), truck);
 					while(iterator.hasNext() 
-							//&& st.availableLoad() >= customers.get(iterator.nextIndex() ).getDemand()
+							&& st.availableLoad() >= customers.get(iterator.nextIndex() ).getDemand()
 							&& this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)){//lacking capacity constraint
 						st.addCustomer(iterator.next());
 					}

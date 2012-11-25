@@ -129,6 +129,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	}
 	
 	public double availableLoad(){
+		checkNotNull(vehicle);
 		return vehicle.getCapacity() - this.totalDemand();
 	}
 

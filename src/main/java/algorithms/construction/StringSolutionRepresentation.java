@@ -5,6 +5,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import cern.colt.list.IntArrayList;
 
 
@@ -69,7 +76,7 @@ import model.fleet.*;
  * 
  * Whenever a route is terminated and there are customers that
  * haven't been serviced, a new route will be generated starting with
- * the next customer in the solution representation.It can ver verified
+ * the next customer in the solution representation.It can verified
  * that this solution representation always gives a TTRP solution with-
  * out violating the capacity constraint of vehicle in use.However, the
  * number of vehicle used may exceed the number of vehicles available 
@@ -94,10 +101,11 @@ import model.fleet.*;
  */
 
 public class StringSolutionRepresentation implements ConstructionHeuristic{
+	Logger logger = LoggerFactory.getLogger(StringSolutionRepresentation.class);
 	private TTRP ttrp;
 	private List<Node> permutation;
 	private Map<VehicleCustomer, ServiceType> vcsServiceType = new HashMap<VehicleCustomer, ServiceType>();
-	private Set<Route<Node,Customer,MovingObject>> routes = new HashSet<Route<Node,Customer,MovingObject>>();
+	private Set<Route<?,?,?>> routes = new HashSet<Route<?,?,?>>();
 	private List<List<Node>> potentialRoutes;
 	
 	
@@ -110,9 +118,40 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		this.permutation = createRandomPermutation(createArtificialDepots(ttrp, nDummy), ttrp.getCustomers());
 		this.potentialRoutes = Nodes.partition(this.permutation, this.depotIndices(permutation));
 		
+		for(List<Node> nodes : this.potentialRoutes) {
+			logger.info("Started processing another sub-permutation from the initial permutation\n");
+			logger.info("number of non-satisfied customer " + Collections2.filter(ttrp.getCustomers(), Customers.notSatisfied()).size()+"\n");
+			processRoute(Nodes.transformToCustomers(nodes));
+		}
 		
 		return null;
 		
+	}
+	
+	private void processRoute(List<Customer> customers){
+		checkArgument(!customers.isEmpty());
+		if(serviceTypeOf(Iterables.getFirst(customers, null)).equals(ServiceType.TRUCK)){ //See: http://stackoverflow.com/questions/1750435/comparing-java-enum-members-or-equals#comment1637223_1750453	
+			 //If the first customer on a route is to be serviced by a single truck, the route is set to be a PTR.
+			logger.info("Pure Truck Route construction started...\n");
+			Truck truck = new Truck(this.ttrp.getFleet().getTruckCapacity(), this.ttrp.getDepot().getLocation());
+			PureTruckRoute ptr = new PureTruckRoute(this.ttrp.getDepot(), truck);
+			ListIterator<Customer> iterator = customers.listIterator();
+			while(iterator.hasNext() 
+					&& this.serviceTypeOf( customers.get(iterator.nextIndex()) ) == ServiceType.TRUCK 
+					&& ptr.availableLoad() >= customers.get(iterator.nextIndex() ).getDemand()
+					) {
+				ptr.addCustomer(iterator.next());
+			}
+			this.routes.add(ptr);
+			logger.info("Pure Truck Route construction finished. PTR: "+Nodes.toString(ptr.getNodes())+"\n");
+			if(Iterables.any(customers, Customers.notSatisfied())){
+				processRoute(new ArrayList<Customer>(Customers.getNotSatisfied(customers)));
+			}
+		}
+		else {
+			checkArgument(this.serviceTypeOf(Iterables.getFirst(customers, null)).equals(ServiceType.COMPLETE_VEHICLE));
+			System.out.println("Complete Vehicle construction started...\n");
+		}
 	}
 	
 	
@@ -171,7 +210,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		return this.potentialRoutes;
 	}
 
-	private ServiceType getServiceType(Customer customer){
+	private ServiceType serviceTypeOf(Customer customer){
 		if(customer instanceof TruckCustomer) {
 			return ServiceType.TRUCK;
 		}

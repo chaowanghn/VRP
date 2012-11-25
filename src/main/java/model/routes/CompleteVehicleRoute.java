@@ -16,6 +16,7 @@ import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 
 import model.fleet.CompleteVehicle;
+import model.fleet.Truck;
 import model.nodes.Customer;
 import model.nodes.Depot;
 import model.nodes.Node;
@@ -103,6 +104,10 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 	
 	public ImmutableList<Edge> getEdges(){
 		return new ImmutableList.Builder<Edge>().addAll(super.getEdges()).addAll(Routes.getAllEdges(subTours)).build();
+	}
+
+	public Truck getTruck() {
+		return ((CompleteVehicle) this.vehicle).getTruck();
 	}
 
 }

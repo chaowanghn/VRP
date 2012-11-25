@@ -2,6 +2,8 @@ package algorithms.construction;
 
 import static org.junit.Assert.*;
 
+import io.Visualizer;
+
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +38,7 @@ public class StringSolutionRepresentationTest extends ConctructionHeuristicTest 
 		List<Node> permutation = stringRepresentation.getPermutation();
 		assertTrue(permutation.containsAll(ttrp.getNodes()));
 		assertTrue(stringRepresentation.getPotentialRoutes().size() == stringRepresentation.depotIndices(permutation).length+1);
+		
 	}
 
 }

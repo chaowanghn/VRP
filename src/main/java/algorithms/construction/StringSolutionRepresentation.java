@@ -120,16 +120,25 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		
 		for(List<Node> nodes : this.potentialRoutes) {
 			logger.info("Started processing another sub-permutation from the initial permutation\n");
-			logger.info("number of non-satisfied customer " + Collections2.filter(ttrp.getCustomers(), Customers.notSatisfied()).size()+"\n");
 			processRoute(Nodes.transformToCustomers(nodes));
+			logger.info("number of non-satisfied customer " + Collections2.filter(ttrp.getCustomers(), Customers.notSatisfied()).size()+"\n");
 		}
 		
-		return null;
+		Solution solution = new Solution(this.ttrp);
+		for(Route<?,?,?> cvr : this.routes) {
+			if(cvr instanceof CompleteVehicleRoute) {
+				solution.add((CompleteVehicleRoute) cvr);
+			}
+			if(cvr instanceof PureTruckRoute){
+				solution.add((PureTruckRoute) cvr);
+			}
+		}
+		return solution;
 		
 	}
 	
 	private void processRoute(List<Customer> customers){
-		checkArgument(!customers.isEmpty());
+		//checkArgument(!customers.isEmpty());
 		if(serviceTypeOf(Iterables.getFirst(customers, null)).equals(ServiceType.TRUCK)){ //See: http://stackoverflow.com/questions/1750435/comparing-java-enum-members-or-equals#comment1637223_1750453	
 			 //If the first customer on a route is to be serviced by a single truck, the route is set to be a PTR.
 			logger.info("Pure Truck Route construction started...\n");
@@ -150,7 +159,23 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		}
 		else {
 			checkArgument(this.serviceTypeOf(Iterables.getFirst(customers, null)).equals(ServiceType.COMPLETE_VEHICLE));
-			System.out.println("Complete Vehicle construction started...\n");
+			logger.info("Complete Vehicle Route construction started...\n");
+			CompleteVehicleRoute cvr = new CompleteVehicleRoute(this.ttrp.getDepot(),new CompleteVehicle(new Truck(this.ttrp.getFleet().getTruckCapacity(), this.ttrp.getDepot().getLocation()), new Trailer(this.ttrp.getFleet().getTrailerCapacity(), this.ttrp.getDepot().getLocation()),  this.ttrp.getDepot().getLocation()));
+			ListIterator<Customer> iterator = customers.listIterator();
+			while(iterator.hasNext()){
+				if(this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)) {
+					SubTour st = new SubTour(customers.get(iterator.nextIndex()), cvr.getTruck());
+					while(iterator.hasNext() 
+							&& this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)){//lacking capacity constraint
+						st.addCustomer(iterator.next());
+					}
+					cvr.addSubTour(st);
+				}
+				else{
+					cvr.addToMainTour((VehicleCustomer) iterator.next());
+				}
+			}
+			this.routes.add(cvr);
 		}
 	}
 	

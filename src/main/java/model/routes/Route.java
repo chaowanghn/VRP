@@ -122,7 +122,10 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	}
 	
 	public double totalDemand(){
-		return Customers.totalDemand(this.customers);
+		if(this.customers.isEmpty()){
+			return 0;
+		}
+		else return Customers.totalDemand(this.customers);
 	}
 	
 	public double availableLoad(){

@@ -61,7 +61,9 @@ public class VisualizerTest {
 		List<Route<? extends Node,? extends Customer,? extends MovingObject>> routes = new ArrayList<>();
 		routes.add(cvr);
 
-		Visualizer.visualize(new TwoOpt().apply(cvr));	
+		//Visualizer.visualize(new TwoOpt().apply(cvr));
+		System.out.println(Solution.createSolutionFromFile(ttrp, Solution.TTRP_03_BEST_KNOWN_SOLUTION));
+		Visualizer.visualize(Solution.createSolutionFromFile(ttrp, Solution.TTRP_03_BEST_KNOWN_SOLUTION));
 	}
 
 }

@@ -79,7 +79,7 @@ public class TTRP implements Visualizable {
 	}
 	
 	public String toString() {
-		return "TTRP instance: Truck Customers: "+ this.truckCustomers.size()+" Vehicle Customers: " + this.vehicleCustomers.size() ;
+		return "TTRP instance: Truck Customers: "+ this.truckCustomers.size()+" Vehicle Customers: " + this.vehicleCustomers.size() +" Truck Capacity: "+this.fleet.getTruckCapacity()+" Trailer Capacity "+this.fleet.getTrailerCapacity();
 	}
 	
 	public TIntObjectMap<Node> nodesMap() {

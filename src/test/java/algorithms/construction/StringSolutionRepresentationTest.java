@@ -7,6 +7,7 @@ import io.Visualizer;
 import java.util.List;
 import java.util.Set;
 
+import model.Solution;
 import model.fleet.CompleteVehicle;
 import model.nodes.Depot;
 import model.nodes.Location;
@@ -34,10 +35,11 @@ public class StringSolutionRepresentationTest extends ConctructionHeuristicTest 
 	@Override
 	@Test
 	public void apply() {
-		stringRepresentation.apply(ttrp);
+		Solution solution = stringRepresentation.apply(ttrp);
 		List<Node> permutation = stringRepresentation.getPermutation();
 		assertTrue(permutation.containsAll(ttrp.getNodes()));
 		assertTrue(stringRepresentation.getPotentialRoutes().size() == stringRepresentation.depotIndices(permutation).length+1);
+		System.out.println(solution);
 		
 	}
 

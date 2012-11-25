@@ -138,8 +138,12 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 	}
 	
 	private void processRoute(List<Customer> customers){
-		//checkArgument(!customers.isEmpty());
-		if(serviceTypeOf(Iterables.getFirst(customers, null)).equals(ServiceType.TRUCK)){ //See: http://stackoverflow.com/questions/1750435/comparing-java-enum-members-or-equals#comment1637223_1750453	
+		if(customers.isEmpty()){
+			return;
+		}
+		Customer firstCustomer = Iterables.getFirst(customers, null);
+		checkNotNull(firstCustomer);
+		if(serviceTypeOf(firstCustomer).equals(ServiceType.TRUCK)){ //See: http://stackoverflow.com/questions/1750435/comparing-java-enum-members-or-equals#comment1637223_1750453	
 			 //If the first customer on a route is to be serviced by a single truck, the route is set to be a PTR.
 			logger.info("Pure Truck Route construction started...\n");
 			Truck truck = new Truck(this.ttrp.getFleet().getTruckCapacity(), this.ttrp.getDepot().getLocation());
@@ -153,19 +157,21 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 			}
 			this.routes.add(ptr);
 			logger.info("Pure Truck Route construction finished. PTR: "+Nodes.toString(ptr.getNodes())+"\n");
-			if(Iterables.any(customers, Customers.notSatisfied())){
-				processRoute(new ArrayList<Customer>(Customers.getNotSatisfied(customers)));
-			}
+			processRoute(new ArrayList<Customer>(Customers.getNotSatisfied(customers)));
 		}
 		else {
 			checkArgument(this.serviceTypeOf(Iterables.getFirst(customers, null)).equals(ServiceType.COMPLETE_VEHICLE));
 			logger.info("Complete Vehicle Route construction started...\n");
-			CompleteVehicleRoute cvr = new CompleteVehicleRoute(this.ttrp.getDepot(),new CompleteVehicle(new Truck(this.ttrp.getFleet().getTruckCapacity(), this.ttrp.getDepot().getLocation()), new Trailer(this.ttrp.getFleet().getTrailerCapacity(), this.ttrp.getDepot().getLocation()),  this.ttrp.getDepot().getLocation()));
+			Truck truck = new Truck(this.ttrp.getFleet().getTruckCapacity(), this.ttrp.getDepot().getLocation());
+			Trailer trailer = new Trailer(this.ttrp.getFleet().getTrailerCapacity(), this.ttrp.getDepot().getLocation());
+			CompleteVehicle completeVehicle = new CompleteVehicle(truck, trailer, this.ttrp.getDepot().getLocation());
+			CompleteVehicleRoute cvr = new CompleteVehicleRoute(this.ttrp.getDepot(),completeVehicle);
 			ListIterator<Customer> iterator = customers.listIterator();
 			while(iterator.hasNext()){
 				if(this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)) {
-					SubTour st = new SubTour(customers.get(iterator.nextIndex()), cvr.getTruck());
+					SubTour st = new SubTour(customers.get(iterator.previousIndex()), cvr.getTruck());
 					while(iterator.hasNext() 
+							//&& st.availableLoad() >= customers.get(iterator.nextIndex() ).getDemand()
 							&& this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)){//lacking capacity constraint
 						st.addCustomer(iterator.next());
 					}
@@ -176,6 +182,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 				}
 			}
 			this.routes.add(cvr);
+			processRoute(new ArrayList<Customer>(Customers.getNotSatisfied(customers)));
 		}
 	}
 	

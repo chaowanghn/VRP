@@ -94,6 +94,18 @@ public class Solution implements Movable,Visualizable{
 		copy.pureTruckRoutes.addAll(this.pureTruckRoutes);
 		return copy;
 	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for(CompleteVehicleRoute cvr : this.completeVehicleRoutes){
+			sb.append("\n"+cvr.toString());
+		}
+		for(PureTruckRoute ptr : this.pureTruckRoutes){
+			sb.append("\n"+ptr.toString());
+		}
+		sb.append("\nSOLUTION COST: "+cost());
+		return sb.toString();
+	}
 }
 
 

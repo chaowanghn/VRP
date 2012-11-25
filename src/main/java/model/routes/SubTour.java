@@ -4,6 +4,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import util.Nodes;
+
 import com.google.common.collect.ImmutableList;
 
 import model.fleet.Truck;
@@ -28,15 +30,7 @@ public class SubTour extends PureTruckRoute {
 	}
 	
 	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.getRoot().getId()+"-");
-		for(Customer c : customers) {
-			checkNotNull(c);
-			sb.append(c.getId() + "-");
-		}
-		sb.append(this.getRoot().getId());
-		sb.append(" Cost: " + cost());
-		return sb.toString();
+		return Nodes.toString(getNodes());
 	}
 	
 	

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import util.Customers;
+import util.Nodes;
 import util.Routes;
 
 import com.google.common.base.Predicate;
@@ -85,14 +86,10 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.getDepot().getId());
-		for (Customer c : customers)
-			sb.append("-"+c.getId());
-		sb.append("-"+this.getDepot().getId());
-		sb.append("  Cost: " + this.cost());
+		StringBuilder sb = new StringBuilder("CVR: MAIN TOUR: ");
+		sb.append(Nodes.toString(new ImmutableList.Builder<Node>().add(getDepot()).addAll(customers).add(getDepot()).build()));
 		if(hasSubTours()) {
-			sb.append("\nSUBTOURS: ");
+			sb.append("\n\tSUBTOURS: ");
 			for (SubTour st : this.subTours) {
 				checkNotNull(st);
 				checkNotNull(st.toString());

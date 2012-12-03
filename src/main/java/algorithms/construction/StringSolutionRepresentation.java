@@ -179,7 +179,9 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 					cvr.addSubTour(st);
 				}
 				else{
-					cvr.addToMainTour((VehicleCustomer) iterator.next());
+					if(cvr.availableLoad() >= customers.get(iterator.nextIndex() ).getDemand()) {
+						cvr.addToMainTour((VehicleCustomer) iterator.next());
+					}
 				}
 			}
 			this.routes.add(cvr);

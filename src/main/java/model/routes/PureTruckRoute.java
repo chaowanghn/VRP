@@ -1,6 +1,7 @@
 package model.routes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import util.Customers;
 import util.Nodes;
 
 import com.google.common.collect.ImmutableList;
@@ -39,6 +40,6 @@ public class PureTruckRoute extends Route<Node,Customer,Truck> {
 	public String toString(){
 		StringBuilder sb = new StringBuilder("PTR: ");
 		sb.append(Nodes.toString(getNodes()));
-		return sb.toString();
+		return sb.toString()+" Demand: "+Customers.totalDemand(this.customers);
 	}
 }

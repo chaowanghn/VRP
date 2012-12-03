@@ -88,6 +88,7 @@ public class CompleteVehicleRoute extends PureVehicleRoute {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("CVR: MAIN TOUR: ");
 		sb.append(Nodes.toString(new ImmutableList.Builder<Node>().add(getDepot()).addAll(customers).add(getDepot()).build()));
+		sb.append(" Demand: "+Customers.totalDemand(customers));
 		if(hasSubTours()) {
 			sb.append("\n\tSUBTOURS: ");
 			for (SubTour st : this.subTours) {

@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import util.Customers;
 import util.Nodes;
 
 import com.google.common.collect.ImmutableList;
@@ -30,7 +31,7 @@ public class SubTour extends PureTruckRoute {
 	}
 	
 	public String toString(){
-		return Nodes.toString(getNodes());
+		return Nodes.toString(getNodes())+" Demand: "+Customers.totalDemand(customers);
 	}
 	
 	

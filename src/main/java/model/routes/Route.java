@@ -169,4 +169,9 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 	public double utilRate(){
 		return Customers.totalDemand(customers) / vehicle.getCapacity();
 	}
+
+	public boolean satisfiesCapacityConstraint() {
+		return this.utilRate()<=1;
+	}
+	
 }

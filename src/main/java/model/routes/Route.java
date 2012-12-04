@@ -166,4 +166,7 @@ public class Route<N extends Node,C extends Customer, V extends MovingObject> im
 		return new Route<N,C,V>(this.depot,this.customers,this.vehicle);
 	}
 
+	public double utilRate(){
+		return Customers.totalDemand(customers) / vehicle.getCapacity();
+	}
 }

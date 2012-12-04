@@ -31,7 +31,7 @@ public class SubTour extends PureTruckRoute {
 	}
 	
 	public String toString(){
-		return Nodes.toString(getNodes())+" Demand: "+Customers.totalDemand(customers);
+		return Nodes.toString(getNodes())+(" Load Used: "+this.utilRate()*100+" %");
 	}
 	
 	

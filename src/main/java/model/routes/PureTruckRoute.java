@@ -40,6 +40,6 @@ public class PureTruckRoute extends Route<Node,Customer,Truck> {
 	public String toString(){
 		StringBuilder sb = new StringBuilder("PTR: ");
 		sb.append(Nodes.toString(getNodes()));
-		return sb.toString()+" Demand: "+Customers.totalDemand(this.customers);
+		return sb.toString()+(" Load Used: "+this.utilRate()*100+" %");
 	}
 }

@@ -2,6 +2,8 @@ package model.nodes;
 
 public class Location {
 	
+	public static Location DEFAULT_LOCATION = new Location(0, 0);
+	
 	private double x;
 	private double y;
 	

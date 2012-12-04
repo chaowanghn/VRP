@@ -146,8 +146,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		if(serviceTypeOf(firstCustomer).equals(ServiceType.TRUCK)){ //See: http://stackoverflow.com/questions/1750435/comparing-java-enum-members-or-equals#comment1637223_1750453	
 			 //If the first customer on a route is to be serviced by a single truck, the route is set to be a PTR.
 			logger.info("Pure Truck Route construction started...\n");
-			Truck truck = new Truck(this.ttrp.getFleet().getTruckCapacity(), this.ttrp.getDepot().getLocation());
-			PureTruckRoute ptr = new PureTruckRoute(this.ttrp.getDepot(), truck);
+			PureTruckRoute ptr = new PureTruckRoute(this.ttrp.getDepot(), this.ttrp.getFleet().getNewTruck());
 			ListIterator<Customer> iterator = customers.listIterator();
 			while(iterator.hasNext() 
 					&& this.serviceTypeOf( customers.get(iterator.nextIndex()) ) == ServiceType.TRUCK 
@@ -162,8 +161,8 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 		else {
 			checkArgument(this.serviceTypeOf(Iterables.getFirst(customers, null)).equals(ServiceType.COMPLETE_VEHICLE));
 			logger.info("Complete Vehicle Route construction started...\n");
-			Truck truck = new Truck(this.ttrp.getFleet().getTruckCapacity(), this.ttrp.getDepot().getLocation());
-			Trailer trailer = new Trailer(this.ttrp.getFleet().getTrailerCapacity(), this.ttrp.getDepot().getLocation());
+			Truck truck = this.ttrp.getFleet().getNewTruck();
+			Trailer trailer = this.ttrp.getFleet().getNewTrailer();
 			CompleteVehicle completeVehicle = new CompleteVehicle(truck, trailer, this.ttrp.getDepot().getLocation());
 			CompleteVehicleRoute cvr = new CompleteVehicleRoute(this.ttrp.getDepot(),completeVehicle);
 			ListIterator<Customer> iterator = customers.listIterator();
@@ -173,7 +172,7 @@ public class StringSolutionRepresentation implements ConstructionHeuristic{
 					SubTour st = new SubTour(customers.get(iterator.previousIndex()), truck);
 					while(iterator.hasNext() 
 							&& st.availableLoad() >= customers.get(iterator.nextIndex() ).getDemand()
-							&& this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)){//lacking capacity constraint
+							&& this.serviceTypeOf(customers.get(iterator.nextIndex())).equals(ServiceType.TRUCK)){
 						st.addCustomer(iterator.next());
 					}
 					cvr.addSubTour(st);

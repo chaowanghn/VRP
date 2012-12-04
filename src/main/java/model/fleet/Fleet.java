@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import model.nodes.Location;
+
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
@@ -71,4 +73,17 @@ public class Fleet {
 		
 		else return null;
 	}
+
+	public Truck getNewTruck(){
+		return new Truck(truckCapacity, Location.DEFAULT_LOCATION);
+	}
+	
+	public Trailer getNewTrailer() {
+		return new Trailer(trailerCapacity,Location.DEFAULT_LOCATION);
+	}
+	
+	public CompleteVehicle getNewCompleteVehicle(){
+		return new CompleteVehicle(this.getNewTruck(), this.getNewTrailer(), Location.DEFAULT_LOCATION);
+	}
+
 }
